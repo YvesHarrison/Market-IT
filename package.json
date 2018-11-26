@@ -1,0 +1,35 @@
+{
+  "name": "market-it",
+  "version": "1.0.0",
+  "description": "CS 546 Web Programing Goup Course Project",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YvesHarrison/Market-IT.git"
+  },
+  "keywords": [
+    "Market",
+    "Information",
+    "Technology"
+  ],
+  "author": "Hanfan Wang 10442733 Sanchita Rastogi 10439951 Shreesh Chavan 10440695 Xinzhe Li 10434405",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YvesHarrison/Market-IT/issues"
+  },
+  "homepage": "https://github.com/YvesHarrison/Market-IT#readme",
+  "dependencies": {
+    "bluebird": "^3.5.2",
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.0",
+    "expression": "0.0.1",
+    "mongodb": "^3.1.8",
+    "uuid": "^3.3.2"
+  }
+}
