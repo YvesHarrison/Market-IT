@@ -20,17 +20,20 @@
 	<script src="/public/js/bootstrap.js"></script>
 	<script src="/public/js/blocs.js"></script>
 	<script src="/public/js/lazysizes.min.js" defer></script>
-    <title>Home</title>
+
+     <title>Home</title>
+
 </head>
 <header>
     <!-- Main container -->
-<div class="page-container">
+<div class="wrap">
     <!-- bloc-0 -->
 <div class="bloc l-bloc bgc-white " id="bloc-0">
 	<div class="container bloc-sm">
-		<nav class="navbar row">
+		<nav class="navbar_row">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="http://localhost:3000/">Market IT<span class="special-tag-for-editing-text-with-html"></span><span class="special-tag-for-editing-text-with-html"></span><img src="/public/imgs/logo.jpg" alt="logo" /></a>
+				<a class="navbar-brand" href="http://localhost:3000/">Market IT<span class="special-tag-for-editing-text-with-html"></span></a>
+                <span class="special-tag-for-editing-text-with-html"></span><img src="../public/imgs/logo.jpg"  alt="MarketIT" id="top-log" class="top-log"/>
 				<button id="nav-toggle" type="button" class="ui-navbar-toggle navbar-toggle" data-toggle="collapse" data-target=".navbar-1">
 					<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
 				</button>
@@ -38,7 +41,6 @@
 
             <!-- Search bar -->
              <form name ="topform" id="top-form" class="top-form">
-            <img src="../public/imgs/logo.jpg"  alt="MarketIT" id="top-log" class="top-log"/>
             <input type="text"  placeholder="Search" id="search-input" class ="search-input">
             <button class="search-button" id="search-button" type="submit">Search</button>
         </form>
@@ -60,7 +62,7 @@
                         <a class="dropdown-divider"></a>
                         <form class="logout-form" action="/logout" accept-charset="UTF-8" method="post">
                             <input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="nsMWSKZLME7eUQxVeWSe7WZUPjWsY43w3sfbbOTCZDtXmOyCr7SVH3MqoJ5VFXtLFPBORuzA/erdiknH0xz4rQ==">
-                            <button type="submit" class="dropdown-item dropdown-signout" data-ga-click="Header, sign out, icon:logout" role="menuitem">Sign out</button>
+                            <button type="submit" class="dropdown-item dropdown-signout" data-ga-click="Header, sign out, icon:logout" role="menubar">Sign out</button>
                         </form> 
                     </div>
                 </li>
@@ -80,8 +82,9 @@
 		</nav>
 	</div>
 </div>
-<!-- bloc-0 END -->
 </header>
+</div class="wrap">
+
 <body>
     <main>
     {{{body}}}
