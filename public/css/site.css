@@ -856,7 +856,7 @@ h1 {
 }
 
 .top-form {
-  	text-align:center
+  	text-align:left;
 }
 
 .search-button{
@@ -864,18 +864,8 @@ h1 {
 }
 
 form-inline{
-	text-align:center;
-	width:100%;
-	height:5rem;
-}
-
-.sign-in-button{
-	margin-left:22rem;
-	vertical-align:middle;
-}
-
-.sign-up-button{
-	vertical-align:middle;
+	display: inline-block;
+		text-align:center; 
 }
 
 .dropdown{
@@ -893,3 +883,30 @@ form-inline{
 	width:10px; 
 	height:10px;
 }
+
+.navbar_row {
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+    padding: 0;
+    list-style: none;
+    background-color: #f2f2f2;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc; 
+	margin-left: 0px; 
+}
+
+.navbar_row li a {
+    display: block;
+    padding: 8px 15px;
+    text-decoration: none;
+    font-weight: bold;
+    text-align:center;
+    color:black;
+    border-right: 1px solid #ccc; }
+.navbar_row li a:hover {
+    color:blueviolet;
+    text-align:center;
+    background-color: #fff;}
+    /* End navigation bar styling. */
+
