@@ -34,7 +34,7 @@
     "express-session": "^1.15.6",
     "expression": "0.0.1",
     "method-override": "^3.0.0",
-    "mongodb": "^3.1.8",
+    "mongodb": "^3.1.10",
     "mongoose": "^5.3.14",
     "mongoose-unique-validator": "^2.0.2",
     "morgan": "^1.9.1",
