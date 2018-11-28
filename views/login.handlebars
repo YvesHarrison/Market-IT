@@ -1,0 +1,23 @@
+
+    <img src="../public/imgs/logo.jpg"  alt="MarketIT" id="top-log" class="top-log"/>
+    <main>
+        <article class="input-login">
+
+
+        <h1>Login Market IT</h1>
+
+
+        <form name ="phrase" action="/login" method="POST" id="login-form" class="login-form">
+            <label for="text_input">Name:</label>
+            <input type="text"  name="username" placeholder="" id="name" class="name"/>
+            <label for="text_input">Password:</label>
+            <input type="text"  name="password" placeholder="" id="password" class="password"/>
+            <button class="button" type="submit">Log In</button>
+        </form>
+    
+    
+        </article>
+        <div class="error" id="error">{{error}}</div>
+        <script type="text/javascript" src="../public/js/client_side.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </main>

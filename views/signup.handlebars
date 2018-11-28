@@ -1,0 +1,47 @@
+
+  <img src="../public/imgs/logo.jpg"  alt="MarketIT" id="top-log" class="top-log"/>
+    <main>
+        <article class="input-sign-up">
+
+
+        <h1>Sign Up For Market IT</h1>
+
+
+        <form name ="signup" action="/signup" method="POST" id="signup-form" class="signup-form">
+            <label for="text_input">User Name:</label>
+            <input type="text"  name="username" placeholder="" id="signup-name" class="signup-name"/>
+
+            <label for="text_input">First Name:</label>
+            <input type="text"  name="signup-first" placeholder="" id="signup-first" class="signup-first"/>
+
+            <label for="text_input">Last Name:</label>
+            <input type="text"  name="signup-last" placeholder="" id="signup-last" class="signup-last"/>
+
+            <label for="text_input">Email Address:</label>
+            <input type="text"  name="signup-email" placeholder="" id="signup-email" class="signup-email"/>
+
+            <label for="text_input">Telephone:</label>
+            <input type="text"  name="signup-phone" placeholder="" id="signup-phone" class="signup-phone"/>
+
+            <label for="text_input">City:</label>
+            <input type="text"  name="signup-city" placeholder="" id="signup-city" class="signup-city"/>
+
+            <label for="text_input">Address Line 1:</label>
+            <input type="text"  name="signup-address1" placeholder="" id="signup-address1" class="signup-address1"/>
+
+            <label for="text_input">Address Line 2:</label>
+            <input type="text"  name="signup-address2" placeholder="" id="signup-address2" class="signup-address2"/>
+
+            <label for="text_input">Password:</label>
+            <input type="text"  name="signup-password" placeholder="" id="signup-password" class="signup-password"/>
+            
+            <label for="text_input">Repeat Password:</label>
+            <input type="text"  name="signup-repassword" placeholder="" id="signup-repassword" class="signup-repassword"/>
+            
+            <button class="button" id ="signup-button" type="submit">Sign Up</button>
+        </form>
+    
+    
+        </article>
+        <div class="error" id="error">{{error}}</div>
+    </main>
