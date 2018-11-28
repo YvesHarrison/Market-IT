@@ -5,16 +5,15 @@
 
         <h1>Login Market IT</h1>
 
-
+        <div class="login"> 
         <form name ="phrase" action="/login" method="POST" id="login-form" class="login-form">
-            <label for="text_input">Name:</label>
-            <input type="text"  name="username" placeholder="" id="name" class="name"/>
-            <label for="text_input">Password:</label>
-            <input type="text"  name="password" placeholder="" id="password" class="password"/>
+            <input type="text"  name="username" placeholder="Username" id="name" class="name" autofocus="true" required="true"/>
+            <input type="text"  name="password" placeholder="Password" id="password" class="password" required="true" />
             <button class="button" type="submit">Log In</button>
         </form>
-    
-    
+        <a href="#" class="login_forgot">forgot password?</a>
+        </div>
+        <div class="shadow"></div>
         </article>
         <div class="error" id="error">{{error}}</div>
         <script type="text/javascript" src="../public/js/client_side.js"></script>
