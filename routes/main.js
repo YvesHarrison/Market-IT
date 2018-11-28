@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const path = require("path");
-
+const passport = require('passport');
 
 router.get("/", async (req, res) => {
   try {
@@ -29,7 +29,7 @@ function isLoggedIn(req, res, next) {
   res.redirect('/');
 }
 
-app.post('/login', passport.authenticate('local-login', {
+router.post('/login', passport.authenticate('local-login', {
   successRedirect : '/profile', 
   failureRedirect : '/login', 
   failureFlash : true 
@@ -44,7 +44,7 @@ router.get("/signup", async (req, res) => {
   }
 });
 
-app.post('/signup', passport.authenticate('local-signup', {
+router.post('/signup', passport.authenticate('local-signup', {
   successRedirect : '/profile', // redirect to the secure profile section
   failureRedirect : '/signup', // redirect back to the signup page if there is an error
   failureFlash : true // allow flash messages
