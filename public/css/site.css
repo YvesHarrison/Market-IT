@@ -462,11 +462,15 @@ button{
 /* = Custom Styling
 -------------------------------------------------------------- */
 
-h1,h2,h3,h4,h5,h6,p,label,.btn,a{
+h1,h2,h3,h4,h5,h6,label,.btn,a{
 	font-family:"Domine";
 	font-weight:400;
 	font-size:40px;
 	text-decoration:none;
+}
+p{
+	font-size: 20px;
+	text-align: justify;
 }
 .container{
 	max-width:1170px;
