@@ -856,7 +856,7 @@ h1 {
 .search-input {
 	margin-left:25rem;
   	width: 25rem;
-  	vertical-align:middle;
+  	/*vertical-align:middle;*/
 }
 
 .top-form {
