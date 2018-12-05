@@ -1,0 +1,265 @@
+ul .picture-small-li {
+    display: inline-block;
+    border: 1px solid #ccc;
+    margin: 0 -14px;
+    width: 60px;
+    height: 60px;
+}
+
+.picture-big img {
+    border-radius: 3px;
+    width: 487px;
+    height: 355px;
+    border: 1px solid #ccc;
+}
+
+.picture-small {
+    margin-top: 15px;
+    padding: 0 -50px;
+}
+
+.picture-small-li img {
+    width: 58px;
+    height: 58px;
+}
+
+/*breadcrumb*/
+.breadcrumb_content {
+    text-align: left;
+}
+
+.breadcrumb_content h3 {
+    font-size: 24px;
+    text-transform: capitalize;
+    color: #2971f5;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.breadcrumb_content ul li {
+    display: inline-block;
+    padding-right: 15px;
+    text-transform: capitalize;
+}
+
+.breadcrumb_content ul li:last-child {
+    padding-right: 0;
+}
+
+.breadcrumb_content ul li a {
+    font-size: 14px;
+    color: #666666;
+}
+
+.breadcrumb_content ul li a:hover {
+    color: #2971f5;
+}
+
+.breadcrumbs_inner {
+    background: url(../img/banner/bgbread.jpg);
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+    background-size: cover;
+}
+
+.breadcrumbs_area {
+    padding-bottom: 43px;
+}
+
+.breadcrumb_content {
+    text-align: left;
+    padding: 44px 0;
+}
+
+
+.current_price {
+    color: #dc4444;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.old_price {
+    color: #999;
+    font-size: 14px;
+    font-weight: 400;
+    text-decoration: line-through;
+    margin-left: 5px;
+}
+
+.product_ratting a {
+    display: inline-block;
+    margin-bottom: 8px;
+    color: #2971f5;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.product_ratting a:hover {
+    text-decoration: none;
+    color: #ce1f21;
+}
+
+
+.product_action_link ul li.product_cart a {
+    width: 121px;
+    font-size: 13px;
+}
+
+.product_details h3 {
+    font-size: 20px;
+    line-height: 24px;
+    color: #444444;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.product_details .product_price {
+    margin-bottom: 15px;
+}
+
+.product_details .product_ratting {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 15px;
+}
+
+
+.product_details .product_description p {
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.product_details .product_description {
+    margin-bottom: 20px;
+}
+.product_stock label{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.product_stock input {
+    width: 70px;
+    height: 30px;
+    padding: 0px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: inherit;
+    margin-left: 10px;
+}
+
+
+.product_action_link ul li {
+    display: inline-block;
+}
+
+.product_action_link ul li a {
+    font-size: 15px;
+    color: #444444;
+    margin: 0 -40px;
+    font-weight: 300;
+}
+
+.product_action_link ul li a:hover {
+    color: #2971f5;
+}
+
+
+.product_action_link ul li.product_cart a {
+    background: #2971f5;
+    color: #ffffff;
+    line-height: 40px;
+    width: 150px;
+    font-size: 14px;
+    font-weight: 500;
+    display: inline-block;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 3px;
+}
+
+.product_action_link ul li.product_cart a:hover {
+    background: #000;
+    text-decoration: none;
+}
+
+.product_stock {
+    margin-bottom: 28px;
+}
+
+.social_sharing ul li {
+    display: inline-block;
+}
+
+.social_sharing ul li a {
+    text-align: center;
+    font-size: 13px;
+    padding: 7px 15px;
+    line-height: 40px;
+    color: #fff;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.social_sharing ul li:last-child a,
+.product_action_link ul li:last-child a {
+    margin-right: 0;
+}
+
+.social_sharing ul li a.bg-facebook {
+    background: #435f9f;
+}
+
+.social_sharing ul li a.bg-Tweet {
+    background: #00aaf0;
+}
+
+.social_sharing ul li a.bg-google {
+    background: #e04b34;
+}
+
+.social_sharing ul li a.bg-pinterest {
+    background: #ce1f21;
+}
+
+.social_sharing span {
+    width: 87px;
+    float: left;
+    line-height: 40px;
+    color: #444444;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.product_stock label {
+    margin-bottom: 0;
+    font-size: 16px;
+    color: #444444;
+    font-weight: 500;
+}
+
+.product_action_link {
+    margin-bottom: 24px;
+}
+
+
+.single_product_wrapper {
+    margin-bottom: 45px;
+}
+
+.comments{
+    margin-top: 60px;
+}
+.comments a{
+    font-size: 18px;
+}
+.comments a:hover{
+    text-decoration: none;
+}
+.more-info{
+    margin: 20px;
+    font-size: 16px;
+    font-weight: 400;
+}
+#myTabContent{
+    text-align: center;
+}
