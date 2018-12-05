@@ -16,6 +16,9 @@ a:hover{text-decoration: none; cursor:pointer;}
 
 #page-loading-blocs-notifaction{position: fixed;top: 0;bottom: 0;width: 100%;z-index:100000;background:#FFFFFF url("img/pageload-spinner.gif") no-repeat center center;}
 
+.text-muted{
+	font-size: 15px;
+}
 /* = Blocs
 -------------------------------------------------------------- */
 
@@ -125,7 +128,7 @@ a:hover{text-decoration: none; cursor:pointer;}
 	right:0;
 }
 .texture-paper::before{
-	background: url("img/texture-paper.png");
+	background: url("/public/img/texture-paper.png");
 	background-size: 280px 280px;
 }
 
@@ -504,7 +507,7 @@ p{
 /* Bloc image backgrounds */
 
 .bg-walkway{
-	background-image:url("img/walkway.jpg");
+	background-image:url("/public/img/walkway.jpg");
 }
 
 
