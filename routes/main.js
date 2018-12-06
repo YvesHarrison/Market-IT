@@ -56,5 +56,11 @@ router.all("/logout", function(req, res) {
   res.redirect("/login");
 });
 
-
+router.get("/info", async (req, res) => {
+  try {
+    res.render("info");
+  } catch (e) {
+    res.status(500).json({ error: e });
+  }
+});
 module.exports = router;
