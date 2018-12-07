@@ -7,16 +7,22 @@
           <div class="col-lg-8  col-12 jumbotron">
             <form>
               <div class="form-group">
-                <label >Name</label>
+                <label ><h2>Name</h2></label>
                 <p class=username>{{username}}</p>
               </div>
               <div class="form-group">
-                <label >ID</label>
-				<p class=userid>{{userid}}</p>
+                <label ><h2>ID</h2></label>
+				        <p class=userid>{{userid}}</p>
               </div>
               <div class="form-group">
-                <label >Email</label>
-				<p class=useremail>{{useremail}}</p>
+                <label ><h2>Email</h2></label>
+				        <p class=useremail>{{useremail}}</p>
+              </div>
+              <div class="form-group" name="userimageform" id="userimageform">
+                <label for="userimage"><h2>Upload Your Image</h2></label>
+                <input type="file" id="userimage" name="userimage" accept="image/jpg, image/jpeg">
+                <hr>
+                <button type="submit" class="btn btn-primary" id ="userimage-button">Submit</button>
               </div>
             </form>
           </div>
