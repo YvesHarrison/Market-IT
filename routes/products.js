@@ -8,6 +8,13 @@ router.get("/", async (req, res) => {
     } catch (e) {
       res.status(500).json({ error: e });
     }
-  });
+});
 
+// router.get("/post", async (req, res) => {
+//     try {
+//       res.render("postproduct");
+//     } catch (e) {
+//       res.status(500).json({ error: e });
+//     }
+// });
 module.exports = router;
