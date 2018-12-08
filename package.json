@@ -24,7 +24,6 @@
   "homepage": "https://github.com/YvesHarrison/Market-IT#readme",
   "dependencies": {
     "bcrypt": "^3.0.2",
-    "bluebird": "^3.5.2",
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.5.3",
     "body-parser": "^1.18.3",
