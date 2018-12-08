@@ -1,6 +1,45 @@
 const mongoCollections = require("../config/mongoCollections");
 const users = mongoCollections.users;
 const uuid = require("node-uuid");
+var mongoose = require('mongoose');
+var bcrypt = require('bcrypt');
+ 
+// User Schema
+var UserSchema = mongoose.Schema({
+  firstName:{
+    type: String
+  },
+  lastName: {
+    type: String
+  },
+	hashedPassword: {
+		type: String
+	},
+	email: {
+		type: String
+	},
+	products: {
+		type: String
+  },
+  Phone: {
+		type: String
+  },
+
+  city: {
+    type: String
+  },
+
+  address1: {
+    type: String
+  },
+
+  address2: {
+    type: String
+  }
+
+});
+
+var User = module.exports = mongoose.model('User', UserSchema);
 
 let exportedMethods = {
   getAllUsers() {
@@ -8,6 +47,17 @@ let exportedMethods = {
       return userCollection.find({}).toArray();
     });
   },
+
+  getUserByemail(email) {
+    return users().then(userCollection => {
+      return userCollection.findOne({ email: email }).then(user => {
+        if (!user) throw "User not found";
+
+        return user;
+      });
+    });
+  },
+
   getUserById(id) {
     return users().then(userCollection => {
       return userCollection.findOne({ _id: id }).then(user => {
@@ -20,6 +70,7 @@ let exportedMethods = {
   addUser(userData) {
     return users().then(userCollection => {
       let newUser = {
+      
         firstName: userData.firstName,
         lastName: userData.lastName,
         _id: uuid.v4(),
