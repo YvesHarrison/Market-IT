@@ -1,0 +1,58 @@
+<div class="container">
+<hr>
+<h2>Post Your Product</h2>
+<hr>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-8  col-12 jumbotron">
+      <form  name ="productup" action="/productup" method="POST" id="productup-form" class="productup-form">
+        <div class="form-group" >
+          <label for="productname"><h2>Product Name:</h2></label>
+          <input type="text" class="form-control" id="productup-name" name="productname" placeholder="Name" aria-describedby="pnameHelp">
+          <span id="pnameHelp" class="form-text text-muted" style="display: none;">Please enter a valid product name.</span> 
+        </div>
+        
+        <div class="form-group">
+          <label for="Tag"><h2>Tag:</h2></label>
+          <input type="text" class="form-control" id="productup-tag" name="productup-first" placeholder="Tag" aria-describedby="tagHelp">
+          <span id="tagHelp" class="form-text text-muted" style="display: none;">Please enter a valid tag.</span>
+        </div>
+
+        <div class="form-group">
+          <label for="price"><h2>Price:</h2></label>
+          <input type="text" class="form-control" id="productup-price" name="productup-price" placeholder="Price" aria-describedby="priceHelp">
+          <span id="priceHelp" class="form-text text-muted" style="display: none;">Please enter a valid price.</span>
+        </div>
+                
+        <div class="form-group">
+          <label for="lastname"><h2>Quantity:</h2></label>
+          <input type="text" class="form-control" id="productup-quantity" name="productup-quantity" placeholder="Quantity" aria-describedby="quantityHelp">
+          <span id="quantityHelp" class="form-text text-muted" style="display: none;">Please enter a valid quantity.</span>
+        </div>
+              
+        <div class="form-group">
+          <label for="description"><h2>Description:</h2></label>
+          <textarea rows="10" cols="100" class="form-control" id="description" name="description" placeholder="Description" aria-describedby="descriptionHelp"></textarea>
+          <span id="descriptionHelp" class="form-text text-muted" style="display: none;">Please enter a description.</span>
+        </div>
+              
+        <div class="form-group">
+          <label for="moreinfo"><h2>More Information:</h2></label>
+          <textarea rows="20" cols="100" class="form-control" id="moreinfo" name="description" placeholder="More Information" aria-describedby="moreinfoHelp"></textarea>
+          <span id="moreinfoHelp" class="form-text text-muted" style="display: none;">Please enter a information.</span>
+        </div>
+        
+        <div class="form-group">
+          <label for="userimage"><h2>Upload Image for your prodcut:</h2></label> 
+          <div></div>
+          <input type="file" id="productimage" name="productimage" accept="image/jpg, image/jpeg">
+        </div>
+          
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary" id ="productup-button">Post</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
