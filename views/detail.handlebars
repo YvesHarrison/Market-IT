@@ -1,0 +1,154 @@
+<div class="breadcrumbs_area">
+    <div class="container">
+        <div class="breadcrumbs_inner">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb_content">
+                        <h3>product details</h3>
+                        <ul>
+                            <li><a href="products">home</a></li>
+                            <li><i class="fa fa-angle-right"></i></li>
+                            <li>product details</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="single_product_wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-md-6">
+                <div class="picture-big ">
+                        <img src="../public/imgs/earphone.png" class="img-responsive" id="pic" />
+                </div>
+                <div class="picture-small">
+                    <ul>
+                                    <li id="li01" class="picture-small-li"><img src="../public/imgs/earphone.png" /></li>
+                                    <li id="li02" class="picture-small-li"><img src="../public/imgs/earphone2.jpeg" /></li>
+                                    <li id="li03" class="picture-small-li"><img src="../public/imgs/earphone3.jpeg" /></li>
+                                    <li id="li04" class="picture-small-li"><img src="../public/imgs/earphone2.jpeg" /></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-6">
+                <div class="product_details">
+                    <h3>Sony WH-1000XM3</h3>
+                    <div class="product_price">
+                        <span class="current_price">$348.00</span>
+                        <span class="old_price">$368.00</span>
+                    </div>
+                    <div class="product_ratting">
+                        <a href="#comments">1 Review</a>
+                    </div>
+                    <div class="product_description">
+                        <p>Sony has been hot on the heels of rival Bose, working hard to create
+                            the ultimate noise-canceling headphone. And with the WH-1000XM3 -- priced at $350, £330 or
+                            $AU499 -- it's finally done it.
+                            The biggest design change is to the shape of the headband and padding on the ear cups. The
+                            headband is now more contoured to your head, and the headphone has shaved off 20 grams of
+                            weight. The padding on the ear cups is also a little softer.
+                            The end result is a headphone that's clearly more comfortable than its predecessor.</p>
+                    </div>
+                    <div class="product_details_action">
+                        <div class="product_stock">
+                            <label>Quantity:</label>
+                            <input min="1" max="100" type="number">
+                        </div>
+                        <div class="product_action_link">
+                            <ul>
+                                <li class="product_cart"><a href="#" title="Add to Cart">Add to Cart</a></li>
+                            </ul>
+                        </div>
+                        <div class="social_sharing">
+                            <span>Share</span>
+                            <ul>
+                                <li><a href="#" class="bg-facebook" data-toggle="tooltip" title="Facebook"><i class="fa fa-facebook"></i>
+                                        Facebook</a></li>
+                                <li><a href="#" class="bg-Tweet" data-toggle="tooltip" title="twitter"><i class="fa fa-twitter"></i>
+                                        Tweet</a></li>
+                                <li><a href="#" class="bg-google" data-toggle="tooltip" title="google-plus"><i class="fa fa-google-plus"></i>
+                                        Google+</a></li>
+                                <li><a href="#" class="bg-pinterest" data-toggle="tooltip" title="pinterest"><i class="fa fa-pinterest"></i>
+                                        Pinterest</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="comments">
+            <ul id="myTab" class="nav nav-tabs">
+                <li class="active">
+                    <a href="#more" data-toggle="tab">
+                        More info
+                    </a>
+                </li>
+                <li><a name="comments" href="#review" data-toggle="tab">Reviews</a></li>
+
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade in active" id="more">
+                    <p class="more-info">For the last few years, Sony has been hot on the heels of rival Bose, working
+                        hard to create the
+                        ultimate noise-canceling headphone. And with the WH-1000XM3 -- priced at $350, £330 or $AU499
+                        -- it's finally done it.</p>
+                    <p class="more-info">In developing this third-generation model, it seems as if Sony's engineers
+                        went through CNET's
+                        review of last year's WH-1000MX2 and corrected each small issue I had with it.</p>
+                    <p class="more-info">The biggest design change is to the shape of the headband and padding on the
+                        ear cups. The
+                        headband is now more contoured to your head, and the headphone has shaved off 20 grams of
+                        weight. The padding on the ear cups is also a little softer.</p>
+                    <p class="more-info">The end result is a headphone that's clearly more comfortable than its
+                        predecessor.</p>
+                    <img class="more-info-img" src="../public/imgs/earphone.png" alt="earphone" />
+                </div>
+                
+                <div class="tab-pane fade" id="review">
+                    
+                    <table class="table table-hover" id="comment-table">
+                        <caption>Recent comments</caption>
+                        <thead>
+                            <tr>
+                                <th>users</th>
+                                <th>comments</th>
+                                <th>time</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
+                    <form name ="phrase" id="myForm" class="new-palindrome-form">
+                        <label for="text_input">Commenting:</label>
+                        <div class="form-group">
+                            <textarea type="text" rows="3" cols="70" class="form-control" id="text_input" name="text_input" placeholder="Comment"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id ="comment-button">Comment</button>
+                    </form>
+                    <div class="error" id="error" hidden></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/public/js/comment.js"></script> 
+<script>
+    function show(p1, p2) {
+        let li01 = document.getElementById(p1)
+        let pic = document.getElementById('pic')
+        li01.onmouseover = function () {
+            pic.src = p2;
+        }
+    }
+    show("li01", "../public/imgs/earphone.png")
+    show("li02", "../public/imgs/earphone2.jpeg")
+    show("li03", "../public/imgs/earphone3.jpeg")
+    show("li04", "../public/imgs/earphone2.jpeg")
+</script>

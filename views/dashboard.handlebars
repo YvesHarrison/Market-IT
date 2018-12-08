@@ -1,39 +1,47 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-    <div  class="form-inline">
-        <form name ="topform" id="top-form" class="top-form">
-            <img src="../public/imgs/logo.jpg"  alt="MarketIT" id="top-log" class="top-log"/>
-            <input type="text"  placeholder="Search" id="search-input" class ="search-input">
-            <button class="search-button" id="search-button" type="submit">Search</button>
-        </form>
+<!-- bloc-1 -->
+<div class="cntPageheader">
+	<div class="bloc bloc-fill-screen bgc-black bg-walkway d-bloc full-width-bloc" id="bloc-1">
+		<div class="container fill-bloc-top-edge">
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<h1 class="text-center mountain-hero-text animated fadeInUp">
+						Products available according to your need<br>
+					</h1>
+					<h3 class="text-center mg-lg mountain-hero-text-sub animated fadeInUp animDelay06, .animDelay04-hvr">
+						<br>
+					</h3>
+					<div class="text-center">
+						<a href="login" class="btn-wire btn btn-xl animated fadeIn animDelay1">Login<br></a>
+					</div>
+					<p>
 
-    <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Sign in </a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Sign up </a>
-                </li>
+					</p>
+					<div class="text-center">
+						<a href="signup" class="btn-wire btn btn-xl animated fadeIn animDelay1">Sign Up<br></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container fill-bloc-bottom-edge">
+			<div class="row">
+				<div class="col-sm-12">
+					<a id="scroll-hero" class="blocs-hero-btn-dwn" href="#"><span class="fa fa-chevron-down"></span></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- bloc-1 END -->
 
-                <li class="nav-item dropdown">
-                    <img src="../public/imgs/user_en.jpg"  alt="UserDropDown" id="drop-graph" class="drop-graph" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
-                    <img src="../public/imgs/triangle.jpg"  alt="UserDropDown" id="drop-triangle" class="drop-triangle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+	<!-- ScrollToTop Button -->
+	<a class="bloc-button btn btn-d scrollToTop" onclick="scrollToTarget('1')"><span class="fa fa-chevron-up"></span></a>
+	<!-- ScrollToTop Button END-->
+</div>
+<!-- Main container END -->
 
-                    <div class="dropdown-menu" aria-labelledby="dropdown03">
-                        
-                        <a class="dropdown-item" href="">Your Bio</a>
-                        <a class="dropdown-item" href="">Your Orders</a>
-                        <a class="dropdown-item" href="">Your Posts</a>
-                        <a class="dropdown-divider"></a>
-                        <form class="logout-form" action="/logout" accept-charset="UTF-8" method="post">
-                            <input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="nsMWSKZLME7eUQxVeWSe7WZUPjWsY43w3sfbbOTCZDtXmOyCr7SVH3MqoJ5VFXtLFPBORuzA/erdiknH0xz4rQ==">
-                            <button type="submit" class="dropdown-item dropdown-signout" data-ga-click="Header, sign out, icon:logout" role="menuitem">Sign out</button>
-                        </form> 
-                    </div>
-                </li>
-            </ul>
-    </div> 
-</nav>	
+<!-- Preloader -->
+<div id="page-loading-blocs-notifaction"></div>
+</div>
 
-          
+<!-- Preloader END -->
