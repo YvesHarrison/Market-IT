@@ -10,6 +10,14 @@ router.get("/", async (req, res) => {
     }
 });
 
+// router.post("/comment_post", async (req, res) => {
+//     try {
+//       console.log("receive");
+//     } catch (e) {
+//       res.status(500).json({ error: e });
+//     }
+// });
+
 // router.get("/post", async (req, res) => {
 //     try {
 //       res.render("postproduct");
