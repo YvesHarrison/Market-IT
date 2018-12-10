@@ -57,16 +57,29 @@ if (myForm) {
             let input=textInput.value
 
             
-            
-            //const li = `<li class="not-palindrome"> ${textInput.value} </li>`
-            //$("#attempts").append(li);
             let date="";
-            var myDate = new Date();
+            let myDate = new Date();
             date=myDate.toLocaleString( );
-            //const le = `<li class="not-palindrome"> ${date} </li>`
-            const comment=`<tr><td>${input}</td><td>${input}</td><td>${date}</td></tr>`
+
+            let requestConfig = {
+          		method: "POST",
+          		url: "/products/comment",
+          		contentType: "application/json",
+          		data: JSON.stringify({
+            		comment: input,
+            		time: date
+          		})
+        	};
+        	
+        	$.ajax(requestConfig).then(function(responseMessage) {
+        		alert(responseMessage.comment);
+        		alert(responseMessage.time);
+        		alert("Comment Success!");
+          		const comment=`<tr><td>${input}</td><td>${responseMessage.comment}</td><td>${responseMessage.time}</td></tr>`
+            	$("#comment-table").append(comment);
+			});
+
             
-            $("#comment-table").append(comment);
             $("#myForm").trigger('reset');
             $('#text_input').focus();
         } else {
