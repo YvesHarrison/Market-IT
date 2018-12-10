@@ -32,7 +32,7 @@ if (myForm) {
         		alert(responseMessage.comment);
         		alert(responseMessage.time);
         		alert("Comment Success!");
-          		const comment=`<tr><td>${input}</td><td>${input}</td><td>${date}</td></tr>`
+          		const comment=`<tr><td>${input}</td><td>${responseMessage.comment}</td><td>${responseMessage.time}</td></tr>`
             	$("#comment-table").append(comment);
 			});
 
