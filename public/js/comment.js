@@ -20,7 +20,7 @@ if (myForm) {
 
             let requestConfig = {
           		method: "POST",
-          		url: "/comment",
+          		url: "/products/comment",
           		contentType: "application/json",
           		data: JSON.stringify({
             		comment: input,
@@ -29,6 +29,8 @@ if (myForm) {
         	};
         	
         	$.ajax(requestConfig).then(function(responseMessage) {
+        		alert(responseMessage.comment);
+        		alert(responseMessage.time);
         		alert("Comment Success!");
           		const comment=`<tr><td>${input}</td><td>${input}</td><td>${date}</td></tr>`
             	$("#comment-table").append(comment);
