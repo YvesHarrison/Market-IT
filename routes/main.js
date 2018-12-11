@@ -41,6 +41,11 @@ router.get("/signup", function (req, res) {
 router.post('/signup', function (req, res) {
 	var name = req.body.firstName;
 	var email = req.body.email;
+	var lastName = req.body.lastName;
+	var Phone = req.body.Phone;
+	var city = req.body.city;
+	var address1 = req.body.address1;
+	var address2 = req.body.address2;
 	console.log(req.body.password);
 	var password = bcrypt.hashSync(req.body.password, SALT_ROUNDS);
 
@@ -71,8 +76,17 @@ router.post('/signup', function (req, res) {
 				errors: errors
 			});
 		} else {
-			var newUser ={
+			var newUser = {
 				firstName: name,
+
+				lastName: lastName,
+				Phone: Phone,
+				city: city,
+				address1: address1,
+				address2: address2,
+				email: email,
+				hashedPassword: password
+
         lastName: req.body.lastName,
         email: email,
         hashedPassword: password,
@@ -81,10 +95,12 @@ router.post('/signup', function (req, res) {
         state: userData.state,
         address1: userData.address1,
         address2: userData.address2,
+
 			};
 			User.addUser(newUser, function (err, user) {
 				if (err) throw err;
 				console.log(user);
+				console.log(req.user);
 			});
 			req.flash('success_msg', 'You are registered and can now login');
 			res.redirect('/login');
@@ -93,36 +109,38 @@ router.post('/signup', function (req, res) {
 });
 /*-------------------------Passport Locale Use-----------------------*/
 passport.use(new LocalStrategy(
-	function (email, password, done) {
-		User.getUserByemail(email, function (err, user) {
-			if (err) throw err;
-			if (!user) {
-				return done(null, false, {
-					message: 'Unknown User'
-				});
-			}
-
-			User.comparePassword(password, user.password, function (err, isMatch) {
-				if (err) throw err;
-				if (isMatch) {
-					return done(null, user);
-				} else {
-					return done(null, false, {
-						message: 'Invalid password'
-					});
-				}
+	async function (email, password, done) {
+		console.log(password);
+		var l_objuser = await User.getUserByemail(email);
+		console.log("hi user: " + l_objuser);
+		if (!l_objuser) {
+			return done(null, false, {
+				message: 'Unknown User'
 			});
-		});
+		}
+
+		if (bcrypt.compare(password, l_objuser.hashedPassword)) {
+
+			return done(null, l_objuser);
+		}
+		else {
+			return done(null, false, {
+				message: 'Invalid password'
+			});
+		}
 	}));
 
 passport.serializeUser(function (user, done) {
-	done(null, user.id);
+	done(null, user._id);
 });
 
-passport.deserializeUser(function (id, done) {
-	User.getUserById(id, function (err, user) {
-		done(err, user);
-	});
+passport.deserializeUser(async function (_id, done) {
+	console.log(_id);
+	var l_objuser = await User.getUserById(_id);
+	if(l_objuser){
+		done(null,l_objuser);
+	}
+	
 });
 
 router.post('/login',
@@ -132,6 +150,7 @@ router.post('/login',
 		failureFlash: true
 	}),
 	function (req, res) {
+		
 		res.redirect('/');
 	});
 

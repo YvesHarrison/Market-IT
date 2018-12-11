@@ -108,37 +108,80 @@
                     <img class="more-info-img" src="../public/imgs/earphone.png" alt="earphone" />
                 </div>
                 
-                <div class="tab-pane fade" id="review">
-                    
-                    <table class="table table-hover" id="comment-table">
-                        <caption>Recent comments</caption>
-                        <thead>
-                            <tr>
-                                <th>users</th>
-                                <th>comments</th>
-                                <th>time</th>
-                            </tr>
-                        </thead>
+                <table border="1">
+                <%
+                if (typeof posts != 'undefined' && posts.length > 0) { 
+                var srNo = 0;
+                posts.forEach( function ( post ){
+                        srNo = srNo + 1;
+                        %>
+<tr>
+    <td><%= srNo %></td>
+<td><%= post.title %></td>
+<td><a href="/posts/detail/<%= post._id %>" title="Post Detail">Detail</a></td>
+ 
+</tr>
+<% });
+}
+else {  %>
+  <tr><td colspan="3"> No Data </td></tr>
+<% } %>
+ 
+    </table>
 
-                        <tbody>
-                            
-                        </tbody>
-                    </table>
-                    <form name ="phrase" id="myForm" class="new-palindrome-form">
-                        <label for="text_input">Commenting:</label>
-                        <div class="form-group">
-                            <textarea type="text" rows="3" cols="70" class="form-control" id="text_input" name="text_input" placeholder="Comment"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary" id ="comment-button">Comment</button>
-                    </form>
+                    
+                <h2><%= postDetail.title %></h2>
+                div class="comments">
+        <% 
+        if (typeof comments != 'undefined' && comments != null) {
+                comments.forEach( function ( commentData ){
+                        %>
+                    <p> <%= commentData.comment %> </p>
+                        <% });
+                    } %>
+ 
+</div>
+ 
+<textarea id="comment" rows="3" cols="50"></textarea></br>
+<input type="hidden" id="postId" value="<%= postId %>">
+<input type="submit" value="Send" id="send"> 
+</body>
+<script type="text/javascript">
+var socket = io();
+    $('#send').click(function(){
+        var comment = $('#comment').val();
+        var postId = $('#postId').val();
+        if(comment != ''){
+            var data = {'comment': comment,'postId': postId};
+        $('.comments').append("<p>"+comment+"</p>");
+        $('#comment').val('');
+        }
+        
+    socket.emit('comment',data);
+ 
+ 
+    });
+ 
+    socket.on('comment',function(data){
+        var postId = "<%= postId %>";
+        if(postId==data.postId){
+            $('.comments').append("<p>"+data.comment+"</p>");
+        }
+        });
+    
+ 
+</script>
+
+                    
                     <div class="error" id="error" hidden></div>
-                </div>
+             
             </div>
         </div>
     </div>
 </div>
 
-<script src="/public/js/comment.js"></script> 
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+            <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 <script>
     function show(p1, p2) {
         let li01 = document.getElementById(p1)

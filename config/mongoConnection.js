@@ -15,7 +15,7 @@ let _db = undefined;
 
 let connectDb = async () => {
   if (!_connection) {
-    _connection = await MongoClient.connect(settings.mongoConfig.serverUrl);
+    _connection = await MongoClient.connect(settings.mongoConfig.serverUrl, { useNewUrlParser: true });
     _db = await _connection.db(settings.mongoConfig.database);
   }
 

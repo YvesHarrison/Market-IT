@@ -8,6 +8,10 @@ var flash = require('connect-flash');
 var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 
+var http = require("http").Server(app);
+var io = require("socket.io")(http);
+
+
 var session      = require('express-session');
 var validator = require('express-validator');
 
@@ -39,7 +43,23 @@ app.engine("handlebars", exphbs({
 app.set("view engine", "handlebars");
 
 
-app.use(validator());
+// Express Validator
+app.use(validator({
+    errorFormatter: function(param, msg, value) {
+        var namespace = param.split('.')
+        , root    = namespace.shift()
+        , formParam = root;
+  
+      while(namespace.length) {
+        formParam += '[' + namespace.shift() + ']';
+      }
+      return {
+        param : formParam,
+        msg   : msg,
+        value : value
+      };
+    }
+  }));
 
 app.use(session({
     secret: 'ilovescotchscotchyscotchscotch',
@@ -50,6 +70,16 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+
+/*---------------------------comments-----------------------------*/
+io.on('connection',function(socket){
+    socket.on('comment',function(data){
+        var commentData = new Comments(data);
+        commentData.save();
+        socket.broadcast.emit('comment',data);  
+    });
+ 
+});
 
 configRoutes(app);
 
