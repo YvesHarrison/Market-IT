@@ -1227,13 +1227,15 @@ body {
 	background-image: radial-gradient(cover, rgba(92, 100, 111, 1) 0%, rgba(31, 35, 40, 1) 100%), url('http://i.minus.com/io97fW9I0NqJq.png')
 }
 
-.login {
-	background: #eceeee;
+#login-form {
+	background: white;
 	border: 1px solid #42464b;
 	border-radius: 6px;
 	height: 257px;
 	margin: 20px auto 0;
 	width: 298px;
+	padding-top: 5%;
+	padding-bottom: 1%;
 }
 
 .login h1 {
@@ -1255,20 +1257,19 @@ input[type="password"],
 input[type="text"],
 input[type="email"] {
 	background: url('http://i.minus.com/ibhqW9Buanohx2.png') center left no-repeat, linear-gradient(top, #d6d7d7, #dee0e0);
-	border-radius: 4px;
-	border-bottom: 1px solid rgb(148, 148, 148);
-	box-sizing: border-box;
-	color: #e4ebff;
-	/* padding-left: 37px; */
-	transition: box-shadow 0.3s;
-	width: 240px;
+	width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
 }
 
 input[type="password"]:focus,
 input[type="email"]:focus,
 input[type="text"]:focus {
 	box-shadow: 0 0 4px 1px rgba(55, 166, 155, 0.3);
-	border-bottom: 1px solid rgb(150, 37, 255);
+	border-bottom: 3% solid rgb(150, 37, 255);
 	outline: 0;
 }
 
@@ -1286,14 +1287,14 @@ input[type="text"]::placeholder {
 	width: 87px;
 }
 
-.toggle {
-	background: url(http://i.minus.com/ibitS19pe8PVX6.png) no-repeat;
-	display: block;
-	height: 16px;
-	margin-top: -20px;
-	width: 87px;
-	z-index: -1;
-}
+	.toggle {
+		background: url(http://i.minus.com/ibitS19pe8PVX6.png) no-repeat;
+		display: block;
+		height: 16px;
+		margin-top: -20px;
+		width: 87px;
+		z-index: -1;
+	}
 
 input[type="checkbox"]:checked+.toggle {
 	background-position: 0 -16px
@@ -1302,10 +1303,10 @@ input[type="checkbox"]:checked+.toggle {
 .login_forgot {
 	color: #7f7f7f;
 	display: inline-block;
-	float: right;
+	float: none;
 	font: 12px/1 sans-serif;
 	left: -19px;
-	position: relative;
+	position: initial;
 	text-decoration: none;
 	top: 5px;
 	transition: color .4s;
@@ -1338,7 +1339,7 @@ input[type="submit"] {
 	border-top-right-radius: 5px;
 	border-bottom-right-radius: 5px;
 	border-bottom-left-radius: 5px;
-	box-shadow: inset 0px 1px 0px #2ab7ec, 0px 5px 0px 0px #497a78, 0px 10px 5px #999;
+		
 }
 
 .shadow {
@@ -1370,7 +1371,6 @@ input[type="submit"] {
 	margin-top: 20px;
 	margin-bottom: 20px;
 	float: left;
-	margin-left: 16px;
 	font-weight: 800;
 	font-size: 0.8em;
 }
