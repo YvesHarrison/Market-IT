@@ -4,9 +4,6 @@ const users = require("./users");
 const uuid = require("node-uuid");
 var mongoose = require('mongoose');
 /*------------------------------Comments-----------------------*/
-
-var Schema = mongoose.Schema,
-ObjectId = Schema.ObjectId;
 var Comments = mongoose.Schema({
 comment :String,    
 postId :String
