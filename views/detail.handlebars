@@ -101,51 +101,53 @@
                         predecessor.</p>
                     <img class="more-info-img" src="../public/imgs/earphone.png" alt="earphone" />
                 </div>
-                
-                <table border="1">
-                <% if (typeof posts != 'undefined' && posts.length > 0) { 
+            </div>
+            <div>
+                {{!-- for posts --}}
+                Handlebars.registerHelper('table', function(posts, comment) {
+                if(typeof posts != 'undefined' && posts.length > 0) { 
                 var srNo = 0;
                 posts.forEach( function ( post ){
                         srNo = srNo + 1;
-                        %>
+                       
 <tr>
-    <td><%= srNo %></td>
-<td><%= post.title %></td>
-<td><a href="/posts/detail/<%= post._id %>" title="Post Detail">Detail</a></td>
+    <td> srNo ></td>
+<td>{{post.title}} 
+<td><a href="/products/detail/{{post.id}}" title="Post Detail">Detail</a></td>
  
 </tr>
-<% });
+});
 }
-else {  %>
+else {
   <tr><td colspan="3"> No Data </td></tr>
-<% } %>
- 
     </table>
 
                     
-                <h2><%= postDetail.title %></h2>
+                <h2> {{postDetail.title }}</h2>
                 div class="comments">
-        <% 
-        if (typeof comments != 'undefined' && comments != null) {
+        if(typeof comments != 'undefined' && comments != null) {
                 comments.forEach( function ( commentData ){
-                        %>
-                    <p> <%= commentData.comment %> </p>
-                        <% });
-                    } %>
- 
+                    <p> {{commentData.comment}} </p>
+                    });
+        }
+}
+                });
+        
+       
 </div>
  
+ <div>
 <textarea id="comment" rows="3" cols="50"></textarea></br>
-<input type="hidden" id="postId" value="<%= postId %>">
+<input type="hidden" id="commentId" value="<{{commentId }}>">
 <input type="submit" value="Send" id="send"> 
 </body>
 <script type="text/javascript">
 var socket = io();
     $('#send').click(function(){
         var comment = $('#comment').val();
-        var postId = $('#postId').val();
+        var commentId = $('#commentId').val();
         if(comment != ''){
-            var data = {'comment': comment,'postId': postId};
+            var data = {'comment': comment,'commentId': commentId};
         $('.comments').append("<p>"+comment+"</p>");
         $('#comment').val('');
         }
@@ -156,14 +158,15 @@ var socket = io();
     });
  
     socket.on('comment',function(data){
-        var postId = "<%= postId %>";
-        if(postId==data.postId){
+        var commentId = "{{commentId}}";
+        if(commentId==data.commentId){
             $('.comments').append("<p>"+data.comment+"</p>");
         }
         });
     
  
 </script>
+ </div>
 
                     
                     <div class="error" id="error" hidden></div>
