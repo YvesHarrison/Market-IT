@@ -38,17 +38,15 @@ var UserSchema = mongoose.Schema({
   }
 
 });
+var User = module.exports = mongoose.model('User', UserSchema);
 
 // Posts Schema
 var Posts = mongoose.Schema({
-  title :String,    
+  title: String,
   description :String,
   by :String,
-  url :String
   });
   module.exports = mongoose.model('Posts', Posts);
-
-var User = module.exports = mongoose.model('User', UserSchema);
 
 let exportedMethods = {
   getAllUsers() {
