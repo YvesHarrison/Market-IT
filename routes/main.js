@@ -85,8 +85,7 @@ router.post('/signup', function (req, res) {
 				address2: address2,
 				email: email,
 				hashedPassword: password
-
-			});
+      });
 			User.addUser(newUser, function (err, user) {
 				if (err) throw err;
 				console.log(user);
