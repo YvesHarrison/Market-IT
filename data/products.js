@@ -26,13 +26,13 @@ let exportedMethods = {
             });
         });
     },
-    addProduct(producData, posterId) {
+    addProduct(producData) {
         return products().then(productCollection => {
             return users.getUserById(posterId).then(userThatproducted => {
                 let newproduct = {
                     p_name: producData.p_name,
                     p_description: producData.p_description,
-                    posterId: posterId,
+                    posterId: producData.posterId,
                     tags: producData.tags,
                     product_id: uuid.v4(),
                     comments: [],

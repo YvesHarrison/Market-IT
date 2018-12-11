@@ -4,12 +4,26 @@
 
         <h1>Login Market IT</h1>
 
-        <div class="login">
-            <form name="phrase" action="/login" method="POST" id="login-form" class="login-form">
-                <input type="text" name="username" placeholder="Username" id="name" class="name" autofocus="true"
-                    required="true" />
-                <input type="text" name="password" placeholder="Password" id="password" class="password" required="true" />
-                <button class="button" type="submit">Log In</button>
+        <div class="login cntsignupback">
+            <form name="phrase" action="/login" method="POST" id="login-form" class="signup-form">
+                <div class="text-center">
+                    <div class="form-group">
+                        <input type="text" name="username" placeholder="Username" id="name" class="form-control"
+                            autofocus="true" required="true" />
+                        <span id="firstHelp" class="form-text text-muted" style="display: none;">Please enter a valid
+                            Username.</span>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="password" placeholder="Password" id="password" class="form-control"
+                            required="true" />
+                        <span id="firstHelp" class="form-text text-muted" style="display: none;">Please enter a valid
+                            Password.</span>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="gradient-button gradient-button-1">Log In</button>
+                </div>
             </form>
             <a href="#" class="login_forgot">forgot password?</a>
         </div>
