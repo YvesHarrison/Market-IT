@@ -8,14 +8,16 @@ var Comments = require('../data/products');
 
 router.get("/", async (req, res) => {
     try {
-    
       res.render("products");
     } catch (e) {
       res.status(500).json({ error: e });
+    }
+  });
 
 var DATA = require('../data');
 var User = DATA.users;
 var Prod = DATA.posts;
+
 router.get("/", async (req, res) => {
   try {
     res.render("products");
@@ -90,6 +92,7 @@ router.get('/posts/detail/:id',function(req,res){
       }
   }); 
 });
+    
 
 
 module.exports = router;
