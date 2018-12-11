@@ -5,8 +5,8 @@ const multer = require("multer");
 var DATA = require('../data');
 var User = DATA.users;
 var Prod = DATA.posts;
-var Posts = require('../data/users');
-var Comments = require('../data/products');
+var Comments = require('../data/comment');
+
 const storage = multer.diskStorage({
   destination: function (req, file, callback) {
     callback(null, './public/uploads/products/');
@@ -133,36 +133,37 @@ router.get("/:id", async (req, res) => {
     });
   }
 });
-router.get('/detail', function (req, res) {
-  Posts.find({}, function (err, posts) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render('detail', {
-        posts: posts
-      });
-    }
-  });
+
+router.get('/detail',function(req,res){
+        res.render('detail');
+  }); 
+
+router.get('/detail/comments', function(req,res){
+    Comments.find({}, function(err,comments){
+      res.json(comments);
+    });
 });
 
-router.get('/products/detail/:id', function (req, res) {
-  Posts.addCommentsUser(req.params.id, function (err, postDetail) {
-    if (err) {
-      console.log(err);
-    } else {
-      Comments.find({
-        'commentId': req.params.id
-      }, function (err, comments) {
-        res.render('detail', {
-          postDetail: postDetail,
-          comments: comments,
-          commentId: req.params.id
-        });
-      });
-    }
+router.post('/detail/comments', function(req,res){
+  var commentBody = req.body.commentBody;
+  var commentBy = req.body.commentBy;
+  var createdAt = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
+  
+  //console.log(Comments);
+  var comment = new Comments();
+  comment.commentBody = commentBody;
+  comment.commentBy = commentBy;
+  comment.createdAt = createdAt;
+  console.log(comment);
+  comment.save(function(err){
+      res.json({message:"Comment saved successfully"}); 
+  });
+
+  Prod.addCommentToProduct(comment, function (err, user) {
+    if (err) throw err;
+    console.log(comment);
   });
 });
-
 
 
 

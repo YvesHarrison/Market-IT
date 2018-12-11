@@ -23,7 +23,11 @@ var UserSchema = mongoose.Schema({
     type: String
   },
   Phone: {
+<<<<<<< HEAD
     type: String
+=======
+		type: String,
+>>>>>>> 71ac0094fc56222efad1c10dd66b54f4a6d4362b
   },
 
   city: {
@@ -41,6 +45,7 @@ var UserSchema = mongoose.Schema({
 });
 var User = module.exports = mongoose.model('User', UserSchema);
 
+<<<<<<< HEAD
 // Posts Schema
 var Posts = mongoose.Schema({
   title: String,
@@ -49,6 +54,8 @@ var Posts = mongoose.Schema({
 });
 module.exports = mongoose.model('Posts', Posts);
 
+=======
+>>>>>>> 71ac0094fc56222efad1c10dd66b54f4a6d4362b
 let exportedMethods = {
   getAllUsers() {
     return users().then(userCollection => {

@@ -4,11 +4,25 @@ const users = require("./users");
 const uuid = require("node-uuid");
 var mongoose = require('mongoose');
 /*------------------------------Comments-----------------------*/
+<<<<<<< HEAD
 var Comments = mongoose.Schema({
     comment: String,
     postId: String
 });
 module.exports = mongoose.model('Comments', Comments);
+=======
+
+// var commentSchema = mongoose.Schema({
+
+// 	commentBody : String,
+// 	commentBy: String,
+// 	createdAt : String
+
+// });
+
+// var Comment = mongoose.model('Comment',commentSchema);
+// module.exports = Comment;
+>>>>>>> 71ac0094fc56222efad1c10dd66b54f4a6d4362b
 
 
 let exportedMethods = {
@@ -122,10 +136,11 @@ let exportedMethods = {
                 $addToSet: {
                     comments: {
                         comment_id: uuid.v4(),
-                        user_name: commentData.user_name,
+                        commentBy: commentData.user_name,
                         commenter_id: commentData.commenter_id,
                         users_image_path: "",
-                        comment: commentData.comment,
+                        commentBody: commentData.comment,
+                        createdAt: Date.now(),
                     }
                 }
             });
