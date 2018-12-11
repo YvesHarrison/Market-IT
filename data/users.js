@@ -22,7 +22,7 @@ var UserSchema = mongoose.Schema({
 		type: String
   },
   Phone: {
-		type: String
+		type: String,
   },
 
   city: {
@@ -39,14 +39,6 @@ var UserSchema = mongoose.Schema({
 
 });
 var User = module.exports = mongoose.model('User', UserSchema);
-
-// Posts Schema
-var Posts = mongoose.Schema({
-  title: String,
-  description :String,
-  by :String,
-  });
-  module.exports = mongoose.model('Posts', Posts);
 
 let exportedMethods = {
   getAllUsers() {
