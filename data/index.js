@@ -1,6 +1,6 @@
 module.exports = {
     users: require("./users"),
-    posts: require("./posts"),
+    posts: require("./products"),
     metadata: require("./metadata"),
 
   };

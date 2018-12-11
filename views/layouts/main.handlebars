@@ -7,6 +7,7 @@
     <meta name="description" content="">
     <link rel="stylesheet" href="/public/css/site.css">
     <link rel="stylesheet" href="/public/css/product.css">
+    <link rel="stylesheet" href="/public/css/style.css">
 
     <link rel="stylesheet" type="text/css" href="/public/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/public/css/animate.css">
@@ -24,33 +25,34 @@
     <!-- Main container -->
     <nav class="navbar">
         <div class="col-sm-3">
-            <div>
-                <a href="http://localhost:3000/"><img src="../public/imgs/logo.jpg" alt="MarketIT" id="top-log" class="top-log" />Market
-                    IT</a>
+            <div class="nav-left">
+                <a href="http://localhost:3000/"><img src="../public/imgs/logo.jpg" alt="MarketIT" id="top-log" class="top-log nav-img" /></a>
+                <a href="http://localhost:3000/" class="market-it">Market IT</a>
             </div>
         </div>
-        <div class="col-sm-5">
+        <div class="col-sm-5 nav-search">
             <form>
                 <div>
-                    <input type="search" placeholder="Search" aria-label="Search">
+                    <input type="search" placeholder="Enter products..." aria-label="Search">
+                    <button type="submit"></button>
                 </div>
             </form>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-4">
             <div>
-                <ul>
-                    <li>
-                        <a href="http://localhost:3000/products" id="pl-undefined">Products</a>
+                <ul class="nav-ul">
+                    <li class="nav-product">
+                        <a href="http://localhost:3000" id="pl-undefined" class="nav-home">Home</a>
+                    </li>
+                    <li class="nav-product">
+                        <a href="http://localhost:3000/products" id="pl-undefined" class="nav-home">Products</a>
+                    </li>
+                    <li class="nav-product">
+                        <a href="http://localhost:3000" id="pl-undefined" >Sign out</a>
                     </li>
                 </ul>
             </div>
         </div>
-        <div class="col-sm-1">
-
-        </div>
-        <!-- Navbar brand -->
-
-        <!-- Collapsible content -->
     </nav>
     {{!-- <div class="wrap">
         <!-- bloc-0 -->
@@ -128,6 +130,7 @@
 </header>
 
 <body>
+
     <main>
         {{{body}}}
         <script type="text/javascript" src="../public/js/client_side.js"></script>

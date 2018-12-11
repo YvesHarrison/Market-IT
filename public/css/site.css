@@ -1146,6 +1146,8 @@ h1 {
 	vertical-align: middle;
 	width: 50px;
 	height: 50px;
+	width: 23%;
+	height: 86%;
 }
 
 .user-p {
@@ -1195,9 +1197,9 @@ form-inline {
 	text-align: center;
 	padding: 0;
 	list-style: none;
-	background-color: #f2f2f2;
-	border-bottom: 1px solid #ccc;
-	border-top: 1px solid #ccc;
+	background-color: white;
+	/* border-bottom: 1px solid #ccc;
+	border-top: 1px solid #ccc; */
 	margin-left: 0px;
 }
 
@@ -1208,7 +1210,7 @@ form-inline {
 	font-weight: bold;
 	text-align: center;
 	color: black;
-	border-right: 1px solid #ccc;
+	/* border-right: 1px solid #ccc; */
 }
 
 .navbar_row li a:hover {
@@ -1382,7 +1384,7 @@ input[type="submit"] {
 }
 
 .cntPageheader {
-	padding-top: 40px;
+	/* padding-top: 40px; */
 }
 
 .cntsignupback {

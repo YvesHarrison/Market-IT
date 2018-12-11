@@ -78,6 +78,7 @@ router.post('/signup', function (req, res) {
 		} else {
 			var newUser = {
 				firstName: name,
+
 				lastName: lastName,
 				Phone: Phone,
 				city: city,
@@ -85,6 +86,16 @@ router.post('/signup', function (req, res) {
 				address2: address2,
 				email: email,
 				hashedPassword: password
+
+        lastName: req.body.lastName,
+        email: email,
+        hashedPassword: password,
+        Phone: userData.Phones,
+        city: userData.city,
+        state: userData.state,
+        address1: userData.address1,
+        address2: userData.address2,
+
 			};
 			User.addUser(newUser, function (err, user) {
 				if (err) throw err;

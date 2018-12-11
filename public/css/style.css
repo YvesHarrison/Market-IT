@@ -1,0 +1,68 @@
+.market-it {
+    margin-left: 15px;
+    vertical-align: bottom;
+}
+
+.nav-left {
+    height: 100px;
+}
+
+.nav-product {
+    list-style-type: none;
+}
+
+.nav-img {
+    vertical-align: middle;
+    margin-top: 14px;
+    margin-left: 30px;
+    margin-bottom: -23px;
+
+}
+
+.nav-search form {
+    position: relative;
+    width: 350px;
+    margin-top: 40px;
+}
+
+.nav-search input {
+    width: 100%;
+    height: 42px;
+    padding-left: 13px;
+    padding-right: 46px;
+
+    border: 1px solid gray;
+    border-radius: 5px;
+    background: transparent;
+    top: 0;
+    right: 0;
+}
+
+.nav-search button {
+    height: 42px;
+    cursor: pointer;
+    position: absolute;
+    background: gray;
+    border-radius: 0 5px 5px 0;
+    border: 1px solid gray;
+    width: 70px;
+    top: 0;
+    right: 0;
+}
+
+.nav-search button:before {
+    content: "SEARCH";
+    font-size: 13px;
+    color: #F9F0DA;
+}
+
+
+.nav-product {
+    margin-top: 18px;
+    padding: 10px;
+    float: left;
+}
+.nav-home{
+    border-right:0.6px solid gray;
+    padding-right: 12px;
+}
