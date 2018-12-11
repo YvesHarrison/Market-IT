@@ -47,11 +47,31 @@ router.get("/:id", async (req, res) => {
     });
   }
 });
+router.post("/tag", (req, res) => {
+  console.log(req.body);
+  console.log("This is the body");
+  var l_arrTags = req.body.split(/[\s,]+/);
+  res.render("products");
+});
 
-
+function escapeRegex(text) {
+  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
 router.get("/", async (req, res) => {
   try {
-    res.render("products");
+    console.log(req.query.search);
+    if (req.query.search) {
+      const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+      var products = await Prod.getProductsByTag(regex);
+      res.render("products", {
+        products: products
+      });
+    } else {
+      var products = await Prod.getAllproducts();
+      res.render("products", {
+        products: products
+      });
+    }
   } catch (e) {
     res.status(500).json({
       error: e

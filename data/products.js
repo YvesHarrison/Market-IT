@@ -22,9 +22,13 @@ let exportedMethods = {
     },
     getProductsByTag(tag) {
         return products().then(productCollection => {
-            return productCollection.find({
+            var l_arrprodtags = productCollection.find({
                 tags: tag
             }).toArray();
+            var l_arrprodname = productCollection.find({
+                pname: tag
+            }).toArray();
+            return l_arrprodtags.concat(l_arrprodname);
         });
     },
     getProductById(id) {
