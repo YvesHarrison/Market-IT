@@ -9,8 +9,6 @@ var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 
 var http = require("http").Server(app);
-var io = require("socket.io")(http);
-
 
 var session      = require('express-session');
 var validator = require('express-validator');
@@ -42,6 +40,22 @@ app.engine("handlebars", exphbs({
 }));
 app.set("view engine", "handlebars");
 
+/*--------------------check for authorization------------------------*/
+// app.use(function(req, res, next) {
+//     var auth;
+//     if (req.headers.authorization) {
+//         auth = new Buffer(req.headers.authorization.substring(6), 'base64').toString().split(':');
+//     }
+
+//     if (!auth || auth[0] !== 'admin' || auth[1] !== 'admin') {
+//         res.statusCode = 401;
+//         res.setHeader('WWW-Authenticate', 'Basic realm="Hello"');
+//         res.end('Unauthorized');
+//     } else {
+//         // continue with processing, user was authenticated
+//         next();
+//     }
+// });
 
 // Express Validator
 app.use(validator({
@@ -71,15 +85,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-/*---------------------------comments-----------------------------*/
-io.on('connection',function(socket){
-    socket.on('comment',function(data){
-        var commentData = new Comments(data);
-        commentData.save();
-        socket.broadcast.emit('comment',data);  
-    });
- 
-});
 
 configRoutes(app);
 

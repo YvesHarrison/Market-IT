@@ -1429,3 +1429,13 @@ input[type="submit"] {
 .clsformLabel{
 	color: white;
 }
+
+/* comment box */
+/* #commentByID, #commentBodyID{
+	height: 56px;
+	font-size: 18px;
+	border-right: transparent;
+	border-top: transparent;
+	border-left: transparent;
+	border-bottom: transparent;
+} */
