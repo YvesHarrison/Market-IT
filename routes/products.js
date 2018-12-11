@@ -2,6 +2,11 @@ const express = require("express");
 const router = express.Router();
 const path = require("path");
 const multer = require("multer");
+var DATA = require('../data');
+var User = DATA.users;
+var Prod = DATA.posts;
+var Posts = require('../data/users');
+var Comments = require('../data/products');
 const storage = multer.diskStorage({
   destination: function (req, file, callback) {
     callback(null, './uploads/products/');
@@ -24,23 +29,25 @@ const upload = multer({
   fileFilter: fileFilter
 });
 
-var Posts = require('../data/users');
-var Comments = require('../data/products');
 
 
 
-router.get("/", async (req, res) => {
-    try {
-    res.render("products");
+
+router.get("/:id", async (req, res) => {
+  try {
+    var product = await Prod.getProductById(req.params.id);
+    if (product)
+      res.status(200).render("details", {
+        product: product
+      });
+    else throw "product not found";
   } catch (e) {
     res.status(500).json({
       error: e
     });
   }
 });
-var DATA = require('../data');
-var User = DATA.users;
-var Prod = DATA.posts;
+
 
 router.get("/", async (req, res) => {
   try {
@@ -147,7 +154,7 @@ router.get('/posts/detail/:id', function (req, res) {
     }
   });
 });
-    
+
 
 
 module.exports = router;

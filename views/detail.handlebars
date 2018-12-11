@@ -22,7 +22,7 @@
         <div class="row">
             <div class="col-lg-5 col-md-6">
                 <div class="picture-big ">
-                        <img src="../public/imgs/earphone.png" class="img-responsive" id="pic" />
+                        <img src="../{{product.image_path}}" class="img-responsive" id="pic" />
                 </div>
                 <div class="picture-small">
                     <ul>
@@ -35,22 +35,16 @@
             </div>
             <div class="col-lg-7 col-md-6">
                 <div class="product_details">
-                    <h3>Sony WH-1000XM3</h3>
+                    <h3>{{product.pname}}</h3>
                     <div class="product_price">
-                        <span class="current_price">$348.00</span>
+                        <span class="current_price">${{product.price}}</span>
                         <span class="old_price">$368.00</span>
                     </div>
                     <div class="product_ratting">
                         <a href="#comments">1 Review</a>
                     </div>
                     <div class="product_description">
-                        <p>Sony has been hot on the heels of rival Bose, working hard to create
-                            the ultimate noise-canceling headphone. And with the WH-1000XM3 -- priced at $350, £330 or
-                            $AU499 -- it's finally done it.
-                            The biggest design change is to the shape of the headband and padding on the ear cups. The
-                            headband is now more contoured to your head, and the headphone has shaved off 20 grams of
-                            weight. The padding on the ear cups is also a little softer.
-                            The end result is a headphone that's clearly more comfortable than its predecessor.</p>
+                        <p>{{product.pdescription}}</p>
                     </div>
                     <div class="product_details_action">
                         <div class="product_stock">
@@ -109,8 +103,7 @@
                 </div>
                 
                 <table border="1">
-                <%
-                if (typeof posts != 'undefined' && posts.length > 0) { 
+                <% if (typeof posts != 'undefined' && posts.length > 0) { 
                 var srNo = 0;
                 posts.forEach( function ( post ){
                         srNo = srNo + 1;

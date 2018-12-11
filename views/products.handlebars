@@ -7,6 +7,40 @@
     <div class="bloc bgc-white l-bloc" id="bloc-2">
         <div class="container bloc-lg">
             <div class="row">
+                {{#each products}}
+                <div class="col-sm-4">
+                    <div id="myCarousel" class="carousel slide">
+                        <ol class="carousel-indicators">
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#myCarousel" data-slide-to="1"></li>
+                            <li data-target="#myCarousel" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img src="../{{this.image_path}}" alt="First slide">
+                            </div>
+                            <div class="item">
+                                <img src="../public/imgs/earphone2.jpeg" alt="Second slide">
+                            </div>
+                            <div class="item">
+                                <img src="../public/imgs/earphone3.jpeg" alt="Third slide">
+                            </div>
+                        </div>
+                        <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+                        <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+                    </div>
+                    <h3 class="mg-md">
+                        {{this.pname}}
+                    </h3>
+                    <span class="label label-default">Price: ${{this.price}}</span>
+                    <span class="label label-warning">Quantity: {{this.quantity}}</span>
+                    <p></p>
+                    <p class="text-muted">
+                        {{this.p_description}}
+                    </p>
+                    <form method="GET" action="/{{this._id}}"><button type="submit" class="btn btn-primary btn-sm">View Details</button></a>
+                </div>
+                {{#each/}}
                 <div class="col-sm-4">
                     <div id="myCarousel" class="carousel slide">
                         <ol class="carousel-indicators">
