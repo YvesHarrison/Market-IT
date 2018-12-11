@@ -1,28 +1,29 @@
 const mongoCollections = require("../config/mongoCollections");
 const users = mongoCollections.users;
+const products = mongoCollections.products;
 const uuid = require("node-uuid");
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
- 
+
 // User Schema
 var UserSchema = mongoose.Schema({
-  firstName:{
+  firstName: {
     type: String
   },
   lastName: {
     type: String
   },
-	hashedPassword: {
-		type: String
-	},
-	email: {
-		type: String
-	},
-	products: {
-		type: String
+  hashedPassword: {
+    type: String
+  },
+  email: {
+    type: String
+  },
+  products: {
+    type: String
   },
   Phone: {
-		type: String
+    type: String
   },
 
   city: {
@@ -43,10 +44,10 @@ var User = module.exports = mongoose.model('User', UserSchema);
 // Posts Schema
 var Posts = mongoose.Schema({
   title: String,
-  description :String,
-  by :String,
-  });
-  module.exports = mongoose.model('Posts', Posts);
+  description: String,
+  by: String,
+});
+module.exports = mongoose.model('Posts', Posts);
 
 let exportedMethods = {
   getAllUsers() {
@@ -57,8 +58,10 @@ let exportedMethods = {
 
   getUserByemail(email) {
     return users().then(userCollection => {
-      return userCollection.findOne({ email: email }).then(user => {
-        
+      return userCollection.findOne({
+        email: email
+      }).then(user => {
+
         if (!user) throw "User not found";
 
         return user;
@@ -68,7 +71,9 @@ let exportedMethods = {
 
   getUserById(id) {
     return users().then(userCollection => {
-      return userCollection.findOne({ _id: id }).then(user => {
+      return userCollection.findOne({
+        _id: id
+      }).then(user => {
         if (!user) throw "User not found";
 
         return user;
@@ -78,7 +83,7 @@ let exportedMethods = {
   addUser(userData) {
     return users().then(userCollection => {
       let newUser = {
-      
+
         firstName: userData.firstName,
         lastName: userData.lastName,
         _id: uuid.v4(),
@@ -108,7 +113,9 @@ let exportedMethods = {
   },
   removeUser(id) {
     return users().then(userCollection => {
-      return userCollection.removeOne({ _id: id }).then(deletionInfo => {
+      return userCollection.removeOne({
+        _id: id
+      }).then(deletionInfo => {
         if (deletionInfo.deletedCount === 0) {
           throw `Could not delete user with id of ${id}`;
         }
@@ -126,69 +133,82 @@ let exportedMethods = {
         $set: updatedUser
       };
 
-      return userCollection.updateOne({ _id: id }, updateCommand).then(() => {
+      return userCollection.updateOne({
+        _id: id
+      }, updateCommand).then(() => {
         return this.getUserById(id);
       });
     });
   },
   addBoughtProductToUser(userId, productId) {
     return this.getUserById(userId).then(currentUser => {
-      return userCollection.updateOne(
-        { _id: userId },
-        {
-          $addToSet: {
-            bought_products:  productId
-          }
+      return userCollection.updateOne({
+        _id: userId
+      }, {
+        $addToSet: {
+          bought_products: productId
         }
-      );
+      });
     });
   },
   addPostedProductToUser(userId, productId) {
-    return this.getUserById(userId).then(currentUser => {
-      return userCollection.updateOne(
-        { _id: userId },
-        {
-          $addToSet: {
-            posted_products:  productId
-          }
+    return users().then(productCollection => {
+      return this.getUserById(userId).then(userThatPosted => {
+        return productCollection
+          .updateOne({
+            _id: userId
+          }, {
+            $addToSet: {
+              posted_products:productId
+            }
+          })
+          .then(result => {
+            return this.getUserById(userId);
+          });
+      });
+    });
+    return this.getAllUsers().then(userCollection => {
+      console.log(userCollection);
+      return userCollection.updateOne({
+        _id: userId
+      }, {
+        $addToSet: {
+          posted_products: productId
         }
-      );
+      });
     });
   },
   addCommentsUser(userId, commentId) {
-    return this.getUserById(userId).then(currentUser => {
-      return userCollection.updateOne(
-        { _id: userId },
-        {
-          $addToSet: {
-            comments:  commentId
-          }
+    return this.getAllUsers().then(userCollection => {
+      return userCollection.updateOne({
+        _id: userId
+      }, {
+        $addToSet: {
+          comments: commentId
         }
-      );
+      });
     });
   },
   removePostedProductFromUser(userId, productId) {
     return this.getUserById(userId).then(currentUser => {
-      return userCollection.updateOne(
-        { _id: userId },
-        {
-          $pull: {
-            posted_products: productId
-          }
+      return userCollection.updateOne({
+        _id: userId
+      }, {
+        $pull: {
+          posted_products: productId
         }
-      );
+      });
     });
   },
   removeBoughtProductFromUser(userId, productId) {
     return this.getUserById(userId).then(currentUser => {
-      return userCollection.updateOne(
-        { _id: userId },
-        {
-          $pull: {
-            bought_products: productId
-          }
+      return userCollection.updateOne({
+        _id: userId
+      }, {
+        $pull: {
+          bought_products: productId
         }
-      );
+      });
     });
   }
 };

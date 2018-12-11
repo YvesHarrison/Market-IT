@@ -9,10 +9,10 @@ var Posts = require('../data/users');
 var Comments = require('../data/products');
 const storage = multer.diskStorage({
   destination: function (req, file, callback) {
-    callback(null, './uploads/products/');
+    callback(null, './public/uploads/products/');
   },
   filename: function (req, file, callback) {
-    callback(null, new Date().toISOString() + file.originalname);
+    callback(null, (new Date().toISOString().replace(/:/g,'_') + file.originalname));
   },
 });
 const fileFilter = (req, file, callback) => {
@@ -30,20 +30,7 @@ const upload = multer({
 });
 
 
-router.get("/:id", async (req, res) => {
-  try {
-    var product = await Prod.getProductById(req.params.id);
-    if (product)
-      res.status(200).render("details", {
-        product: product
-      });
-    else throw "product not found";
-  } catch (e) {
-    res.status(500).json({
-      error: e
-    });
-  }
-});
+
 router.post("/tag", (req, res) => {
   console.log(req.body);
   console.log("This is the body");
@@ -59,7 +46,7 @@ router.get("/", async (req, res) => {
     console.log(req.query.search);
     if (req.query.search) {
       const regex = new RegExp(escapeRegex(req.query.search), 'gi');
-      var products = await Prod.getProductsByTag(regex);
+      var products = await Prod.getProductsByTag(regex,req.query.search);
       res.render("products", {
         products: products
       });
@@ -75,35 +62,47 @@ router.get("/", async (req, res) => {
     });
   }
 });
-router.post("/productup", upload.single('productImage'), async (req, res) => {
+router.get("/productup", async (req, res) => {
   try {
-    console.log(req.file);
+    console.log("hi");
+    res.status(200).render("postproduct");
+  } catch (e) {
+    res.status(500).json({
+      error: e
+    });
+  }
+});
+router.post("/productup", upload.single('productimage'), async (req, res) => {
+  try {
+    console.log(req.user);
     if (req.user) {
+      console.log("prod herr1");
       var l_strArrtags;
       if (req.body.tags) {
         var tags = req.body.tags;
         l_strArrtags = tags.split(',');
       } else l_strArrtags = [];
-
+      console.log(req.file);
       var newProd = {
         p_name: req.body.p_name,
         p_description: req.body.p_description,
         posterId: req.user._id,
         tags: l_strArrtags,
         image_name: req.file.originalname,
-        image_path: req.file.path,
+        image_path: (req.file.path).replace(/\\/g,"/"),
         price: req.body.price,
         quantity: req.body.quantity
       };
-
-      Prod.addProduct(newProd, async function (err, product) {
-        if (err) throw err;
-        let l_objuser = await User.addPostedProductToUser(product.posterId, product._id);
+      console.log("this is new: " + JSON.stringify(newProd));
+      var newone = await Prod.addProduct(JSON.parse(JSON.stringify(newProd)));
+      console.log("this is new added: " + newone);
+      if (newone) {
+        let l_objuser = await User.addPostedProductToUser(newone.posterId, newone.product_id);
+        console.log(l_objuser);
         if (!l_objuser) {
           throw "User not found";
         }
-        console.log(product);
-      });
+      } else throw "product couldnt be added";
     } else {
 
       res.status(403).render("users/logout", {
@@ -112,17 +111,7 @@ router.post("/productup", upload.single('productImage'), async (req, res) => {
 
     }
     var allprods = await Prod.getAllproducts();
-    res.status(200).render("products");
-  } catch (e) {
-    res.status(500).json({
-      error: e
-    });
-  }
-});
-router.get("/productup", async (req, res) => {
-  try {
-    console.log(req.body);
-    res.status(200).render("postproduct");
+    res.status(200).redirect('/products');
   } catch (e) {
     res.status(500).json({
       error: e
@@ -130,14 +119,30 @@ router.get("/productup", async (req, res) => {
   }
 });
 
-router.get('/detail',function(req,res){
-  Posts.find({}, function(err, posts) {
-      if (err) {
-        console.log(err);
-      } else {
-        res.render('detail', { posts: posts });
-      }
-  }); 
+router.get("/:id", async (req, res) => {
+  try {
+    var product = await Prod.getProductById(req.params.id);
+    if (product)
+      res.status(200).render("details", {
+        product: product
+      });
+    else throw "product not found";
+  } catch (e) {
+    res.status(500).json({
+      error: e
+    });
+  }
+});
+router.get('/detail', function (req, res) {
+  Posts.find({}, function (err, posts) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render('detail', {
+        posts: posts
+      });
+    }
+  });
 });
 
 router.get('/products/detail/:id', function (req, res) {
@@ -145,11 +150,17 @@ router.get('/products/detail/:id', function (req, res) {
     if (err) {
       console.log(err);
     } else {
-        Comments.find({'commentId':req.params.id}, function (err, comments) {
-            res.render('detail', { postDetail: postDetail, comments: comments, commentId: req.params.id });
+      Comments.find({
+        'commentId': req.params.id
+      }, function (err, comments) {
+        res.render('detail', {
+          postDetail: postDetail,
+          comments: comments,
+          commentId: req.params.id
         });
+      });
     }
-}); 
+  });
 });
 
 

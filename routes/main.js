@@ -85,7 +85,7 @@ router.post('/signup', function (req, res) {
 				address2: address2,
 				email: email,
 				hashedPassword: password
-      });
+			});
 			User.addUser(newUser, function (err, user) {
 				if (err) throw err;
 				console.log(user);
@@ -97,9 +97,11 @@ router.post('/signup', function (req, res) {
 	}
 });
 /*-------------------------Passport Locale Use-----------------------*/
-passport.use(new LocalStrategy(
-	async function (email, password, done) {
-		console.log(password);
+passport.use('local', new LocalStrategy({
+	usernameField: 'email',
+	passwordField: 'password'
+}, async function (email, password, done) {
+	try {
 		var l_objuser = await User.getUserByemail(email);
 		console.log("hi user: " + l_objuser);
 		if (!l_objuser) {
@@ -107,31 +109,48 @@ passport.use(new LocalStrategy(
 				message: 'Unknown User'
 			});
 		}
-
-		if (bcrypt.compare(password, l_objuser.hashedPassword)) {
+		console.log("password match : " + bcrypt.compare(password, l_objuser.hashedPassword));
+		if (await bcrypt.compare(password, l_objuser.hashedPassword)) {
 
 			return done(null, l_objuser);
-		}
-		else {
+		} else {
 			return done(null, false, {
 				message: 'Invalid password'
 			});
 		}
-	}));
+
+	} catch (e) {
+		return done(null, false, {
+			message: 'Invalid password'
+		});
+	}
+
+}));
 
 passport.serializeUser(function (user, done) {
+	console.log("hi i am here");
 	done(null, user._id);
 });
 
 passport.deserializeUser(async function (_id, done) {
-	console.log(_id);
 	var l_objuser = await User.getUserById(_id);
-	if(l_objuser){
-		done(null,l_objuser);
+	if (l_objuser) {
+		done(null, l_objuser);
 	}
-	
-});
 
+});
+// router.post('/login', function (req, res) {
+// 	passport.authenticate('local', function(err, user, info) {
+// 		if (err) { return next(err); }
+// 		if (!user) { return res.redirect('/login'); }
+// 		console.log("here");
+// 		req.logIn(user, function(err) {
+// 		  if (err) { return next(err); }
+// 		  return res.redirect('/users/' + user.username);
+// 		});
+// 	  })(req, res );
+
+// });
 router.post('/login',
 	passport.authenticate('local', {
 		successRedirect: '/',
@@ -139,10 +158,10 @@ router.post('/login',
 		failureFlash: true
 	}),
 	function (req, res) {
-		
+
 		res.redirect('/');
 	});
-	
+
 /*------------------------Logout------------------------------*/
 router.all("/logout", function (req, res) {
 	req.logout();

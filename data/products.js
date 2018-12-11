@@ -5,8 +5,8 @@ const uuid = require("node-uuid");
 var mongoose = require('mongoose');
 /*------------------------------Comments-----------------------*/
 var Comments = mongoose.Schema({
-comment :String,    
-postId :String
+    comment: String,
+    postId: String
 });
 module.exports = mongoose.model('Comments', Comments);
 
@@ -17,15 +17,22 @@ let exportedMethods = {
             return productCollection.find({}).toArray();
         });
     },
-    getProductsByTag(tag) {
-        return products().then(productCollection => {
-            var l_arrprodtags = productCollection.find({
+    getProductsByTag(tag,normaltag) {
+        console.log(tag);
+        return products().then(async productCollection => {
+            var l_arrprodnamenormal = await productCollection.find({
+                p_name: normaltag
+            }).toArray();        
+            var l_arrprodname = await productCollection.find({
+                p_name: tag
+            }).toArray();
+            console.log(l_arrprodname);
+            console.log(productCollection);
+            var l_arrprodtags = await productCollection.find({
                 tags: tag
             }).toArray();
-            var l_arrprodname = productCollection.find({
-                pname: tag
-            }).toArray();
-            return l_arrprodtags.concat(l_arrprodname);
+            console.log(l_arrprodtags.concat(l_arrprodname))
+            return l_arrprodtags.concat(l_arrprodname).concat(l_arrprodnamenormal);
         });
     },
     getProductById(id) {
@@ -38,32 +45,27 @@ let exportedMethods = {
             });
         });
     },
-    addProduct(producData) {
-        return products().then(productCollection => {
-            return users.getUserById(posterId).then(userThatproducted => {
-                let newproduct = {
-                    p_name: producData.p_name,
-                    p_description: producData.p_description,
-                    posterId: producData.posterId,
-                    tags: producData.tags,
-                    product_id: uuid.v4(),
-                    comments: [],
-                    image_name: image_name,
-                    image_path: image_path,
-                    price: producData.price,
-                    quantity: producData.quantity
-                };
-
-                return productCollection
-                    .insertOne(newproduct)
-                    .then(newInsertInformation => {
-                        return newInsertInformation.insertedId;
-                    })
-                    .then(newId => {
-                        return this.getproductById(newId);
-                    });
-            });
+     addProduct(producData) {
+        return products().then(async productCollection => {
+            console.log("hi");
+            let newproduct = {
+                p_name: producData.p_name,
+                p_description: producData.p_description,
+                posterId: producData.posterId,
+                tags: producData.tags,
+                product_id: uuid.v4(),
+                comments: [],
+                image_name: producData.image_name,
+                image_path: producData.image_path,
+                price: producData.price,
+                quantity: producData.quantity
+            };
+            console.log(newproduct);
+            var nj = await productCollection.insertOne(newproduct);
+            var newprod = await this.getProductById(newproduct.product_id);
+            return newprod;
         });
+
     },
     removeproduct(id) {
         return products().then(productCollection => {
