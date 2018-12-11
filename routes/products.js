@@ -55,13 +55,15 @@ router.get("/productup", async (req, res) => {
   }
 });
 
-// router.post("/comment_post", async (req, res) => {
-//     try {
-//       console.log("receive");
-//     } catch (e) {
-//       res.status(500).json({ error: e });
-//     }
-// });
+router.post("/comment", async (req, res) => {
+    try {
+      console.log("receive");
+      console.log(req.body);
+      res.send(req.body);
+    } catch (e) {
+      res.status(500).json({ error: e });
+    }
+});
 
 // router.get("/post", async (req, res) => {
 //     try {
