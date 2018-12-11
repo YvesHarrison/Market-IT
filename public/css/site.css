@@ -1229,7 +1229,7 @@ body {
 	background-image: radial-gradient(cover, rgba(92, 100, 111, 1) 0%, rgba(31, 35, 40, 1) 100%), url('http://i.minus.com/io97fW9I0NqJq.png')
 }
 
-#login-form {
+/* #login-form {
 	background: white;
 	border: 1px solid #42464b;
 	border-radius: 6px;
@@ -1238,7 +1238,7 @@ body {
 	width: 298px;
 	padding-top: 5%;
 	padding-bottom: 1%;
-}
+} */
 
 .login h1 {
 	background-image: linear-gradient(top, #f1f3f3, #d4dae0);
@@ -1265,6 +1265,7 @@ input[type="email"] {
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
+  color: white;
 }
 
 input[type="password"]:focus,
@@ -1273,6 +1274,7 @@ input[type="text"]:focus {
 	box-shadow: 0 0 4px 1px rgba(55, 166, 155, 0.3);
 	border-bottom: 3% solid rgb(150, 37, 255);
 	outline: 0;
+	color: white;
 }
 
 input[type="password"]::placeholder,

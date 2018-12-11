@@ -71,16 +71,29 @@ router.post('/signup', function (req, res) {
 				errors: errors
 			});
 		} else {
+<<<<<<< HEAD
+			var newUser = {
+				"firstName": name,
+				"lastName": req.body.lastName,
+				"email": email,
+				"hashedPassword": password,
+				Phone: req.body.Phones,
+=======
 			var newUser = ({
 				firstName: name,
 				lastName: req.body.lastName,
 				Phone: req.body.Phone,
+>>>>>>> 1f6319cc31ca5564680741bf0715021bef274936
 				city: req.body.city,
 				address1: req.body.address1,
 				address2: req.body.address2,
+<<<<<<< HEAD
+			};
+=======
 				email: email,
 				hashedPassword: password
       });
+>>>>>>> 1f6319cc31ca5564680741bf0715021bef274936
 			User.addUser(newUser, function (err, user) {
 				if (err) throw err;
 				console.log(user);
