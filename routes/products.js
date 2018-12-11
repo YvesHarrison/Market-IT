@@ -28,9 +28,9 @@ var Posts = require('../data/users');
 var Comments = require('../data/products');
 
 
-router.get("/", async (req, res) => {
-  try {
 
+router.get("/", async (req, res) => {
+    try {
     res.render("products");
   } catch (e) {
     res.status(500).json({
@@ -41,6 +41,7 @@ router.get("/", async (req, res) => {
 var DATA = require('../data');
 var User = DATA.users;
 var Prod = DATA.posts;
+
 router.get("/", async (req, res) => {
   try {
     res.render("products");
@@ -135,6 +136,7 @@ router.get('/posts/detail/:id', function (req, res) {
     }
   });
 });
+    
 
 
 module.exports = router;

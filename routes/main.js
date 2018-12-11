@@ -76,9 +76,8 @@ router.post('/signup', function (req, res) {
 				errors: errors
 			});
 		} else {
-			var newUser = {
+			var newUser = ({
 				firstName: name,
-
 				lastName: lastName,
 				Phone: Phone,
 				city: city,
@@ -86,25 +85,7 @@ router.post('/signup', function (req, res) {
 				address2: address2,
 				email: email,
 				hashedPassword: password
-
-        lastName: req.body.lastName,
-        email: email,
-        hashedPassword: password,
-<<<<<<< HEAD
-        Phone: req.body.Phones,
-        city: req.body.city,
-        state: req.body.state,
-        address1: req.body.address1,
-        address2: req.body.address2,
-=======
-        Phone: userData.Phones,
-        city: userData.city,
-        state: userData.state,
-        address1: userData.address1,
-        address2: userData.address2,
-
->>>>>>> f5172ae937de612e5e92ec7dabe49c3f82900fcb
-			};
+      });
 			User.addUser(newUser, function (err, user) {
 				if (err) throw err;
 				console.log(user);
