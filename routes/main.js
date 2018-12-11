@@ -71,6 +71,7 @@ router.post('/signup', function (req, res) {
 				errors: errors
 			});
 		} else {
+<<<<<<< HEAD
 			var newUser = {
 				"firstName": name,
 				"lastName": req.body.lastName,
@@ -82,6 +83,18 @@ router.post('/signup', function (req, res) {
 				address1: req.body.address1,
 				address2: req.body.address2,
 			};
+=======
+			var newUser = ({
+				firstName: name,
+				lastName: lastName,
+				Phone: Phone,
+				city: city,
+				address1: address1,
+				address2: address2,
+				email: email,
+				hashedPassword: password
+      });
+>>>>>>> eb53d643ee863ef3aee6330ba329ad6e50a30a93
 			User.addUser(newUser, function (err, user) {
 				if (err) throw err;
 				console.log(user);
