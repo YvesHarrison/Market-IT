@@ -76,11 +76,11 @@ router.post('/signup', function (req, res) {
         lastName: req.body.lastName,
         email: email,
         hashedPassword: password,
-        Phone: userData.Phones,
-        city: userData.city,
-        state: userData.state,
-        address1: userData.address1,
-        address2: userData.address2,
+        Phone: req.body.Phones,
+        city: req.body.city,
+        state: req.body.state,
+        address1: req.body.address1,
+        address2: req.body.address2,
 			};
 			User.addUser(newUser, function (err, user) {
 				if (err) throw err;
