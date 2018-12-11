@@ -21,7 +21,22 @@ const upload = multer({
   limits: {
     fileSize: 1024 * 1024 * 6
   },
-  fileFilter:fileFilter
+  fileFilter: fileFilter
+});
+
+var Posts = require('../data/users');
+var Comments = require('../data/products');
+
+
+router.get("/", async (req, res) => {
+  try {
+
+    res.render("products");
+  } catch (e) {
+    res.status(500).json({
+      error: e
+    });
+  }
 });
 var DATA = require('../data');
 var User = DATA.users;
@@ -58,6 +73,7 @@ router.post("/productup", upload.single('productImage'), async (req, res) => {
       res.status(403).render("users/logout", {
         msg: "You are not authenticated"
       });
+
     }
     var allprods = await Prod.getAllproducts();
     res.status(200).render("products");
@@ -89,4 +105,36 @@ router.post("/comment", async (req, res) => {
     });
   }
 });
+router.get('/products/review', function (req, res) {
+  Posts.find({}, function (err, posts) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render('index', {
+        posts: posts
+      });
+    }
+  });
+});
+
+
+router.get('/posts/detail/:id', function (req, res) {
+  Posts.addCommentsUser(req.params._id, function (err, postDetail) {
+    if (err) {
+      console.log(err);
+    } else {
+      Comments.find({
+        'postId': req.params.id
+      }, function (err, comments) {
+        res.render('post-detail', {
+          postDetail: postDetail,
+          comments: comments,
+          postId: req.params.id
+        });
+      });
+    }
+  });
+});
+
+
 module.exports = router;

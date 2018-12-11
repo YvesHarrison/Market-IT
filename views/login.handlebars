@@ -4,6 +4,15 @@
 
         <h1>Login Market IT</h1>
 
+
+        <div class="login">
+            <form name="phrase" action="/login" method="POST" id="login-form" class="login-form">
+                <input type="text" name="username" placeholder="Username" id="name" class="name" autofocus="true"
+                    required="true" />
+                <input type="text" name="password" placeholder="Password" id="password" class="password" required="true" />
+                <button type="submit">Log In</button>
+                <a href="#" class="login_forgot">forgot password?</a>
+
         <div class="login cntsignupback">
             <form name="phrase" action="/login" method="POST" id="login-form" class="signup-form">
                 <div class="text-center">
@@ -24,8 +33,9 @@
                 <div class="text-center">
                     <button type="submit" class="gradient-button gradient-button-1">Log In</button>
                 </div>
+
             </form>
-            <a href="#" class="login_forgot">forgot password?</a>
+            
         </div>
         <div class="shadow"></div>
     </article>

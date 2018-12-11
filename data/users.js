@@ -39,6 +39,15 @@ var UserSchema = mongoose.Schema({
 
 });
 
+// Posts Schema
+var Posts = mongoose.Schema({
+  title :String,    
+  description :String,
+  by :String,
+  url :String
+  });
+  module.exports = mongoose.model('Posts', Posts);
+
 var User = module.exports = mongoose.model('User', UserSchema);
 
 let exportedMethods = {
@@ -51,6 +60,7 @@ let exportedMethods = {
   getUserByemail(email) {
     return users().then(userCollection => {
       return userCollection.findOne({ email: email }).then(user => {
+        
         if (!user) throw "User not found";
 
         return user;
