@@ -23,26 +23,24 @@ $('#commentSubmit').click(function() {
     var commBy = $('#commentByID').val();
     var commBody = $('#commentBodyID').val();
 
-    console.log(commBy);
-    console.log(commBody);
+    console.log("commBy",commBy);
+    console.log("commBody",commBody);
 
     $.ajax({
-            url: '/details',
-            type: 'POST',
-            data: {
-                commentBody: commBody,
-                commentBy: commBy
-            },
-            success: function(data) {
+        url: 'products/detail/comments',
+        type: 'POST',
+        data: {
+            commentBody: commBody,
+            commentBy: commBy
+        },
+        success: function(data) {
 
-                // Add it to the comments section
-                var template = $('template').html();
-                var HBlock = template.replace(/{cB}/g, commBody);
-                $('.comments-section').prepend(HBlock);
-
-
-            }
-        });
+        // Add it to the comments section
+        var template = $('template').html();
+        var HBlock = template.replace(/{cB}/g, commBody);
+        $('.comments-section').prepend(HBlock);
+        }
+    });
 
 
 });

@@ -5,7 +5,7 @@ const multer = require("multer");
 var DATA = require('../data');
 var User = DATA.users;
 var Prod = DATA.posts;
-var Comments = require('../data/products');
+var Comments = require('../data/comment');
 
 const storage = multer.diskStorage({
   destination: function (req, file, callback) {
@@ -135,31 +135,31 @@ router.get('/detail',function(req,res){
   }); 
 
 router.get('/detail/comments', function(req,res){
-    Comment.find({}, function(err,comments){
+    Comments.find({}, function(err,comments){
       res.json(comments);
-  
     });
-  
-  });
+});
 
-  router.post('/detail/comments', function(req,res){
-    var commentBody = req.body.commentBody;
-    var commentBy = req.body.commentBy;
-    var createdAt = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
+router.post('/detail/comments', function(req,res){
+  var commentBody = req.body.commentBody;
+  var commentBy = req.body.commentBy;
+  var createdAt = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
   
-    var comment = new Comment();
-    comment.commentBody = commentBody;
-    comment.commentBy = commentBy;
-    comment.createdAt = createdAt;
-    comment.save(function(err){
+  //console.log(Comments);
+  var comment = new Comments();
+  comment.commentBody = commentBody;
+  comment.commentBy = commentBy;
+  comment.createdAt = createdAt;
+  console.log(comment);
+  comment.save(function(err){
       res.json({message:"Comment saved successfully"}); 
-    });
-
-    Comments.addCommentToProduct(comment, function (err, user) {
-      if (err) throw err;
-      console.log(comment);
-    });
   });
+
+  Prod.addCommentToProduct(comment, function (err, user) {
+    if (err) throw err;
+    console.log(comment);
+  });
+});
 
 
 
