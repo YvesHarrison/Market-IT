@@ -47,8 +47,8 @@ let exportedMethods = {
                     tags: producData.tags,
                     product_id: uuid.v4(),
                     comments: [],
-                    image_name: "",
-                    image_path: "",
+                    image_name: image_name,
+                    image_path: image_path,
                     price: producData.price,
                     quantity: producData.quantity
                 };

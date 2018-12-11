@@ -54,18 +54,29 @@ router.post("/productup", upload.single('productImage'), async (req, res) => {
   try {
     console.log(req.file);
     if (req.user) {
+      var l_strArrtags;
+      if (req.body.tags) {
+        var tags = req.body.tags;
+        l_strArrtags = tags.split(',');
+      } else l_strArrtags = [];
+
       var newProd = {
         p_name: req.body.p_name,
         p_description: req.body.p_description,
-        posterId: req.cookies.AuthCookie,
-        tags: req.body.tags,
+        posterId: req.user._id,
+        tags: l_strArrtags,
         image_name: req.file.originalname,
         image_path: req.file.path,
         price: req.body.price,
         quantity: req.body.quantity
       };
-      Prod.addProduct(newProd, function (err, product) {
+
+      Prod.addProduct(newProd, async function (err, product) {
         if (err) throw err;
+        let l_objuser = await User.addPostedProductToUser(product.posterId, product._id);
+        if (!l_objuser) {
+          throw "User not found";
+        }
         console.log(product);
       });
     } else {
