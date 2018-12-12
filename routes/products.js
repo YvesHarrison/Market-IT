@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const path = require("path");
+const xss = require('xss');
 const multer = require("multer");
 var DATA = require('../data');
 var User = DATA.users;
@@ -32,21 +33,29 @@ const upload = multer({
 
 
 router.post("/tag", (req, res) => {
-  console.log(req.body);
+  try{
+  console.log(xss(req.body));
   console.log("This is the body");
-  var l_arrTags = req.body.split(/[\s,]+/);
+  var l_arrTags = xss(req.body.split(/[\s,]+/));
   res.render("products");
+  }
+catch (e) {
+  res.status(500).json({
+    error: e
+  });
+}
 });
+
 
 function escapeRegex(text) {
   return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 };
 router.get("/", async (req, res) => {
   try {
-    console.log(req.query.search);
+    console.log(xss(req.query.search));
     if (req.query.search) {
-      const regex = new RegExp(escapeRegex(req.query.search), 'gi');
-      var products = await Prod.getProductsByTag(regex,req.query.search);
+      const regex = new RegExp(escapeRegex(xss(req.query.search)), 'gi');
+      var products = await Prod.getProductsByTag(regex,xss(req.query.search));
       res.render("products", {
         products: products
       });
@@ -64,7 +73,7 @@ router.get("/", async (req, res) => {
 });
 router.get("/productup", async (req, res) => {
   try {
-    console.log("hi");
+  
     res.status(200).render("postproduct");
   } catch (e) {
     res.status(500).json({
@@ -74,24 +83,24 @@ router.get("/productup", async (req, res) => {
 });
 router.post("/productup", upload.single('productimage'), async (req, res) => {
   try {
-    console.log(req.user);
-    if (req.user) {
-      console.log("prod herr1");
+    console.log(xss(req.user));
+    if (xss(req.user)) {
+  
       var l_strArrtags;
-      if (req.body.tags) {
-        var tags = req.body.tags;
+      if (xss(req.body.tags)) {
+        var tags = xss(req.body.tags);
         l_strArrtags = tags.split(',');
       } else l_strArrtags = [];
-      console.log(req.file);
+      console.log(xss(req.file));
       var newProd = {
-        p_name: req.body.p_name,
-        p_description: req.body.p_description,
-        posterId: req.user._id,
+        p_name: xss(req.body.p_name),
+        p_description: xss(req.body.p_description),
+        posterId: xss(req.user._id),
         tags: l_strArrtags,
-        image_name: req.file.originalname,
-        image_path: (req.file.path).replace(/\\/g,"/"),
-        price: req.body.price,
-        quantity: req.body.quantity
+        image_name: xss(req.file.originalname),
+        image_path: xss((req.file.path)).replace(/\\/g,"/"),
+        price: xss(req.body.price),
+        quantity: xss(req.body.quantity)
       };
       console.log("this is new: " + JSON.stringify(newProd));
       var newone = await Prod.addProduct(JSON.parse(JSON.stringify(newProd)));
@@ -121,9 +130,9 @@ router.post("/productup", upload.single('productimage'), async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
-    console.log(req.params.id);
-    console.log("req.params.id");
-    var product = await Prod.getProductById(req.params.id);
+    var product = await Prod.getProductById(xss(req.params.id));
+    console.log(xss(req.params.id));
+    
     if (product)
       res.status(200).render("detail", {
         product: product
@@ -137,18 +146,33 @@ router.get("/:id", async (req, res) => {
 });
 
 router.get('/detail',function(req,res){
+  try{
         res.render('detail');
+  }
+  catch (e) {
+    res.status(500).json({
+      error: e
+    });
+  }
   }); 
 
+
 router.get('/detail/comments', function(req,res){
+  try{
     Comments.find({}, function(err,comments){
       res.json(comments);
     });
+  }
+    catch (e) {
+      res.status(500).json({
+        error: e
+      });
+    }
 });
 
 router.post('/detail/comments', function(req,res){
-  var commentBody = req.body.commentBody;
-  var commentBy = req.body.commentBy;
+  var commentBody = xss(req.body.commentBody);
+  var commentBy = xss(req.body.commentBy);
   var createdAt = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
   
   //console.log(Comments);

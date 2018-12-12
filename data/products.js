@@ -32,7 +32,7 @@ let exportedMethods = {
         });
     },
     getProductsByTag(tag,normaltag) {
-        console.log(tag);
+        if(!tag) throw "You must provide a tag";
         return products().then(async productCollection => {
             var l_arrprodnamenormal = await productCollection.find({
                 p_name: normaltag
@@ -50,6 +50,7 @@ let exportedMethods = {
         });
     },
     getProductById(id) {
+        if(!id) throw "Must provide an id";
         return products().then(productCollection => {
             return productCollection.findOne({
                 product_id: id
@@ -60,6 +61,7 @@ let exportedMethods = {
         });
     },
      addProduct(producData) {
+
         return products().then(async productCollection => {
             console.log("hi");
             let newproduct = {
@@ -82,6 +84,7 @@ let exportedMethods = {
 
     },
     removeproduct(id) {
+        if (!id) throw "You must provide an id";
         return products().then(productCollection => {
             return productCollection.removeOne({
                 product_id: id
@@ -93,6 +96,7 @@ let exportedMethods = {
         });
     },
     updateProduct(id, updatedproduct) {
+        if (!id) throw "You must provide an id";
         return products().then(productCollection => {
             let updatedproductData = {};
 

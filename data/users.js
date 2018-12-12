@@ -60,6 +60,7 @@ let exportedMethods = {
   },
 
   getUserByemail(email) {
+    if (!email) throw "You must provide an email";
     return users().then(userCollection => {
       return userCollection.findOne({
         email: email
@@ -73,6 +74,7 @@ let exportedMethods = {
   },
 
   getUserById(id) {
+    if (!id) throw "You must provide an id";
     return users().then(userCollection => {
       return userCollection.findOne({
         _id: id
@@ -115,6 +117,7 @@ let exportedMethods = {
     });
   },
   removeUser(id) {
+    if (!id) throw "You must provide an id";
     return users().then(userCollection => {
       return userCollection.removeOne({
         _id: id
@@ -126,6 +129,7 @@ let exportedMethods = {
     });
   },
   updateUser(id, updatedUser) {
+    if (!id) throw "You must provide an id";
     return this.getUserById(id).then(currentUser => {
       let updatedUser = {
         firstName: updatedUser.firstName,
