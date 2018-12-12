@@ -113,6 +113,7 @@ passport.use('local', new LocalStrategy({
 	passwordField: 'password'
 }, async function (email, password, done) {
 	try {
+		console.log("yolo");
 		var l_objuser = await User.getUserByemail(email);
 		console.log("hi user: " + l_objuser);
 		if (!l_objuser) {

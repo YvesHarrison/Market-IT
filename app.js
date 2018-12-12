@@ -12,6 +12,7 @@ var http = require("http").Server(app);
 
 var session = require('express-session');
 var validator = require('express-validator');
+
 app.use(session({
     secret: 'ilovescotchscotchyscotchscotch',
     resave: true,
@@ -19,6 +20,8 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+
 
 
 // app.use(morgan('dev')); // log every request to the console
@@ -84,8 +87,6 @@ app.use(validator({
 
 app.use(flash());
 
-<<<<<<< HEAD
-=======
 /*---------------------------comments-----------------------------*/
 // io.on('connection', function (socket) {
 //     socket.on('comment', function (data) {
@@ -95,7 +96,6 @@ app.use(flash());
 //     });
 
 // });
->>>>>>> 4becc40517bd6f0173c54aa3d919cf0a4b854362
 
 configRoutes(app);
 

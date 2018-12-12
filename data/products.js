@@ -4,25 +4,11 @@ const users = require("./users");
 const uuid = require("node-uuid");
 var mongoose = require('mongoose');
 /*------------------------------Comments-----------------------*/
-<<<<<<< HEAD
-
-// var commentSchema = mongoose.Schema({
-
-// 	commentBody : String,
-// 	commentBy: String,
-// 	createdAt : String
-
-// });
-
-// var Comment = mongoose.model('Comment',commentSchema);
-// module.exports = Comment;
-=======
 var Comments = mongoose.Schema({
     comment: String,
     postId: String
 });
 module.exports = mongoose.model('Comments', Comments);
->>>>>>> 4becc40517bd6f0173c54aa3d919cf0a4b854362
 
 
 let exportedMethods = {

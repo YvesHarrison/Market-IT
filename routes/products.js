@@ -6,13 +6,13 @@ var DATA = require('../data');
 var User = DATA.users;
 var Prod = DATA.posts;
 var Comments = require('../data/comment');
-
+var nodemailer = require('nodemailer');
 const storage = multer.diskStorage({
   destination: function (req, file, callback) {
     callback(null, './public/uploads/products/');
   },
   filename: function (req, file, callback) {
-    callback(null, (new Date().toISOString().replace(/:/g,'_') + file.originalname));
+    callback(null, (new Date().toISOString().replace(/:/g, '_') + file.originalname));
   },
 });
 const fileFilter = (req, file, callback) => {
@@ -46,7 +46,7 @@ router.get("/", async (req, res) => {
     console.log(req.query.search);
     if (req.query.search) {
       const regex = new RegExp(escapeRegex(req.query.search), 'gi');
-      var products = await Prod.getProductsByTag(regex,req.query.search);
+      var products = await Prod.getProductsByTag(regex, req.query.search);
       res.render("products", {
         products: products
       });
@@ -89,7 +89,7 @@ router.post("/productup", upload.single('productimage'), async (req, res) => {
         posterId: req.user._id,
         tags: l_strArrtags,
         image_name: req.file.originalname,
-        image_path: (req.file.path).replace(/\\/g,"/"),
+        image_path: (req.file.path).replace(/\\/g, "/"),
         price: req.body.price,
         quantity: req.body.quantity
       };
@@ -118,6 +118,50 @@ router.post("/productup", upload.single('productimage'), async (req, res) => {
     });
   }
 });
+router.post("/buy/:id", async (req, res) => {
+  console.log("this is user");
+  console.log(req.user);
+
+  if (req.user) {
+    var product = await Prod.getProductById(req.params.id);
+    if (product) {
+      var seller = await User.getUserById(product.posterId);
+      var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'saveit.team@gmail.com',
+          pass: 'save1234'
+        }
+      });
+      var mailOptions = {
+        from: 'saveit.team@gmail.com',
+        to: seller.email,
+        subject: req.user.firstName + ' wants to buy ' + product.p_name + ' from you',
+        text: 'Hi Seller,\nCongratulations! ' + req.user.firstName + ' wants to buy your product: ' + product.p_name + ' in quantity = ' + req.body.quantity + '. Following is his message:\n\n' + req.body.message + '\n\n Please contact ' + req.user.firstName + ' on email: ' + req.user.email + '\n\nRegards,\nTeam Market IT'
+      };
+
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
+      });
+      res.redirect('/products');
+    } else throw "product not found";
+  } else res.redirect('/login');
+});
+router.get("/buy/:id", async (req, res) => {
+  
+  var product = await Prod.getProductById(req.params.id);
+  if (product) {
+    var seller = await User.getUserById(product.posterId);
+    res.status(200).render("buy", {
+      product: product,
+      seller:seller
+    });
+  } else throw "product not found";
+});
 
 router.get("/:id", async (req, res) => {
   try {
@@ -136,29 +180,31 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.get('/detail',function(req,res){
-        res.render('detail');
-  }); 
-
-router.get('/detail/comments', function(req,res){
-    Comments.find({}, function(err,comments){
-      res.json(comments);
-    });
+router.get('/detail', function (req, res) {
+  res.render('detail');
 });
 
-router.post('/detail/comments', function(req,res){
+router.get('/detail/comments', function (req, res) {
+  Comments.find({}, function (err, comments) {
+    res.json(comments);
+  });
+});
+
+router.post('/detail/comments', function (req, res) {
   var commentBody = req.body.commentBody;
   var commentBy = req.body.commentBy;
   var createdAt = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
-  
+
   //console.log(Comments);
   var comment = new Comments();
   comment.commentBody = commentBody;
   comment.commentBy = commentBy;
   comment.createdAt = createdAt;
   console.log(comment);
-  comment.save(function(err){
-      res.json({message:"Comment saved successfully"}); 
+  comment.save(function (err) {
+    res.json({
+      message: "Comment saved successfully"
+    });
   });
 
   Prod.addCommentToProduct(comment, function (err, user) {
