@@ -4,13 +4,6 @@ const users = require("./users");
 const uuid = require("node-uuid");
 var mongoose = require('mongoose');
 /*------------------------------Comments-----------------------*/
-<<<<<<< HEAD
-var Comments = mongoose.Schema({
-    comment: String,
-    postId: String
-});
-module.exports = mongoose.model('Comments', Comments);
-=======
 
 // var commentSchema = mongoose.Schema({
 
@@ -22,7 +15,6 @@ module.exports = mongoose.model('Comments', Comments);
 
 // var Comment = mongoose.model('Comment',commentSchema);
 // module.exports = Comment;
->>>>>>> 71ac0094fc56222efad1c10dd66b54f4a6d4362b
 
 
 let exportedMethods = {
@@ -46,7 +38,7 @@ let exportedMethods = {
                 tags: tag
             }).toArray();
             console.log(l_arrprodtags.concat(l_arrprodname))
-            return l_arrprodtags.concat(l_arrprodname).concat(l_arrprodnamenormal);
+            return Array.from(new Set(l_arrprodtags.concat(l_arrprodname).concat(l_arrprodnamenormal)));
         });
     },
     getProductById(id) {
@@ -129,7 +121,7 @@ let exportedMethods = {
         });
     },
     addCommentToProduct(commentData, productId) {
-        return this.getProductById(productId).then(thisProduct => {
+        return this.getProductById(productId).then(productCollection => {
             return productCollection.updateOne({
                 product_id: productId
             }, {
