@@ -12,7 +12,7 @@ const main = async () => {
       "Sanchita",
       "Rastogi",
       "srastog1@stevens.edu",
-      ["Ulta HD"],
+      ["Ultra HD TV"],
       "5512297754",
       "Jersey City",
       "New Jersey",
@@ -21,6 +21,20 @@ const main = async () => {
       [""],
       ["Good Product"],
   )
+  await userInfo.addUser(
+    "Shreesh",
+    "Chavan",
+    "shreeshchavan@gmail.com",
+    ["ipad"],
+    "5512297751",
+    "Jersey City",
+    "New Jersey",
+    "JFK Boulevard",
+    [""],
+    [""],
+    ["Great Product"],
+)
+
 
   await productInfo.addProduct(
       "Apple HomePod",

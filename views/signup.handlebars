@@ -2,6 +2,11 @@
       <br/>
       <h2 class="signup-h2">Sign Up For Market IT</h2>
       <br/>
+      {{#if errors}}
+            {{#each errors}}
+            <div class="alert alert-danger"> {{msg}}</div>
+            {{/each}}
+      {{/if}}
       <div class="container">
         <div class="row justify-content-center ">
           <div class="col-lg-8  col-12 jumbotron cntsignupback">
@@ -14,7 +19,7 @@
                 
               <div class="form-group">
                 <label for="lastname" class="clsformLabel">Last Name:</label>
-                <input type="text" class="form-control" id="last" name="last" placeholder="Last Name" aria-describedby="lastHelp">
+                <input type="text" class="form-control" id="last " name="last" placeholder="Last Name" aria-describedby="lastHelp">
                 <span id="lastHelp" class="form-text text-muted" style="display: none;">Please enter a valid last name.</span>
               </div>
               
@@ -50,13 +55,13 @@
                 
               <div class="form-group">
                 <label for="password" class="clsformLabel">Password:</label>
-                <input type="text" class="form-control" id="password" name="password" placeholder="Password" aria-describedby="passwordHelp">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password" aria-describedby="passwordHelp">
                 <span id="passwordHelp" class="form-text text-muted" style="display: none;">Please enter a valid password.</span>
               </div>
                 
               <div class="form-group">
                 <label for="repassword" class="clsformLabel">Repeat Password:</label>
-                <input type="text" class="form-control" id="password2" name="password2" placeholder="Repeat Password" aria-describedby="repasswordHelp">
+                <input type="password" class="form-control" id="password2" name="password2" placeholder="Repeat Password" aria-describedby="repasswordHelp">
                 <span id="repasswordHelp" class="form-text text-muted" style="display: none;">Please enter a valid password.</span>
               </div>
             
