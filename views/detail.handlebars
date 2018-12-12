@@ -100,6 +100,21 @@
                         predecessor.</p>
                     <img class="more-info-img" src="../public/imgs/earphone.png" alt="earphone" />
                 </div>
+                <div class="tab-pane fade" id="review">
+                    {{!-- comment --}}
+                    <div class="header"><h3>comment</h3></div>
+
+                    <input  id="commentByID" type="text" placeholder="name" name="commentBy" /></br>
+                    <textarea  id="commentBodyID" rows="3" cols="50" placeholder="your comment..." name="commentBody" ></textarea></br>
+                    <button class="submitButton" id="commentSubmit" >Make Comment</button>
+
+                    <div class="comments-section">
+                        <template>
+                            <h3>{cB}</h3>
+                        </template>
+                    </div>
+                    
+                </div>
             </div>
             <div>
                     
@@ -123,18 +138,7 @@
     show("li04", "../public/imgs/earphone2.jpeg")
 </script>
 
-{{!-- comment --}}
-<div class="header"><h3>comment</h3></div>
-	<!--form method="post"-->
-	 	<input  id="commentByID" type="text" placeholder="name" name="commentBy" /></br>
-	 	<textarea  id="commentBodyID" rows="3" cols="50" placeholder="your comment..." name="commentBody" ></textarea></br>
-	 	<button class="submitButton" id="commentSubmit" >Post</button>
-	 <!--/form-->
-	<div class="comments-section">
-		<template>
-			<h3>{cB}</h3>
-		</template>
-	</div>
+
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="../public/js/push.js"></script>
