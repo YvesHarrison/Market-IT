@@ -84,6 +84,8 @@ app.use(validator({
 
 app.use(flash());
 
+<<<<<<< HEAD
+=======
 /*---------------------------comments-----------------------------*/
 // io.on('connection', function (socket) {
 //     socket.on('comment', function (data) {
@@ -93,6 +95,7 @@ app.use(flash());
 //     });
 
 // });
+>>>>>>> 4becc40517bd6f0173c54aa3d919cf0a4b854362
 
 configRoutes(app);
 

@@ -7,6 +7,7 @@ const passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var SALT_ROUNDS = 16;
 var User = require('../data/users');
+let tag="Sign Out";
 
 router.get("/", function (req, res) {
 	try {
@@ -17,6 +18,16 @@ router.get("/", function (req, res) {
 		});
 	}
 });
+
+// router.get("/buy", function (req, res) {
+// 	try {
+// 		res.render("buy");
+// 	} catch (e) {
+// 		res.status(500).json({
+// 			error: e
+// 		});
+// 	}
+// });test router to buy page
 /*-----------Login and Authentication-------------------------*/
 router.get("/login", function (req, res) {
 	try {
@@ -171,7 +182,7 @@ router.all("/logout", function (req, res) {
 
 router.get("/info", function (req, res) {
 	try {
-		res.render("info");
+		res.render("info",{signout:tag});
 	} catch (e) {
 		res.status(500).json({
 			error: e
