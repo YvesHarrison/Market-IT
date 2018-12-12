@@ -121,9 +121,11 @@ router.post("/productup", upload.single('productimage'), async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
+    console.log(req.params.id);
+    console.log("req.params.id");
     var product = await Prod.getProductById(req.params.id);
     if (product)
-      res.status(200).render("details", {
+      res.status(200).render("detail", {
         product: product
       });
     else throw "product not found";
