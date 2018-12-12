@@ -3,9 +3,6 @@ const products = mongoCollections.products;
 const users = require("./users");
 const uuid = require("node-uuid");
 var mongoose = require('mongoose');
-/*------------------------------Comments-----------------------*
-
-
 
 let exportedMethods = {
     getAllproducts() {
