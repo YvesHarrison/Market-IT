@@ -84,18 +84,15 @@ app.use(validator({
 
 app.use(flash());
 
-<<<<<<< HEAD
 /*---------------------------comments-----------------------------*/
-io.on('connection', function (socket) {
-    socket.on('comment', function (data) {
-        var commentData = new Comments(data);
-        commentData.save();
-        socket.broadcast.emit('comment', data);
-    });
+// io.on('connection', function (socket) {
+//     socket.on('comment', function (data) {
+//         var commentData = new Comments(data);
+//         commentData.save();
+//         socket.broadcast.emit('comment', data);
+//     });
 
-});
-=======
->>>>>>> 71ac0094fc56222efad1c10dd66b54f4a6d4362b
+// });
 
 configRoutes(app);
 
@@ -103,5 +100,5 @@ app.listen(3000, () => {
     console.log("Your server is now listening on port 3000! Navigate to http://localhost:3000 to access it");
     if (process && process.send) process.send({
         done: true
-    }); // ADD THIS LINE
+    });
 });
