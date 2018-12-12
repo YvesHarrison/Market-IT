@@ -38,7 +38,11 @@
                     <p class="text-muted">
                         {{this.p_description}}
                     </p>
-                    <form method="GET" action="/products/{{this.product_id}}"><button type="submit" class="btn btn-primary btn-sm">View Details</button></a>
+                    <div class="product_action_link">
+                            <ul>
+                                <li class="product_cart"><a href="/products/{{this.product_id}}" title="View Details">View Details</a></li>
+                            </ul>
+                        </div>
                 </div>
                 {{/each}}
                 <div class="col-sm-4">

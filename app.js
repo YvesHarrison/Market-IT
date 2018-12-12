@@ -13,6 +13,7 @@ var http = require("http").Server(app);
 
 var session = require('express-session');
 var validator = require('express-validator');
+
 app.use(session({
     secret: 'ilovescotchscotchyscotchscotch',
     resave: true,
@@ -79,6 +80,7 @@ app.use(validator({
 
 app.use(flash());
 
+
 app.use(function (req, res, next){
     res.locals.success_msg = req.flash('success_msg');
     res.locals.error_msg = req.flash('error_msg');
@@ -86,6 +88,8 @@ app.use(function (req, res, next){
     res.locals.user = (req.user) || null;
     next();
 });
+
+
 
 configRoutes(app);
 

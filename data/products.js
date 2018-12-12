@@ -3,18 +3,8 @@ const products = mongoCollections.products;
 const users = require("./users");
 const uuid = require("node-uuid");
 var mongoose = require('mongoose');
-/*------------------------------Comments-----------------------*/
+/*------------------------------Comments-----------------------*
 
-// var commentSchema = mongoose.Schema({
-
-// 	commentBody : String,
-// 	commentBy: String,
-// 	createdAt : String
-
-// });
-
-// var Comment = mongoose.model('Comment',commentSchema);
-// module.exports = Comment;
 
 
 let exportedMethods = {

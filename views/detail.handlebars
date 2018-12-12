@@ -48,12 +48,11 @@
                     </div>
                     <div class="product_details_action">
                         <div class="product_stock">
-                            <label>Quantity:</label>
-                            <input min="1" max="100" type="number">
+                            <label>Quantity:{{product.quantity}}</label>
                         </div>
                         <div class="product_action_link">
                             <ul>
-                                <li class="product_cart"><a href="#" title="Add to Cart">Add to Cart</a></li>
+                                <li class="product_cart"><a href="../products/buy/{{product.product_id}}" title="Add to Cart">Enquire</a></li>
                             </ul>
                         </div>
                         <div class="social_sharing">
