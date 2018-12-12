@@ -59,16 +59,7 @@ function validationForm(){
               
                 } 
             }
-                // check username match 
-                if ((document.getElementById('logname').value ==
-                document.getElementById('email').value) || (document.getElementById('logpassword').value ==
-                document.getElementById('password').value)){
-                document.getElementById('match').style.color ='green';
-                document.getElementById('match').innerHTML = 'matching';
-          } else {
-            document.getElementById('match').style.color = 'red';
-            document.getElementById('match').innerHTML = 'not matching';
-          }       
+                 
 
                    
 
