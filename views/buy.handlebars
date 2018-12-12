@@ -1,0 +1,61 @@
+<div class="breadcrumbs_area">
+    <div class="container">
+        <div class="breadcrumbs_inner">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb_content">
+                        <h3>product details</h3>
+                        <ul>
+                            <li><a href="products">home</a></li>
+                            <li><i class="fa fa-angle-right"></i></li>
+                            <li>buy</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="single_product_wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-md-6">
+                <div class="picture-big ">
+                        <img src="../{{product.image_path}}" class="img-responsive" id="pic" />
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-6">
+                <div class="product_details">
+                    <h3>{{product.pname}}</h3>
+                    <div class="product_price">
+                        <span class="current_price">${{product.price}}</span>
+                    </div>
+                    <div class="product_quantity">
+                        <label>Quantity:</label>
+                        <span class="current_quantity">{{product.quantity}}</span>
+                    </div>
+                </div>
+                <div class ="message">
+                    <label>Seller:</label>
+                    <h3>{{product.seller}}</h3>
+                    <form name ="phrase" id="myForm" class="new-palindrome-form">
+                        <label for="text_input">Send Message to Seller {{product.seller}}:</label>
+                        <div class="form-group">
+                            <textarea type="text" rows="3" cols="30" class="form-control" id="text_input" name="text_input" placeholder="Message"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id ="comment-button">Send Message</button>
+                    </form>
+                    <div class="error" id="error" hidden></div>
+                </div>
+            </div>
+
+        </div>
+
+        
+    </div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	
