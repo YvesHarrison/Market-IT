@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const path = require("path");
+const xss = require('xss');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
@@ -50,17 +51,16 @@ router.get("/signup", function (req, res) {
 });
 
 router.post('/signup', function (req, res) {
-	var name = req.body.firstName;
-	var email = req.body.email;
-	var lastName = req.body.lastName;
-	var Phone = req.body.Phone;
-	var city = req.body.city;
-	var address1 = req.body.address1;
-	var address2 = req.body.address2;
-	console.log(req.body.password);
-	var password = bcrypt.hashSync(req.body.password, SALT_ROUNDS);
+	var name = xss(req.body.firstName);
+	var email = xss(req.body.email);
+	var lastName = xss(req.body.lastName);
+	var Phone = xss(req.body.Phone);
+	var city = xss(req.body.city);
+	var address1 = xss(req.body.address1);
+	var address2 = xss(req.body.address2);
+	var password = bcrypt.hashSync(xss(req.body.password), SALT_ROUNDS);
 
-	var password2 = bcrypt.compare(req.body.password2, password);
+	var password2 = bcrypt.compare(xss(req.body.password2), password);
 
 	// Validation
 	req.checkBody('firstName', 'Name is required').notEmpty();
@@ -80,7 +80,7 @@ router.post('/signup', function (req, res) {
 		});
 	} else {
 		//checking for email and username are already taken
-		var userexist = User.getUserByemail(email);
+		var userexist = User.getUserByemail(xss(email));
 		if (!userexist) {
 			errors.push("User Exists");
 			res.render('signup', {
@@ -100,7 +100,7 @@ router.post('/signup', function (req, res) {
 			User.addUser(newUser, function (err, user) {
 				if (err) throw err;
 				console.log(user);
-				console.log(req.user);
+				console.log(xss(req.user));
 			});
 			req.flash('success_msg', 'You are registered and can now login');
 			res.redirect('/login');
@@ -113,8 +113,7 @@ passport.use('local', new LocalStrategy({
 	passwordField: 'password'
 }, async function (email, password, done) {
 	try {
-		console.log("yolo");
-		var l_objuser = await User.getUserByemail(email);
+		var l_objuser = await User.getUserByemail(xss(email));
 		console.log("hi user: " + l_objuser);
 		if (!l_objuser) {
 			return done(null, false, {
