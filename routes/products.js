@@ -33,17 +33,16 @@ const upload = multer({
 
 
 router.post("/tag", (req, res) => {
-  try{
-  console.log(xss(req.body));
-  console.log("This is the body");
-  var l_arrTags = xss(req.body.split(/[\s,]+/));
-  res.render("products");
+  try {
+    console.log(xss(req.body));
+    console.log("This is the body");
+    var l_arrTags = xss(req.body.split(/[\s,]+/));
+    res.render("products");
+  } catch (e) {
+    res.status(500).json({
+      error: e
+    });
   }
-catch (e) {
-  res.status(500).json({
-    error: e
-  });
-}
 });
 
 
@@ -55,7 +54,7 @@ router.get("/", async (req, res) => {
     console.log(xss(req.query.search));
     if (req.query.search) {
       const regex = new RegExp(escapeRegex(xss(req.query.search)), 'gi');
-      var products = await Prod.getProductsByTag(regex,xss(req.query.search));
+      var products = await Prod.getProductsByTag(regex, xss(req.query.search));
       res.render("products", {
         products: products
       });
@@ -73,7 +72,7 @@ router.get("/", async (req, res) => {
 });
 router.get("/productup", async (req, res) => {
   try {
-  
+
     res.status(200).render("postproduct");
   } catch (e) {
     res.status(500).json({
@@ -85,7 +84,7 @@ router.post("/productup", upload.single('productimage'), async (req, res) => {
   try {
     console.log(xss(req.user));
     if (xss(req.user)) {
-  
+
       var l_strArrtags;
       if (xss(req.body.tags)) {
         var tags = xss(req.body.tags);
@@ -98,7 +97,7 @@ router.post("/productup", upload.single('productimage'), async (req, res) => {
         posterId: xss(req.user._id),
         tags: l_strArrtags,
         image_name: xss(req.file.originalname),
-        image_path: xss((req.file.path)).replace(/\\/g,"/"),
+        image_path: xss((req.file.path)).replace(/\\/g, "/"),
         price: xss(req.body.price),
         quantity: xss(req.body.quantity)
       };
@@ -156,18 +155,21 @@ router.post("/buy/:id", async (req, res) => {
           console.log('Email sent: ' + info.response);
         }
       });
-      res.redirect('/products');
+      var updateduser = await User.addBoughtProductToUser(req.user._id, product.product_id);
+      if (updateduser)
+        res.redirect('/products');
+      else throw "product couldnt be bought";
     } else throw "product not found";
   } else res.redirect('/login');
 });
 router.get("/buy/:id", async (req, res) => {
-  
+
   var product = await Prod.getProductById(req.params.id);
   if (product) {
     var seller = await User.getUserById(product.posterId);
     res.status(200).render("buy", {
       product: product,
-      seller:seller
+      seller: seller
     });
   } else throw "product not found";
 });
@@ -176,7 +178,7 @@ router.get("/:id", async (req, res) => {
   try {
     var product = await Prod.getProductById(xss(req.params.id));
     console.log(xss(req.params.id));
-    
+
     if (product)
       res.status(200).render("detail", {
         product: product
@@ -189,32 +191,30 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.get('/detail',function(req,res){
-  try{
-        res.render('detail');
-  }
-  catch (e) {
+router.get('/detail', function (req, res) {
+  try {
+    res.render('detail');
+  } catch (e) {
     res.status(500).json({
       error: e
     });
   }
-  }); 
-
-
-router.get('/detail/comments', function(req,res){
-  try{
-    Comments.find({}, function(err,comments){
-      res.json(comments);
-    });
-  }
-    catch (e) {
-      res.status(500).json({
-        error: e
-      });
-    }
 });
 
-router.post('/detail/comments', function(req,res){
+
+router.get('/detail/comments', function (req, res) {
+  try {
+    Comments.find({}, function (err, comments) {
+      res.json(comments);
+    });
+  } catch (e) {
+    res.status(500).json({
+      error: e
+    });
+  }
+});
+
+router.post('/detail/comments', function (req, res) {
   var commentBody = xss(req.body.commentBody);
   var commentBy = xss(req.body.commentBy);
   var createdAt = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');

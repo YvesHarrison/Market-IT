@@ -145,13 +145,19 @@ let exportedMethods = {
     });
   },
   addBoughtProductToUser(userId, productId) {
-    return this.getUserById(userId).then(currentUser => {
-      return userCollection.updateOne({
-        _id: userId
-      }, {
-        $addToSet: {
-          bought_products: productId
-        }
+    return users().then(productCollection => {
+      return this.getUserById(userId).then(userThatPosted => {
+        return productCollection
+          .updateOne({
+            _id: userId
+          }, {
+            $addToSet: {
+              bought_products:productId
+            }
+          })
+          .then(result => {
+            return this.getUserById(userId);
+          });
       });
     });
   },
@@ -169,16 +175,6 @@ let exportedMethods = {
           .then(result => {
             return this.getUserById(userId);
           });
-      });
-    });
-    return this.getAllUsers().then(userCollection => {
-      console.log(userCollection);
-      return userCollection.updateOne({
-        _id: userId
-      }, {
-        $addToSet: {
-          posted_products: productId
-        }
       });
     });
   },
