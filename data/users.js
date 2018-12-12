@@ -41,6 +41,17 @@ var UserSchema = mongoose.Schema({
 });
 var User = module.exports = mongoose.model('User', UserSchema);
 
+<<<<<<< HEAD
+=======
+// Posts Schema
+var Posts = mongoose.Schema({
+  title: String,
+  description: String,
+  by: String,
+});
+module.exports = mongoose.model('Posts', Posts);
+
+>>>>>>> 4becc40517bd6f0173c54aa3d919cf0a4b854362
 let exportedMethods = {
   getAllUsers() {
     return users().then(userCollection => {
