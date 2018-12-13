@@ -10,12 +10,12 @@ let exportedMethods = {
             return productCollection.find({}).toArray();
         });
     },
-    getProductsByTag(tag,normaltag) {
-        if(!tag) throw "You must provide a tag";
+    getProductsByTag(tag, normaltag) {
+        if (!tag) throw "You must provide a tag";
         return products().then(async productCollection => {
             var l_arrprodnamenormal = await productCollection.find({
                 p_name: normaltag
-            }).toArray();        
+            }).toArray();
             var l_arrprodname = await productCollection.find({
                 p_name: tag
             }).toArray();
@@ -29,7 +29,7 @@ let exportedMethods = {
         });
     },
     getProductById(id) {
-        if(!id) throw "Must provide an id";
+        if (!id) throw "Must provide an id";
         return products().then(productCollection => {
             return productCollection.findOne({
                 product_id: id
@@ -39,7 +39,7 @@ let exportedMethods = {
             });
         });
     },
-     addProduct(producData) {
+    addProduct(producData) {
 
         return products().then(async productCollection => {
             console.log("hi");
@@ -107,12 +107,13 @@ let exportedMethods = {
                     product_id: id
                 }, updateCommand)
                 .then(result => {
-                    return this.getproductById(id);
+                    return this.getProductById(id);
                 });
         });
     },
     addCommentToProduct(commentData, productId) {
-        return this.getProductById(productId).then(productCollection => {
+
+        return products().then( async productCollection => {
             console.log(productCollection);
             return productCollection.updateOne({
                 product_id: productId
@@ -122,7 +123,7 @@ let exportedMethods = {
                         comment_id: uuid.v4(),
                         //commentBy: commentData.user_name,
                         //commenter_id: commentData.commenter_id,
-                        commentBy:commentData.commentBy,
+                        commentBy: commentData.commentBy,
                         users_image_path: "",
                         commentBody: commentData.commentBody,
                         createdAt: commentData.createdAt,

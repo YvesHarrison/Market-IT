@@ -214,7 +214,7 @@ router.get('/detail/comments', function (req, res) {
   }
 });
 
-router.post('/:id/detail/comments', function(req,res){
+router.post('/:id/detail/comments', async function(req,res){
   var commentBody = xss(req.body.commentBody);
   var commentBy = xss(req.body.commentBy);
   var createdAt = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
@@ -229,12 +229,7 @@ router.post('/:id/detail/comments', function(req,res){
       message: "Comment saved successfully"
     });
   });
-  console.log("kkk");
-  let id=req.headers.referer;
-  id=id.split("/");
-  let productid=id[id.length-1];
-
-  Prod.addCommentToProduct(comment, productid,function (err, user) {
+  await Prod.addCommentToProduct(comment, req.params.id,function (err, user) {
     if (err) throw err;
     console.log(comment);
   });
