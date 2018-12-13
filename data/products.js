@@ -114,7 +114,7 @@ let exportedMethods = {
     addCommentToProduct(commentData, productId) {
 
         return products().then( async productCollection => {
-            console.log(productCollection);
+            //console.log(productCollection);
             return productCollection.updateOne({
                 product_id: productId
             }, {
@@ -153,6 +153,17 @@ let exportedMethods = {
             .then(secondUpdate => {
                 return this.getproductsByTag(newTag);
             });
+    },
+    async getcomment(id){
+        const collection=await products();
+        try{
+            let product=await this.getProductById(id);
+            //console.log(product.comments);
+            return product.comments;
+        }
+        catch(err){
+            console.log(err);
+        }
     }
 };
 
