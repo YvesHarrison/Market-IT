@@ -43,19 +43,28 @@
         </div>
         <div class="col-sm-4">
             <div>
+
                 <ul class="nav-ul">
-                    <li class="nav-product">
-                        <a href="http://localhost:3000" id="pl-undefined" class="nav-home">Home</a>
+                  
+                    {{#if user}}
+                     <li class="nav-product">
+                        <a href="http://localhost:3000/info" id="pl-undefined" class="nav-home">Profile</a>
                     </li>
     
                     <li class="nav-product">
                         <a href="http://localhost:3000/products" id="pl-undefined" class="nav-home">Products</a>
                     </li>
-        
 
                     <li class="nav-product">
-                        <a href="http://localhost:3000" id="pl-undefined" >{{signout}}</a>
+                        <a href="http://localhost:3000/users/logout" id="pl-undefined" class="nav-home">{{Logout}}</a>
                     </li>
+
+                    {{else}}
+                    <li class="nav-product">
+                        
+                        <a href="http://localhost:3000" id="pl-undefined" class="nav-home">Home</a>
+                    </li>
+                    {{/if}}
                 </ul>
             </div>
         </div>
