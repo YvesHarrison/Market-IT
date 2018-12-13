@@ -113,6 +113,7 @@ let exportedMethods = {
     },
     addCommentToProduct(commentData, productId) {
         return this.getProductById(productId).then(productCollection => {
+            console.log(productCollection);
             return productCollection.updateOne({
                 product_id: productId
             }, {
