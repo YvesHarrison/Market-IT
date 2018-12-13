@@ -120,11 +120,12 @@ let exportedMethods = {
                 $addToSet: {
                     comments: {
                         comment_id: uuid.v4(),
-                        commentBy: commentData.user_name,
-                        commenter_id: commentData.commenter_id,
+                        //commentBy: commentData.user_name,
+                        //commenter_id: commentData.commenter_id,
+                        commentBy:commentData.commentBy,
                         users_image_path: "",
-                        commentBody: commentData.comment,
-                        createdAt: Date.now(),
+                        commentBody: commentData.commentBody,
+                        createdAt: commentData.createdAt,
                     }
                 }
             });
