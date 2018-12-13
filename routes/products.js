@@ -226,23 +226,15 @@ router.post('/:id/detail/comments', async function(req,res){
   //console.log("user id",req.user._id);
   var comment = new Comments();
   comment.commentBody = commentBody;
-  comment.commentBy = req.user.firstName;
+  comment.commentBy = xss(req.user.firstName);
   comment.createdAt = createdAt;
   console.log("comment:",comment);
-<<<<<<< HEAD
   comment.save(function (err) {
     res.json({
       message: "Comment saved successfully"
     });
   });
   await Prod.addCommentToProduct(comment, xss(req.params.id),function (err, user) {
-=======
-  // comment.save(function (err) {
-  //   res.json(comment);
-  // });
-  
-  await Prod.addCommentToProduct(comment, req.params.id,function (err, user) {
->>>>>>> e86b62fd129e28097d775b779814ff44e58a31d3
     if (err) throw err;
     console.log("store:",comment);
   });

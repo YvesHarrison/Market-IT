@@ -10,7 +10,7 @@
       <div class="container">
         <div class="row justify-content-center ">
           <div class="col-lg-8  col-12 jumbotron cntsignupback">
-            <form  name ="signup" action="/signup" method="POST" id="signup_form" class="signup-form" onsubmit="return validationForm()">
+            <form  name ="signup" action="/signup" method="POST" id="signup_form" class="signup-form" >
               <div class="form-group">
                 <label for="firstname" class="clsformLabel">First Name</label>
                 <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" aria-describedby="firstHelp" >
@@ -73,7 +73,6 @@
         </div>
       </div>
       <div class="error" id="error">{{error}}</div>
-    <script type="text/javascript" src="../public/js/signup.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </div>
       

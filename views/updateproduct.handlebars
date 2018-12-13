@@ -1,61 +1,61 @@
 <div class="container">
 <hr>
-<h2>Post Your Product</h2>
+<h2>Edit Your Product</h2>
 <hr>
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-lg-8  col-12 jumbotron">
-      <form  name ="productup" action="/products/productup" method="POST" id="productup-form" class="productup-form" enctype="multipart/form-data" onsubmit="return Validation()">
+      <form  name ="eproductup" action="/products/productup" method="POST" id="eproductup-form" class="eproductup-form" enctype="multipart/form-data" onsubmit="return validationForm()">
         <div class="form-group" >
           <label for="productname"><h2>Product Name:</h2></label>
-          <input type="text" class="form-control" id="productup-name" name="p_name" placeholder="Name" aria-describedby="pnameHelp" >
+          <input type="text" class="form-control" id="eproductup-name" name="ep_name" placeholder="Name" aria-describedby="pnameHelp" >
           <span id="pnameHelp" class="form-text text-muted" style="display: none;">Please enter a valid product name.</span> 
         </div>
         
         <div class="form-group">
           <label for="Tag"><h2>Tag:</h2></label>
-          <input type="text" class="form-control" id="productup-tag" name="tags" placeholder="Tag" aria-describedby="tagHelp" >
+          <input type="text" class="form-control" id="eproductup-tag" name="etags" placeholder="Tag" aria-describedby="tagHelp" >
           <span id="tagHelp" class="form-text text-muted" style="display: none;">Please enter a valid tag.</span>
         </div>
 
         <div class="form-group">
           <label for="price"><h2>Price:</h2></label>
-          <input type="text" class="form-control" id="productup-price" name="price" placeholder="Price" aria-describedby="priceHelp">
+          <input type="text" class="form-control" id="eproductup-price" name="eprice" placeholder="Price" aria-describedby="priceHelp">
           <span id="priceHelp" class="form-text text-muted" style="display: none;">Please enter a valid price.</span>
         </div>
                 
         <div class="form-group">
           <label for="lastname"><h2>Quantity:</h2></label>
-          <input type="text" class="form-control" id="productup-quantity" name="quantity" placeholder="Quantity" aria-describedby="quantityHelp">
+          <input type="text" class="form-control" id="eproductup-quantity" name="equantity" placeholder="Quantity" aria-describedby="quantityHelp">
           <span id="quantityHelp" class="form-text text-muted" style="display: none;">Please enter a valid quantity.</span>
         </div>
               
         <div class="form-group">
           <label for="description"><h2>Description:</h2></label>
-          <textarea rows="10" cols="100" class="form-control" id="description" name="p_description" placeholder="Description" aria-describedby="descriptionHelp"></textarea>
+          <textarea rows="10" cols="100" class="form-control" id="edescription" name="ep_description" placeholder="Description" aria-describedby="descriptionHelp"></textarea>
           <span id="descriptionHelp" class="form-text text-muted" style="display: none;">Please enter a description.</span>
         </div>
               
         <div class="form-group">
           <label for="moreinfo"><h2>More Information:</h2></label>
-          <textarea rows="20" cols="100" class="form-control" id="moreinfo" name="description" placeholder="More Information" aria-describedby="moreinfoHelp"></textarea>
+          <textarea rows="20" cols="100" class="form-control" id="emoreinfo" name="edescription" placeholder="More Information" aria-describedby="moreinfoHelp"></textarea>
           <span id="moreinfoHelp" class="form-text text-muted" style="display: none;">Please enter information.</span>
         </div>
         
         <div class="form-group">
           <label for="productimage"><h2>Upload Image for your product:</h2></label> 
           <div></div>
-          <input type="file" id="productimage" name="productimage" accept="image/jpg, image/jpeg">
-          <img src="" id="check">
+          <input type="file" id="eproductimage" name="eproductimage" accept="image/jpg, image/jpeg">
+          <img src="images/" id="check">
         </div>
           
         <div class="text-center">
-          <button type="submit" class="btn btn-primary" id ="productup-button">Post</button>
+          <button type="submit" class="btn btn-primary" id ="eproductup-button" onclick="location.href='/products';"> Update </button>
         </div>
       </form>
     </div>
   </div>
 </div>
- <div class="error" id="error">{{error}}</div>
-<script type="text/javascript" src="../public/js/product_upload.js"></script>
+   <div class="error" id="error">{{error}}</div>
+<script type="text/javascript" src="../public/js/edit.js"></script>
 </div>
