@@ -127,13 +127,13 @@ passport.use('local', new LocalStrategy({
 			return done(null, l_objuser);
 		} else {
 			return done(null, false, {
-				message: 'Invalid password'
+				message: 'Invalid username and password'
 			});
 		}
 
 	} catch (e) {
 		return done(null, false, {
-			message: 'Invalid password'
+			message: 'Invalid username and password'
 		});
 	}
 
@@ -164,7 +164,7 @@ passport.deserializeUser(async function (_id, done) {
 // });
 router.post('/login',
 	passport.authenticate('local', {
-		successRedirect: '/info',
+		successRedirect: '/products',
 		failureRedirect: '/login',
 		failureFlash: true
 	}),
@@ -174,15 +174,16 @@ router.post('/login',
 	});
 
 /*------------------------Logout------------------------------*/
-router.all("/logout", function (req, res) {
+router.get("/logout", function (req, res) {
 	req.logout();
+	console.log("logggg");
 	req.flash('success_msg', 'You are logged out');
 	res.redirect("/login");
 });
 
 router.get("/info", function (req, res) {
 	try {
-		res.render("info",{signout:tag});
+		res.render("info", {Logout:tag});
 	} catch (e) {
 		res.status(500).json({
 			error: e

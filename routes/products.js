@@ -230,7 +230,11 @@ router.post('/:id/detail/comments', function(req,res){
     });
   });
   console.log("kkk");
-  Prod.addCommentToProduct(comment, function (err, user) {
+  let id=req.headers.referer;
+  id=id.split("/");
+  let productid=id[id.length-1];
+
+  Prod.addCommentToProduct(comment, productid,function (err, user) {
     if (err) throw err;
     console.log(comment);
   });
