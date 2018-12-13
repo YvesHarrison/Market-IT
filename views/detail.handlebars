@@ -24,20 +24,20 @@
                 <div class="picture-big ">
                         <img src="../{{product.image_path}}" class="img-responsive" id="pic" />
                 </div>
-                <div class="picture-small">
+                {{!-- <div class="picture-small">
                     <ul>
                                     <li id="li01" class="picture-small-li"><img src="../public/imgs/earphone.png" /></li>
                                     <li id="li02" class="picture-small-li"><img src="../public/imgs/earphone2.jpeg" /></li>
                                     <li id="li03" class="picture-small-li"><img src="../public/imgs/earphone3.jpeg" /></li>
                                     <li id="li04" class="picture-small-li"><img src="../public/imgs/earphone2.jpeg" /></li>
                     </ul>
-                </div>
+                </div> --}}
             </div>
             <div class="col-lg-7 col-md-6">
                 <div class="product_details">
                     <h3>{{product.p_name}}</h3>
                     <div class="product_price">
-                        <span class="current_price">${{product.price}}</span>
+                        <span class="current_price">{{product.price}}</span>
                         <span class="old_price">$368.00</span>
                     </div>
                     <div class="product_ratting">
