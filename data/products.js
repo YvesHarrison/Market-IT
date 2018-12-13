@@ -19,13 +19,16 @@ let exportedMethods = {
             var l_arrprodname = await productCollection.find({
                 p_name: tag
             }).toArray();
-            console.log(l_arrprodname);
-            console.log(productCollection);
             var l_arrprodtags = await productCollection.find({
                 tags: tag
             }).toArray();
-            console.log(l_arrprodtags.concat(l_arrprodname))
-            return Array.from(new Set(l_arrprodtags.concat(l_arrprodname).concat(l_arrprodnamenormal)));
+            var l_arrdata = Array.from(new Set(l_arrprodtags.concat(l_arrprodname).concat(l_arrprodnamenormal)));
+            l_arrdata = l_arrdata.filter((thing, index, self) =>
+                index === self.findIndex((t) => (
+                    t.productId === thing.productId
+                ))
+            );
+            return l_arrdata;
         });
     },
     getProductById(id) {
@@ -113,7 +116,7 @@ let exportedMethods = {
     },
     addCommentToProduct(commentData, productId) {
 
-        return products().then( async productCollection => {
+        return products().then(async productCollection => {
             console.log(productCollection);
             return productCollection.updateOne({
                 product_id: productId
