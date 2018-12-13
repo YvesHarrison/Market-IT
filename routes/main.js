@@ -81,9 +81,9 @@ router.post('/signup', function (req, res) {
 		});
 	} else {
 		//checking for email and username are already taken
-		var userexist = User.getUserByemail(xss(req.body.email));
-		if (userexist) {
-			req.checkBody('userexist', 'User already exists with this Username').equals(xss(req.body.email));
+		var userexist = User.getUserByemail(xss(email));
+		if (!userexist) {
+			errors.push("User Already Exists");
 			res.render('signup', {
 				errors: errors
 			});
