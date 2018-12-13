@@ -26,7 +26,7 @@ router.get("/info", function (req, res) {
 
 router.get("/info/:id", function (req, res) {
 	try {
-        users.getUserById(req.params._id, function(err,foundUser){
+        users.getUserById(xss(req.params._id), function(err,foundUser){
             if(err){
                 req.flash("error", "Something went wrong");
                 res.render("/")

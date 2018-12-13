@@ -128,12 +128,12 @@ router.post("/productup", upload.single('productimage'), async (req, res) => {
 });
 router.post("/buy/:id", async (req, res) => {
   console.log("this is user");
-  console.log(req.user);
+  console.log(xss(req.user));
 
   if (req.user) {
-    var product = await Prod.getProductById(req.params.id);
+    var product = await Prod.getProductById(xss(req.params.id));
     if (product) {
-      var seller = await User.getUserById(product.posterId);
+      var seller = await User.getUserById(xss(product.posterId));
       var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -144,8 +144,8 @@ router.post("/buy/:id", async (req, res) => {
       var mailOptions = {
         from: 'saveit.team@gmail.com',
         to: seller.email,
-        subject: req.user.firstName + ' wants to buy ' + product.p_name + ' from you',
-        text: 'Hi Seller,\nCongratulations! ' + req.user.firstName + ' wants to buy your product: ' + product.p_name + ' in quantity = ' + req.body.quantity + '. Following is his message:\n\n' + req.body.message + '\n\n Please contact ' + req.user.firstName + ' on email: ' + req.user.email + '\n\nRegards,\nTeam Market IT'
+        subject: xss(req.user.firstName) + ' wants to buy ' + xss(product.p_name) + ' from you',
+        text: 'Hi Seller,\nCongratulations! ' + xss(req.user.firstName) + ' wants to buy your product: ' + xss(product.p_name) + ' in quantity = ' + xss(req.body.quantity) + '. Following is his message:\n\n' + xss(req.body.message) + '\n\n Please contact ' + xss(req.user.firstName) + ' on email: ' + xss(req.user.email) + '\n\nRegards,\nTeam Market IT'
       };
 
       transporter.sendMail(mailOptions, function (error, info) {
@@ -155,7 +155,7 @@ router.post("/buy/:id", async (req, res) => {
           console.log('Email sent: ' + info.response);
         }
       });
-      var updateduser = await User.addBoughtProductToUser(req.user._id, product.product_id);
+      var updateduser = await User.addBoughtProductToUser(xss(req.user._id), xss(product.product_id));
       if (updateduser)
         res.redirect('/products');
       else throw "product couldnt be bought";
@@ -164,9 +164,9 @@ router.post("/buy/:id", async (req, res) => {
 });
 router.get("/buy/:id", async (req, res) => {
 
-  var product = await Prod.getProductById(req.params.id);
+  var product = await Prod.getProductById(xss(req.params.id));
   if (product) {
-    var seller = await User.getUserById(product.posterId);
+    var seller = await User.getUserById(xss(product.posterId));
     res.status(200).render("buy", {
       product: product,
       seller: seller
@@ -229,7 +229,7 @@ router.post('/:id/detail/comments', async function(req,res){
       message: "Comment saved successfully"
     });
   });
-  await Prod.addCommentToProduct(comment, req.params.id,function (err, user) {
+  await Prod.addCommentToProduct(comment, xss(req.params.id),function (err, user) {
     if (err) throw err;
     console.log(comment);
   });
