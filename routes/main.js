@@ -55,7 +55,7 @@ router.post('/signup', function (req, res) {
 	var name = xss(req.body.firstName);
 	var email = xss(req.body.email);
 	var lastName = xss(req.body.last);
-	var Phone = xss(req.body.phone);
+	var phone = xss(req.body.phone);
 	var city = xss(req.body.city);
 	var address1 = xss(req.body.address1);
 	var address2 = xss(req.body.address2);
@@ -73,7 +73,7 @@ router.post('/signup', function (req, res) {
 	var errors = req.validationErrors();
 	if (!password2) {
 		errors.push("Passwords do not match");
-	}
+	};
 	if (errors) {
 		console.log(errors);
 		res.render('signup', {
@@ -83,7 +83,7 @@ router.post('/signup', function (req, res) {
 		//checking for email and username are already taken
 		var userexist = User.getUserByemail(xss(email));
 		if (!userexist) {
-			errors.push("User Exists");
+			errors.push("User Already Exists");
 			res.render('signup', {
 				errors: errors
 			});
@@ -91,7 +91,7 @@ router.post('/signup', function (req, res) {
 			var newUser = ({
 				firstName: name,
 				lastName: lastName,
-				Phone: Phone,
+				phone: phone,
 				city: city,
 				address1: address1,
 				address2: address2,
@@ -115,7 +115,6 @@ passport.use('local', new LocalStrategy({
 }, async function (email, password, done) {
 	try {
 		var l_objuser = await User.getUserByemail(xss(email));
-		console.log("hi user: " + l_objuser);
 		if (!l_objuser) {
 			return done(null, false, {
 				message: 'Unknown User'
@@ -164,6 +163,7 @@ passport.deserializeUser(async function (_id, done) {
 // });
 router.post('/login',
 	passport.authenticate('local', {
+		
 		successRedirect: '/products',
 		failureRedirect: '/login',
 		failureFlash: true
@@ -176,7 +176,6 @@ router.post('/login',
 /*------------------------Logout------------------------------*/
 router.get("/logout", function (req, res) {
 	req.logout();
-	console.log("logggg");
 	req.flash('success_msg', 'You are logged out');
 	res.redirect("/login");
 });
@@ -190,4 +189,24 @@ router.get("/info", function (req, res) {
 		});
 	}
 });
+
+router.get("/info/:id", function (req, res) {
+	try {
+        users.getUserById(req.params._id, function(err,foundUser){
+            if(err){
+                req.flash("error", "Something went wrong");
+                res.render("/")
+            }
+            else{
+                res.render("info", {Logout:tag, users: foundUser});
+            }
+        });
+		
+	} catch (e) {
+		res.status(500).json({
+			error: e
+		});
+	}
+});
+
 module.exports = router;

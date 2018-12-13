@@ -22,8 +22,8 @@ var UserSchema = mongoose.Schema({
   products: {
     type: String
   },
-  Phone: {
-    type: String
+  phone: {
+    type: Number
   },
 
   city: {
@@ -85,9 +85,8 @@ let exportedMethods = {
         email: userData.email,
         products: [],
         hashedPassword: userData.hashedPassword,
-        Phone: userData.Phones,
+        phone: userData.phone,
         city: userData.city,
-        state: userData.state,
         address1: userData.address1,
         address2: userData.address2,
         posted_products: [],
