@@ -164,6 +164,7 @@ passport.deserializeUser(async function (_id, done) {
 // });
 router.post('/login',
 	passport.authenticate('local', {
+		
 		successRedirect: '/products',
 		failureRedirect: '/login',
 		failureFlash: true
@@ -176,7 +177,6 @@ router.post('/login',
 /*------------------------Logout------------------------------*/
 router.get("/logout", function (req, res) {
 	req.logout();
-	console.log("logggg");
 	req.flash('success_msg', 'You are logged out');
 	res.redirect("/login");
 });
@@ -190,4 +190,24 @@ router.get("/info", function (req, res) {
 		});
 	}
 });
+
+router.get("/info/:id", function (req, res) {
+	try {
+        users.getUserById(req.params._id, function(err,foundUser){
+            if(err){
+                req.flash("error", "Something went wrong");
+                res.render("/")
+            }
+            else{
+                res.render("info", {Logout:tag, users: foundUser});
+            }
+        });
+		
+	} catch (e) {
+		res.status(500).json({
+			error: e
+		});
+	}
+});
+
 module.exports = router;
