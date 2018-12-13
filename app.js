@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const path = require('path');
 const bodyParser = require("body-parser");
 const static = express.static(__dirname + "/public");
 var mongoose = require('mongoose');
@@ -20,13 +21,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
-
-
-
-// app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
-// app.use(bodyParser()); // get information from html forms
 
 const configRoutes = require("./routes");
 
@@ -83,19 +78,18 @@ app.use(validator({
     }
 }));
 
-
-
 app.use(flash());
 
-/*---------------------------comments-----------------------------*/
-// io.on('connection', function (socket) {
-//     socket.on('comment', function (data) {
-//         var commentData = new Comments(data);
-//         commentData.save();
-//         socket.broadcast.emit('comment', data);
-//     });
 
-// });
+app.use(function (req, res, next){
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
+    res.locals.user = (req.user) || null;
+    next();
+});
+
+
 
 configRoutes(app);
 

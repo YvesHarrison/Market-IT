@@ -11,7 +11,7 @@ function validationForm(){
     var  password2 = document.getElementById('password2').value;
 
     //check empty fields
-    if(firstname == "" || lastname == "" || email == "" || phone == "" || city == "" ||  password == "" || password2 == ""  )
+    if(firstname == "" || lastname == "" || email == "" || phone == "" || city == "" || address1=="" ||  password == "" || password2 == ""  )
     {
         alert("Input field is empty");
         return;
@@ -45,18 +45,6 @@ function validationForm(){
             "error"
           )[0];
          
-        //   signup_form.addEventListener("submit", event => {
-        //     event.preventDefault();
-        //     try {
-        //       errContainer.classList.add("hidden");
-        //     }
-        //     catch (e) {
-        //         const message = typeof e === "string" ? e : e.message;
-        //         errTextElement.textContent = e;
-        //         errContainer.classList.remove("hidden");
-        //       }
-        //     });
-
     
 
             // validation Login page
@@ -70,6 +58,7 @@ function validationForm(){
                     return;
               
                 } 
+            }
                 // check username match 
                 if ((document.getElementById('logname').value ==
                 document.getElementById('email').value) || (document.getElementById('logpassword').value ==
@@ -79,10 +68,7 @@ function validationForm(){
           } else {
             document.getElementById('match').style.color = 'red';
             document.getElementById('match').innerHTML = 'not matching';
-          }
-
-        }
-                  
+          }       
 
                    
 

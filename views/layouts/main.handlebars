@@ -47,9 +47,12 @@
                     <li class="nav-product">
                         <a href="http://localhost:3000" id="pl-undefined" class="nav-home">Home</a>
                     </li>
+    
                     <li class="nav-product">
                         <a href="http://localhost:3000/products" id="pl-undefined" class="nav-home">Products</a>
                     </li>
+        
+
                     <li class="nav-product">
                         <a href="http://localhost:3000" id="pl-undefined" >{{signout}}</a>
                     </li>
@@ -135,6 +138,18 @@
 <body>
 
     <main>
+        {{#if success_msg}}
+        <div class="alert alert-success"> {{success_msg}} </div>
+        {{/if}}
+
+        {{#if error_msg}}
+        <div class="alert alert-danger"> {{error_msg}} </div>
+        {{/if}}
+
+        {{#if error}}
+        <div class="alert alert-danger"> {{error}} </div>
+        {{/if}}
+
         {{{body}}}
         <script type="text/javascript" src="../public/js/client_side.js"></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>

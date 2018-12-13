@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const path = require("path");
 const xss = require('xss');
+const flash = require("connect-flash")
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
@@ -53,8 +54,8 @@ router.get("/signup", function (req, res) {
 router.post('/signup', function (req, res) {
 	var name = xss(req.body.firstName);
 	var email = xss(req.body.email);
-	var lastName = xss(req.body.lastName);
-	var Phone = xss(req.body.Phone);
+	var lastName = xss(req.body.last);
+	var Phone = xss(req.body.phone);
 	var city = xss(req.body.city);
 	var address1 = xss(req.body.address1);
 	var address2 = xss(req.body.address2);
@@ -67,7 +68,7 @@ router.post('/signup', function (req, res) {
 	req.checkBody('email', 'Email is required').notEmpty();
 	req.checkBody('email', 'Email is not valid').isEmail();
 	req.checkBody('password', 'Password is required').notEmpty();
-
+	req.checkBody('password2', 'Password do not match').equals(xss(req.body.password));
 
 	var errors = req.validationErrors();
 	if (!password2) {
@@ -99,7 +100,7 @@ router.post('/signup', function (req, res) {
 			});
 			User.addUser(newUser, function (err, user) {
 				if (err) throw err;
-				console.log(user);
+				console.log(xss(user));
 				console.log(xss(req.user));
 			});
 			req.flash('success_msg', 'You are registered and can now login');
@@ -139,7 +140,6 @@ passport.use('local', new LocalStrategy({
 }));
 
 passport.serializeUser(function (user, done) {
-	console.log("hi i am here");
 	done(null, user._id);
 });
 
@@ -164,7 +164,7 @@ passport.deserializeUser(async function (_id, done) {
 // });
 router.post('/login',
 	passport.authenticate('local', {
-		successRedirect: '/',
+		successRedirect: '/info',
 		failureRedirect: '/login',
 		failureFlash: true
 	}),

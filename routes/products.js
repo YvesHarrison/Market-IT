@@ -214,23 +214,22 @@ router.get('/detail/comments', function (req, res) {
   }
 });
 
-router.post('/detail/comments', function (req, res) {
+router.post('/:id/detail/comments', function(req,res){
   var commentBody = xss(req.body.commentBody);
   var commentBy = xss(req.body.commentBy);
   var createdAt = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
 
-  //console.log(Comments);
   var comment = new Comments();
   comment.commentBody = commentBody;
   comment.commentBy = commentBy;
   comment.createdAt = createdAt;
-  console.log(comment);
+  console.log("comment:",comment);
   comment.save(function (err) {
     res.json({
       message: "Comment saved successfully"
     });
   });
-
+  console.log("kkk");
   Prod.addCommentToProduct(comment, function (err, user) {
     if (err) throw err;
     console.log(comment);
