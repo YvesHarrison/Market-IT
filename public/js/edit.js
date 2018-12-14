@@ -1,10 +1,10 @@
+function show_error(contain){
+    $("#error").show();
+    $("#error").html(contain);
+}
+
 function validationForm1(ele_id) {
    try{
-    const errContainer = document.getElementById("error");
-    const errTextElement = errContainer.getElementsByClassName(
-        "error"
-    )[0];
-    $(errContainer).css("visibility", "hidden");
     var productname = document.getElementById('eproductup-name').value;
     var tag = document.getElementById('eproductup-tag').value;
     var price = document.getElementById('eproductup-price').value;
@@ -56,12 +56,7 @@ function validationForm1(ele_id) {
     });
    }catch(e){
     const message = typeof e === "string" ? e : e.message;
-    const errContainer = document.getElementById("error");
-    const errTextElement = errContainer.getElementsByClassName(
-        "error"
-    )[0];
-    errTextElement.textContent = e;
-    $(errContainer).css("visibility", "visible");
+    show_error(e);
    }
 
 

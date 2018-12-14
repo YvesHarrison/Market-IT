@@ -224,6 +224,7 @@ router.post("/edit/:id", async (req, res) => {
       console.log("this is new: " + JSON.stringify(updatedProd));
       var newone = await Prod.updateProduct(product.product_id, JSON.parse(JSON.stringify(updatedProd)));
       console.log("this is new added: " + newone);
+      
     } else {
       req.flash('failure_msg', 'You are not authenticated');
       res.status(403).redirect("/login");
