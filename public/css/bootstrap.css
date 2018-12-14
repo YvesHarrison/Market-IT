@@ -6822,7 +6822,7 @@ button.list-group-item-danger.active:focus {
 }
 
 .panel-body {
-  padding: 15px 15px 15px 50px;
+  padding: 15px 15px 15px 15px;
   text-align: left;
 }
 
