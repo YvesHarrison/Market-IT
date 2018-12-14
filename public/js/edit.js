@@ -12,6 +12,7 @@ function validationForm1(ele_id) {
     var description = document.getElementById('edescription').value;
     var moreinformation = document.getElementById('emoreinfo').value;
     //check empty fields
+    console.log("tag");
     if (productname == "") {
         throw "Product Name cannnot be empty";
     }
@@ -51,7 +52,7 @@ function validationForm1(ele_id) {
         },
         error: function (e) {
             throw e;
-
+console.log("error");
         }
     });
    }catch(e){
