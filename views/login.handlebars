@@ -2,79 +2,40 @@
     <article class="input-login">
         <br />
         <h2 class="signup-h2">Login Market IT</h2>
-        <br/>
-{{#if errors}}
-            {{#each errors}}
-            <div class="alert alert-danger"> {{msg}}</div>
-            {{/each}}
-      {{/if}}
-    <div class="container">
-        <div class="row justify-content-center ">
-          <div class="col-lg-8  col-12 jumbotron cntsignupback">
-            <form  name ="phrase" action="/login" method="POST" id="login_form" class="login-form" onsubmit="return validation()">
-              
-              <div class="form-group">
-                <label for="name" class="clsformLabel">Username:</label>
+        <br />
+        {{#if errors}}
+        {{#each errors}}
+        <div class="alert alert-danger"> {{msg}}</div>
+        {{/each}}
+        {{/if}}
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8  col-12 jumbotron cntsignupback">
+                    <form name="phrase" action="/login" method="POST" id="login_form" class="login-form" onsubmit="return validation()">
 
-                <input type="text" class="form-control" id="logname" name="email" placeholder="Username" required="true" >
-                    <span id="match"></span>
-                {{!-- <span id="emailHelp" class="form-text text-muted" style="display: none;">Please enter a valid e-mail address.</span> --}}
-              </div>
-                
-              <div class="form-group">
-                <label for="password" class="clsformLabel">Password:</label>
-                <input type="password" class="form-control" id="logpassword" name="password" placeholder="Password" required="true" aria-describedby="passwordHelp" >
-                <span id="passwordHelp" class="form-text text-muted" style="display: none;">Please enter a valid password.</span>
-              </div>
-            
-              <div class="text-center">
-                <button type="submit" class="gradient-button gradient-button-1" id ="login-button">Log In</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
+                        <div class="form-group">
+                            <label for="name" class="clsformLabel">Username:</label>
+                            <input type="text" class="form-control" id="logname" name="email" placeholder="Username"
+                                required="true">
+                            <span id="match"></span>
+                        </div>
 
-
-
-
-
-
-        {{!-- <div class="login">
-            <form name="phrase" action="/login" method="POST" id="login-form" class="login-form">
-                <input type="text" name="username" placeholder="Username" id="name" class="name" autofocus="true"
-                    required="true" />
-                <input type="text" name="password" placeholder="Password" id="password" class="password" required="true" />
-                <button type="submit">Log In</button>
-                <a href="#" class="login_forgot">forgot password?</a>
-
-                <div class="login cntsignupback">
-                    <form name="phrase" action="/login" method="POST" id="login-form" class="signup-form">
-                        <div class="text-center">
-                            <div class="form-group">
-                                <input type="text" name="username" placeholder="Username" id="name" class="form-control"
-                                    autofocus="true" required="true" />
-                                <span id="firstHelp" class="form-text text-muted" style="display: none;">Please enter a
-                                    valid
-                                    Username.</span>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="password" placeholder="Password" id="password" class="form-control"
-                                    required="true" />
-                                <span id="firstHelp" class="form-text text-muted" style="display: none;">Please enter a
-                                    valid
-                                    Password.</span>
-                            </div>
+                        <div class="form-group">
+                            <label for="password" class="clsformLabel">Password:</label>
+                            <input type="password" class="form-control" id="logpassword" name="password" placeholder="Password"
+                                required="true" aria-describedby="passwordHelp">
+                            <span id="passwordHelp" class="form-text text-muted" style="display: none;">Please enter a
+                                valid password.</span>
                         </div>
 
                         <div class="text-center">
-                            <button type="submit" class="gradient-button gradient-button-1">Log In</button>
+                            <button type="submit" class="gradient-button gradient-button-1" id="login-button">Log In</button>
                         </div>
-
                     </form>
-
                 </div>
-                <div class="shadow"></div> --}}
+            </div>
+        </div>
+
     </article>
     <div class="error" id="error">{{error}}</div>
     <script type="text/javascript" src="../public/js/signup.js"></script>

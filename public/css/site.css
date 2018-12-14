@@ -692,7 +692,7 @@ p {
 /* Bloc image backgrounds */
 
 .bg-walkway {
-	background-image: url("/public/img/walkway.jpg");
+	background-image: url("/public/imgs/walkway.jpg");
 }
 
 
@@ -1265,7 +1265,7 @@ input[type="email"] {
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
-  color: white;
+  /* color: white; */
 }
 
 input[type="password"]:focus,
@@ -1274,13 +1274,13 @@ input[type="text"]:focus {
 	box-shadow: 0 0 4px 1px rgba(55, 166, 155, 0.3);
 	border-bottom: 3% solid rgb(150, 37, 255);
 	outline: 0;
-	color: white;
+	/* color: white; */
 }
 
 input[type="password"]::placeholder,
 input[type="email"]::placeholder,
 input[type="text"]::placeholder {
-	color: white;
+	/* color: white; */
 	opacity: 0.5;
 }
 
@@ -1390,7 +1390,8 @@ input[type="submit"] {
 }
 
 .cntsignupback {
-	background-image: linear-gradient(to bottom, rgba(40, 0, 84, 0.8), rgba(0, 20, 255, 0.6)), url(../imgs/bg.png);
+	background: gray;
+	/* background-image: linear-gradient(to bottom, rgba(40, 0, 84, 0.8), rgba(0, 20, 255, 0.6)), url(../imgs/bg.png); */
     background-size: cover;
 }
 
@@ -1420,14 +1421,16 @@ input[type="submit"] {
 }
 
 .gradient-button-1 {
-	background-image: linear-gradient(to right, #DD5E89 0%, #F7BB97 51%, #DD5E89 100%)
+	background-color: #2971f5;
+	/* background-image: linear-gradient(to right, #DD5E89 0%, #F7BB97 51%, #DD5E89 100%) */
 }
 
 .gradient-button-1:hover {
 	background-position: right center;
 }
 .clsformLabel{
-	color: white;
+	/* color: #2971f5; */
+	font-family: "Arial Black", Gadget, sans-serif;
 }
 
 /* comment box */
@@ -1439,3 +1442,7 @@ input[type="submit"] {
 	border-left: transparent;
 	border-bottom: transparent;
 } */
+
+.justify-content-center{
+	margin: 0 auto;
+}
