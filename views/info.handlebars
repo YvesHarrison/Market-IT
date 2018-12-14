@@ -1,6 +1,6 @@
 <div class="container">
   <hr>
-  <h2>User Profile</h2>
+  <h1 class="info-h1">User Profile</h1>
   <hr>
   <div class="container">
 
@@ -51,7 +51,8 @@
     <div class="col-sm-3">
       <div class="panel">
         <div class="panel-body">
-          <button onclick="deleteTab(this,'{{this.posterId}}')" class='clsDeleteGoal pull-right' value={{this.product_id}}></span></button>
+          <label for="info-button"></label>
+          <button id="info-button" onclick="deleteTab(this,'{{this.posterId}}')" class='clsDeleteGoal pull-right' value={{this.product_id}}></span></button>
           <span>
             <div>{{this.p_name}}</div>
           </span>
@@ -60,7 +61,7 @@
           </span>
           <form action="../products/edit/{{this.product_id}}" method="get">
             <button value={{this.product_id}} class="btn btn-d btn-lg btn-block">
-              <div class="text-center">Edit</div>
+              <div class="text-center info-edit">Edit</div>
             </button>
           </form>
         </div>

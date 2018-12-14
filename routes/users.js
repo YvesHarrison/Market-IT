@@ -3,6 +3,7 @@ const router = express.Router();
 const path = require("path");
 const data = require('../data');
 const users = data.users;
+const tag = "Sign Out";
 router.get("/", async (req, res) => {
     try {
 
