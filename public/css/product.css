@@ -296,9 +296,13 @@ ul .picture-small-li {
 }
 
 .detail-comment textarea{
-    border: 1px solid gray;
+    border: 1px solid rgb(177, 177, 177);
+    border-radius: 6px;
 }
-
+.message-textarea{
+    border: 1px solid rgb(177, 177, 177);
+    border-radius: 6px;
+}
 
 .comment-button{
     background: #226ff4;
@@ -319,7 +323,7 @@ ul .picture-small-li {
 }
 
 .info-img{
-    width: 180px;
+    width: 100%;
     height: 100px;
 }
 .info-img img{
@@ -364,8 +368,8 @@ ul .picture-small-li {
     text-decoration: none;
     outline: none;
     cursor: pointer;
-    margin-top: 43px;
-    margin-left: 210px;
+    margin-top: 20%;
+    margin-left: 74%;
 }
 .aui_close:hover {
     width: 24px;
