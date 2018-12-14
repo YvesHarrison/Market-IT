@@ -8,27 +8,19 @@ const passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var SALT_ROUNDS = 16;
 var User = require('../data/users');
-let tag="Sign Out";
+var Prod = require('../data/products');
+var Metadata = require('../data/metadata');
+let tag = "Sign Out";
 
 router.get("/", function (req, res) {
 	try {
-		res.render("dashboard");
+		res.render("dashboardlog");
 	} catch (e) {
 		res.status(500).json({
 			error: e
 		});
 	}
 });
-
-// router.get("/buy", function (req, res) {
-// 	try {
-// 		res.render("buy");
-// 	} catch (e) {
-// 		res.status(500).json({
-// 			error: e
-// 		});
-// 	}
-// });test router to buy page
 /*-----------Login and Authentication-------------------------*/
 router.get("/login", function (req, res) {
 	try {
@@ -51,7 +43,7 @@ router.get("/signup", function (req, res) {
 	}
 });
 
-router.post('/signup', function (req, res) {
+router.post('/signup', async function (req, res) {
 	var name = xss(req.body.firstName);
 	var email = xss(req.body.email);
 	var lastName = xss(req.body.last);
@@ -71,21 +63,26 @@ router.post('/signup', function (req, res) {
 	req.checkBody('password2', 'Password do not match').equals(xss(req.body.password));
 
 	var errors = req.validationErrors();
-	if (!password2) {
-		errors.push("Passwords do not match");
-	};
 	if (errors) {
-		console.log(errors);
 		res.render('signup', {
 			errors: errors
 		});
 	} else {
 		//checking for email and username are already taken
-		var userexist = User.getUserByemail(xss(email));
-		if (!userexist) {
-			errors.push("User Already Exists");
+		try {
+			var userexist = await User.getUserByemail(xss(email));
+		} catch (e) {
+			var userexist = undefined;
+		}
+
+		if (userexist) {
+			var err = [{
+				param: 'email',
+				msg: 'User already Exists',
+				value: req.body.email
+			}];
 			res.render('signup', {
-				errors: errors
+				errors: err
 			});
 		} else {
 			var newUser = ({
@@ -163,7 +160,7 @@ passport.deserializeUser(async function (_id, done) {
 // });
 router.post('/login',
 	passport.authenticate('local', {
-		
+
 		successRedirect: '/products',
 		failureRedirect: '/login',
 		failureFlash: true
@@ -182,7 +179,9 @@ router.get("/logout", function (req, res) {
 
 router.get("/info", function (req, res) {
 	try {
-		res.render("info", {Logout:tag});
+		res.render("info", {
+			Logout: tag
+		});
 	} catch (e) {
 		res.status(500).json({
 			error: e
@@ -190,18 +189,35 @@ router.get("/info", function (req, res) {
 	}
 });
 
-router.get("/info/:id", function (req, res) {
+router.get("/info/:id", async function (req, res) {
 	try {
-        users.getUserById(req.params._id, function(err,foundUser){
-            if(err){
-                req.flash("error", "Something went wrong");
-                res.render("/")
-            }
-            else{
-                res.render("info", {Logout:tag, users: foundUser});
-            }
-        });
-		
+		var posted_products = [];
+		var bought_products = [];
+		var postprod = false;
+		var boughtprod = false;
+		if (req.user) {
+			if (req.user.posted_products.length > 0) {
+				posted_products = await Prod.getProductsByPosterId(req.user._id);
+				postprod = true;
+			}
+			if (req.user.bought_products.length > 0) {
+				bought_products = await Metadata.getProductsByBuyerId(req.user._id);
+				boughtprod = true;
+			}
+			res.render("info", {
+				Logout: tag,
+				users: req.user,
+				posted_products: posted_products,
+				bought_products: bought_products,
+				postprod: postprod,
+				boughtprod: boughtprod
+			});
+		} else {
+			console.log("here1");
+			req.flash("error", "Something went wrong");
+			res.redirect("/");
+		}
+
 	} catch (e) {
 		res.status(500).json({
 			error: e
