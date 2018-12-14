@@ -17,7 +17,8 @@ $(function () {
             // });
             for(let i=0;i<data.length;++i){
                 var comment=`<tr><td>${data[i].commentBy}</td><td>${data[i].commentBody}</td><td>${data[i].createdAt}</td></tr>`;
-                $("#comment-table").append(comment);
+                var comment2= `<div class="col-sm-12"><div class="panel panel-default"><div class="panel-heading"><strong>${data[i].commentBy}</strong> <span class="text-muted">commented on ${data[i].createdAt}</span></div><div class="panel-body">${data[i].commentBody}</div></div></div>`
+                $("#comment-table").append(comment2);
             }
         }
     });
@@ -46,8 +47,10 @@ $('#commentSubmit').click(function () {
         },
         success: function (data) {
             if(data.commentBy){
+
+                var comment2= `<div class="col-sm-12"><div class="panel panel-default"><div class="panel-heading"><strong>${data.commentBy}</strong> <span class="text-muted">commented on ${data.createdAt}</span></div><div class="panel-body">${data.commentBody}</div></div></div>`
                 const comment=`<tr><td>${data.commentBy}</td><td>${data.commentBody}</td><td>${data.createdAt}</td></tr>`;
-                $("#comment-table").append(comment);
+                $("#comment-table").append(comment2);
             }
             else{
                 $("#error").show();

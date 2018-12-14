@@ -6822,7 +6822,8 @@ button.list-group-item-danger.active:focus {
 }
 
 .panel-body {
-  padding: 15px;
+  padding: 15px 15px 15px 50px;
+  text-align: left;
 }
 
 .panel-heading {
@@ -7094,6 +7095,7 @@ button.list-group-item-danger.active:focus {
   color: #333;
   background-color: #f5f5f5;
   border-color: #ddd;
+  text-align: left;
 }
 
 .panel-default>.panel-heading+.panel-collapse>.panel-body {

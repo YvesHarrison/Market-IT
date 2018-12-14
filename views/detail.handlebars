@@ -111,31 +111,22 @@
                 </div>
                 <div class="tab-pane fade" id="review">
                     {{!-- comment --}}
-                    <div class="header">
-                        <h3>comment</h3>
-                    </div>
-                    <table class="table table-hover" id="comment-table">
-                        <caption>Recent comments</caption>
-                        <thead>
+                    <div class="header"><h3>Comments</h3></div>
+                    <div class="table table-hover" id="comment-table">
+                        {{!-- <caption>Recent comments</caption> --}}
+                        {{!-- <thead>
                             <tr>
-                                <th>users</th>
-                                <th>comments</th>
-                                <th>time</th>
+                                <th>Comments</th>
                             </tr>
                         </thead>
 
                         <tbody>
-
-                        </tbody>
-                    </table>
-                    <div class="form-group detail-comment">
-                        <div class="text-center">
-                            <textarea class="form-control" id="commentBodyID" rows="3" cols="50" placeholder="your comment..."
-                                name="commentBody"></textarea></br>
-                            <button class="comment-button" id="commentSubmit" value='{{product.product_id}}'>Make Comment</button>
-                            <div class="error" id="error" hidden></div>
-                        </div>
+                            
+                        </tbody> --}}
                     </div>
+                    <textarea  id="commentBodyID" rows="3" cols="50" placeholder="your comment..." name="commentBody" ></textarea></br>
+                    <button class="submitButton" id="commentSubmit" value='{{product.product_id}}'>Make Comment</button>
+                    <div class="error" id="error" hidden></div>
                 </div>
             </div>
             <div>
