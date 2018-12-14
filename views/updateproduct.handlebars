@@ -1,16 +1,16 @@
 <div class="container">
   <hr>
-  <h2>Edit Your Product</h2>
+  <h1 class="info-h1">Edit Your Product</h1>
   <hr>
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-8  col-12 jumbotron">
-        {{!-- <form name="eproductup" action="/products/edit/{{product.product_id}}" method="POST" id="eproductup-form"
-          class="eproductup-form" --}} <form name="eproductup" id="eproductup-form" class="eproductup-form" enctype="multipart/form-data">
+         <form name="eproductup" id="eproductup-form" class="eproductup-form" >
           <div class="form-group">
             <label for="eproductup-name">
               <h2>Product Name:</h2>
             </label>
+            <label for="eproductup-name"></label>
             <input type="text" class="form-control" id="eproductup-name" name="ep_name" placeholder="Name"
               aria-describedby="pnameHelp" value='{{product.p_name}}'>
             <span id="pnameHelp" class="form-text text-muted" style="display: none;">Please enter a valid product name.</span>
@@ -20,6 +20,7 @@
             <label for="eproductup-tag">
               <h2>Tag:</h2>
             </label>
+            <label for="eproductup-tag"></label>
             <input type="text" class="form-control" id="eproductup-tag" name="etags" placeholder="Tag" aria-describedby="tagHelp"
               value={{tag}}>
             <span id="tagHelp" class="form-text text-muted" style="display: none;">Please enter a valid tag.</span>
@@ -29,6 +30,7 @@
             <label for="eproductup-price">
               <h2>Price:</h2>
             </label>
+            <label for="eproductup-price"></label>
             <input type="number" class="form-control" id="eproductup-price" name="eprice" placeholder="Price"
               aria-describedby="priceHelp" value='{{product.price}}'>
             <span id="priceHelp" class="form-text text-muted" style="display: none;">Please enter a valid price.</span>
@@ -38,6 +40,7 @@
             <label for="eproductup-quantity">
               <h2>Quantity:</h2>
             </label>
+            <label for="eproductup-quantity"></label>
             <input type="number" class="form-control" id="eproductup-quantity" name="equantity" placeholder="Quantity"
               aria-describedby="quantityHelp" value='{{product.quantity}}'>
             <span id="quantityHelp" class="form-text text-muted" style="display: none;">Please enter a valid quantity.</span>
@@ -47,6 +50,7 @@
             <label for="edescription">
               <h2>Description:</h2>
             </label>
+            <label for="edescription"></label>
             <textarea rows="10" cols="100" class="form-control" id="edescription" name="ep_description" placeholder="Description"
               aria-describedby="descriptionHelp" value='{{product.p_description}}'></textarea>
             <span id="descriptionHelp" class="form-text text-muted" style="display: none;">Please enter a description.</span>
@@ -56,10 +60,10 @@
               Update </button>
           </div>
         </form>
+        <div class="text-center">
+          <div class="alert alert-danger" id="error" hidden>{{error}}</div>
+        </div>
       </div>
     </div>
-  </div>
-  <div id="error">
-    <div class="error"></div>
   </div>
 </div>

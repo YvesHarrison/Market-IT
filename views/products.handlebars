@@ -3,13 +3,17 @@
 <!-- Main container -->
 <div class="page-container">
 
-
+    <h1></h1>
+    <h2></h2>
     <div class="bloc bgc-white l-bloc" id="bloc-4">
         <div class="container bloc-lg">
             <div class="row">
                 {{#each products}}
                 <div class="col-sm-4">
-                    <div id="myCarousel" class="carousel slide">
+                    <div class="products-div">
+                        <img src="../{{this.image_path}}" alt="First slide">
+                    </div>
+                    {{!-- <div id="myCarousel" class="carousel slide">
                         <ol class="carousel-indicators">
                             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                         </ol>
@@ -18,7 +22,7 @@
                                 <img src="../{{this.image_path}}" alt="First slide">
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <h3 class="mg-md">
                         {{this.p_name}}
                     </h3>
@@ -42,7 +46,7 @@
 
 
     <!-- ScrollToTop Button -->
-    <a class="bloc-button btn btn-d scrollToTop" onclick="scrollToTarget('1')"><span class="fa fa-chevron-up"></span></a>
+    <a class="bloc-button btn btn-d scrollToTop scroll-top-button" onclick="scrollToTarget('1')"><span class="fa fa-chevron-up scroll-top">TOP</span></a>
     <!-- ScrollToTop Button END-->
 
 

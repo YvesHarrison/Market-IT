@@ -31,7 +31,7 @@ ul .picture-small-li {
 .breadcrumb_content h3 {
     font-size: 24px;
     text-transform: capitalize;
-    color: #2971f5;
+    color: #226ff4;
     font-weight: 500;
     margin-bottom: 10px;
 }
@@ -52,7 +52,7 @@ ul .picture-small-li {
 }
 
 .breadcrumb_content ul li a:hover {
-    color: #2971f5;
+    color: #226ff4;
 }
 
 .breadcrumbs_inner {
@@ -90,7 +90,7 @@ ul .picture-small-li {
 .product_ratting a {
     display: inline-block;
     margin-bottom: 8px;
-    color: #2971f5;
+    color: #226ff4;
     font-size: 16px;
     text-decoration: none;
 }
@@ -160,12 +160,12 @@ ul .picture-small-li {
 }
 
 .product_action_link ul li a:hover {
-    color: #2971f5;
+    color: #226ff4;
 }
 
 
 .product_action_link ul li.product_cart a {
-    background: #2971f5;
+    background: #226ff4;
     color: #ffffff;
     line-height: 40px;
     width: 150px;

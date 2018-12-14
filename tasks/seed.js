@@ -31,20 +31,21 @@ const main = async () => {
 		email: "shreeshchavan@gmail.com",
 		hashedPassword: password
   });
-  await Userdata.addUser(newUser);
+  let user=await Userdata.addUser(newUser);
+  let post_id=user._id;
+
 
   var newProducts = ({
-		
+		p_name: "Surface Laptop",
+        p_description: "Really nice laptop with Windows 10 pro.",
+        posterId: post_id,
+        tags: "Laptop",
+        image_name: "2018-12-11T22_54_49.280ZLaptop.jpg",
+        image_path: "../public/uploads/products/2018-12-11T22_54_49.280ZLaptop.jpg",
+        price: 2100,
+        quantity: 30
   });
-  // await productInfo.addProduct(
-  //     "Apple HomePod",
-  //     "Excellent bass and consistently superior sound quality across a wide variety of music genres. The speaker is easy to set up and Siri can hear you from across a room.",
-  //     "",
-  //     "Speakers",
-  //     ["best buy product"],
-  //     "$329",
-  //     "20",
-  // )
+  await Productdata.addProduct(newProducts);
   console.log("Done seeding database");
   await db.serverConfig.close();
 };

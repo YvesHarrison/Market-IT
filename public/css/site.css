@@ -545,9 +545,11 @@ nav .caret {
 .btn-d:hover,
 .btn-d:focus {
 	color: #FFF;
-	background: rgba(0, 0, 0, .3);
+	background: #226ff4;
 }
-
+.scroll-top-button{
+	background: #000;
+}
 /* Prevent ugly blue glow on chrome and safari */
 button {
 	outline: none !important;
@@ -616,7 +618,7 @@ button {
 /* ScrollToTop button */
 
 .scrollToTop {
-	width: 40px;
+	width: 65px;
 	height: 40px;
 	position: fixed;
 	bottom: 20px;
@@ -625,6 +627,7 @@ button {
 	z-index: 500;
 	transition: all .3s ease-in-out;
 }
+
 
 .scrollToTop span {
 	margin-top: 6px;
@@ -635,6 +638,9 @@ button {
 	opacity: 1;
 }
 
+.scroll-top{
+	color: #767676 !important;
+}
 /* = Custom Styling
 -------------------------------------------------------------- */
 
@@ -1421,7 +1427,7 @@ input[type="submit"] {
 }
 
 .gradient-button-1 {
-	background-color: #2971f5;
+	background-color: #226ff4;
 	/* background-image: linear-gradient(to right, #DD5E89 0%, #F7BB97 51%, #DD5E89 100%) */
 }
 
@@ -1429,7 +1435,7 @@ input[type="submit"] {
 	background-position: right center;
 }
 .clsformLabel{
-	/* color: #2971f5; */
+	/* color: #226ff4; */
 	font-family: "Arial Black", Gadget, sans-serif;
 }
 
@@ -1446,3 +1452,11 @@ input[type="submit"] {
 .justify-content-center{
 	margin: 0 auto;
 }
+
+.info-h1{
+	text-align: left;
+}
+
+/* .info-edit{
+	color: #226ff4;
+} */
