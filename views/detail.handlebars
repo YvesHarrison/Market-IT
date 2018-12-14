@@ -1,3 +1,5 @@
+<h1></h1>
+<h2></h2>
 <div class="breadcrumbs_area">
     <div class="container">
         <div class="breadcrumbs_inner">
@@ -22,7 +24,7 @@
         <div class="row">
             <div class="col-lg-5 col-md-6">
                 <div class="picture-big ">
-                        <img src="../{{product.image_path}}" class="img-responsive" id="pic" />
+                        <img src="../{{product.image_path}}" class="img-responsive" id="pic" alt="product-img" />
                 </div>
                 {{!-- <div class="picture-small">
                     <ul>
@@ -57,11 +59,11 @@
                         <div class="social_sharing">
                             <span>Share</span>
                             <ul>
-                                <li><a href="http://www.facebook.com/sharer.php?u= localhost:3000" target="_blank" class="bg-facebook" data-toggle="tooltip"
-                                        title="Facebook"><i class="fa fa-facebook"></i>
+                                <li><a href="http://www.facebook.com/sharer.php?u= localhost:3000" target="_blank"
+                                        class="bg-facebook" data-toggle="tooltip" title="Facebook"><i class="fa fa-facebook"></i>
                                         Facebook</a></li>
-                                <li><a href="http://twitter.com/share?url=localhost:3000" target="_blank" class="bg-Tweet" data-toggle="tooltip"
-                                        title="twitter"><i class="fa fa-twitter"></i>
+                                <li><a href="http://twitter.com/share?url=localhost:3000" target="_blank" class="bg-Tweet"
+                                        data-toggle="tooltip" title="twitter"><i class="fa fa-twitter"></i>
                                         Tweet</a></li>
                                 <li><a href="https://plus.google.com" target="_blank" class="bg-google" data-toggle="tooltip"
                                         title="google-plus"><i class="fa fa-google-plus"></i>
@@ -79,16 +81,20 @@
         <div class="comments">
             <ul id="myTab" class="nav nav-tabs">
                 <li class="active">
-                    <a href="#more" data-toggle="tab">
+                    <a href="#more" data-toggle="tab" class="comments-color">
                         More info
                     </a>
                 </li>
-                <li><a name="comments" href="#review" data-toggle="tab">Reviews</a></li>
+                <li><a name="comments" href="#review" data-toggle="tab" class="comments-color">Reviews</a></li>
 
             </ul>
             <div id="myTabContent" class="tab-content">
                 <div class="tab-pane fade in active" id="more">
-                    <p class="more-info">For the last few years, Sony has been hot on the heels of rival Bose, working
+                    <div class="product_description detail-description">
+                        <p>{{product.p_description}}</p>
+                    </div>
+                    {{!-- <p class="more-info">For the last few years, Sony has been hot on the heels of rival Bose,
+                        working
                         hard to create the
                         ultimate noise-canceling headphone. And with the WH-1000XM3 -- priced at $350, £330 or $AU499
                         -- it's finally done it.</p>
@@ -100,8 +106,8 @@
                         headband is now more contoured to your head, and the headphone has shaved off 20 grams of
                         weight. The padding on the ear cups is also a little softer.</p>
                     <p class="more-info">The end result is a headphone that's clearly more comfortable than its
-                        predecessor.</p>
-                    <img class="more-info-img" src="../public/imgs/earphone.png" alt="earphone" />
+                        predecessor.</p> --}}
+                    {{!-- <img class="more-info-img" src="../public/imgs/earphone.png" alt="earphone" /> --}}
                 </div>
                 <div class="tab-pane fade" id="review">
                     {{!-- comment --}}
@@ -122,9 +128,14 @@
 
                         </tbody>
                     </table>
-                    <textarea id="commentBodyID" rows="3" cols="50" placeholder="your comment..." name="commentBody"></textarea></br>
-                    <button class="submitButton" id="commentSubmit" value='{{product.product_id}}'>Make Comment</button>
-                    <div class="error" id="error" hidden></div>
+                    <div class="form-group detail-comment">
+                        <div class="text-center">
+                            <textarea class="form-control" id="commentBodyID" rows="3" cols="50" placeholder="your comment..."
+                                name="commentBody"></textarea></br>
+                            <button class="comment-button" id="commentSubmit" value='{{product.product_id}}'>Make Comment</button>
+                            <div class="error" id="error" hidden></div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div>
