@@ -220,25 +220,30 @@ router.post('/:id/detail/comment', async function (req, res) {
 });
 
 router.post('/:id/detail/comments', async function(req,res){
-  var commentBody = xss(req.body.commentBody);
-  var commentBy = xss(req.body.commentBy);
-  var createdAt = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
-  //console.log("user id",req.user._id);
-  var comment = new Comments();
-  comment.commentBody = commentBody;
-  comment.commentBy = xss(req.user.firstName);
-  comment.createdAt = createdAt;
-  console.log("comment:",comment);
-  comment.save(function (err) {
-    res.json({
-      message: "Comment saved successfully"
+  if(xss(req.user)){
+    var commentBody = xss(req.body.commentBody);
+    var createdAt = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
+    //console.log("user id",req.user._id);
+    var comment = new Comments();
+    comment.commentBody = commentBody;
+    comment.commentBy = xss(req.user.firstName);
+    comment.createdAt = createdAt;
+    console.log("comment:",comment);
+    comment.save(function (err) {
+      res.json({
+        message: "Comment saved successfully"
+      });
     });
-  });
-  await Prod.addCommentToProduct(comment, xss(req.params.id),function (err, user) {
-    if (err) throw err;
-    console.log("store:",comment);
-  });
-  res.json(comment);
+    await Prod.addCommentToProduct(comment, xss(req.params.id),function (err, user) {
+      if (err) throw err;
+      console.log("store:",comment);
+    });
+    res.json(comment);
+  }
+  else{
+    let checkmessage={status:false};
+    res.json(checkmessage);
+  }
 });
 
 

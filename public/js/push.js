@@ -26,7 +26,7 @@ $(function () {
 
 $('#commentSubmit').click(function () {
 
-    var commBy = $('#commentByID').val();
+    
     var commBody = $('#commentBodyID').val();
 
     //console.log("commBy", commBy);
@@ -36,21 +36,18 @@ $('#commentSubmit').click(function () {
         url: productid + '/detail/comments',
         type: 'POST',
         data: {
-            commentBody: commBody,
-            commentBy: commBy
+            commentBody: commBody
         },
         success: function (data) {
-            //console.log("data",data);
-            const comment=`<tr><td>${data.commentBy}</td><td>${data.commentBody}</td><td>${data.createdAt}</td></tr>`;
-            $("#comment-table").append(comment);
-            // Add it to the comments section
-            // var template = $('template').html();
-            // var HBlock = template.replace(/{cB1}/g, data.commentBy,/{cB2}/g, data.commBody,/{cB3}/g, data.createdAt);
-            // $('.comments-section').prepend(HBlock);
-            // var HBlock = template.replace(/{cB2}/g, data.commBody);
-            // $('.comments-section').prepend(HBlock);
-            // var HBlock = template.replace(/{cB3}/g, data.createdAt);
-            // $('.comments-section').prepend(HBlock);
+            if(data.commentBy){
+                const comment=`<tr><td>${data.commentBy}</td><td>${data.commentBody}</td><td>${data.createdAt}</td></tr>`;
+                $("#comment-table").append(comment);
+            }
+            else{
+                $("#error").show();
+                $("#error").html("Please login before make a comment!");
+                $('#commentBodyID').focus();
+            }
         }
     });
 

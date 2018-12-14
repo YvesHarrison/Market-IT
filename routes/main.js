@@ -20,15 +20,6 @@ router.get("/", function (req, res) {
 	}
 });
 
-// router.get("/buy", function (req, res) {
-// 	try {
-// 		res.render("buy");
-// 	} catch (e) {
-// 		res.status(500).json({
-// 			error: e
-// 		});
-// 	}
-// });test router to buy page
 /*-----------Login and Authentication-------------------------*/
 router.get("/login", function (req, res) {
 	try {
@@ -149,18 +140,7 @@ passport.deserializeUser(async function (_id, done) {
 	}
 
 });
-// router.post('/login', function (req, res) {
-// 	passport.authenticate('local', function(err, user, info) {
-// 		if (err) { return next(err); }
-// 		if (!user) { return res.redirect('/login'); }
-// 		console.log("here");
-// 		req.logIn(user, function(err) {
-// 		  if (err) { return next(err); }
-// 		  return res.redirect('/users/' + user.username);
-// 		});
-// 	  })(req, res );
 
-// });
 router.post('/login',
 	passport.authenticate('local', {
 		
