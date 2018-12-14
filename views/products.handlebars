@@ -10,7 +10,10 @@
             <div class="row">
                 {{#each products}}
                 <div class="col-sm-4">
-                    <div id="myCarousel" class="carousel slide">
+                    <div class="products-div">
+                        <img src="../{{this.image_path}}" alt="First slide">
+                    </div>
+                    {{!-- <div id="myCarousel" class="carousel slide">
                         <ol class="carousel-indicators">
                             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                         </ol>
@@ -19,7 +22,7 @@
                                 <img src="../{{this.image_path}}" alt="First slide">
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <h3 class="mg-md">
                         {{this.p_name}}
                     </h3>
