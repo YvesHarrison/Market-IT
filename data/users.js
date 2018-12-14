@@ -169,6 +169,23 @@ let exportedMethods = {
       });
     });
   },
+  removePostedProductFromUser(userId, productId) {
+    return users().then(productCollection => {
+      return this.getUserById(userId).then(userThatPosted => {
+        return productCollection
+          .updateOne({
+            _id: userId
+          }, {
+            $pull: {
+              posted_products:productId
+            }
+          })
+          .then(result => {
+            return this.getUserById(userId);
+          });
+      });
+    });
+  },
   addCommentsUser(userId, commentId) {
     return this.getAllUsers().then(userCollection => {
       return userCollection.updateOne({
@@ -180,17 +197,7 @@ let exportedMethods = {
       });
     });
   },
-  removePostedProductFromUser(userId, productId) {
-    return this.getUserById(userId).then(currentUser => {
-      return userCollection.updateOne({
-        _id: userId
-      }, {
-        $pull: {
-          posted_products: productId
-        }
-      });
-    });
-  },
+
   removeBoughtProductFromUser(userId, productId) {
     return this.getUserById(userId).then(currentUser => {
       return userCollection.updateOne({

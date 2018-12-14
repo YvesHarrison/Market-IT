@@ -17,7 +17,8 @@
     <script src="/public/js/bootstrap.js"></script>
     <script src="/public/js/blocs.js"></script>
     <script src="/public/js/lazysizes.min.js" defer></script>
-   
+    <script src="/public/js/edit.js"></script>
+
 
     <title>Home</title>
 
@@ -34,10 +35,11 @@
         <div class="col-sm-5 nav-search">
             <form method="GET" action="/products">
                 <div>
-                    
-                    <input type="search" placeholder="Enter products..." aria-label="Search" name="search" >
-                     
+                    {{#if user}}
+                    <input type="search" placeholder="Enter products..." aria-label="Search" name="search">
+
                     <button type="submit"></button>
+                    {{/if}}
                 </div>
             </form>
         </div>
@@ -45,12 +47,12 @@
             <div>
 
                 <ul class="nav-ul">
-                  
+
                     {{#if user}}
-                     <li class="nav-product">
-                        <a href="http://localhost:3000/info" id="pl-undefined" class="nav-home">Profile</a>
+                    <li class="nav-product">
+                        <a href="http://localhost:3000/info/{{user._id}}" id="pl-undefined" class="nav-home">Profile</a>
                     </li>
-    
+
                     <li class="nav-product">
                         <a href="http://localhost:3000/products" id="pl-undefined" class="nav-home">Products</a>
                     </li>
@@ -61,8 +63,15 @@
 
                     {{else}}
                     <li class="nav-product">
-                        
+
                         <a href="http://localhost:3000" id="pl-undefined" class="nav-home">Home</a>
+                    </li>
+                    <li class="nav-product">
+                        <a href="http://localhost:3000/login" id="pl-undefined" class="nav-home">Login</a>
+                    </li>
+
+                    <li class="nav-product">
+                        <a href="http://localhost:3000/signup" id="pl-undefined" class="nav-home">Signup</a>
                     </li>
                     {{/if}}
                 </ul>

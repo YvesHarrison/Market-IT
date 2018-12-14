@@ -10,6 +10,11 @@ let exportedMethods = {
             return productCollection.find({}).toArray();
         });
     },
+    getProductsByPosterId(id) {
+        return products().then(productCollection => {
+            return productCollection.find({posterId:id}).toArray();
+        });
+    },
     getProductsByTag(tag, normaltag) {
         if (!tag) throw "You must provide a tag";
         return products().then(async productCollection => {
@@ -65,15 +70,19 @@ let exportedMethods = {
         });
 
     },
-    removeproduct(id) {
+    removeproduct(id,posterId) {
+        console.log('here1');
         if (!id) throw "You must provide an id";
         return products().then(productCollection => {
             return productCollection.removeOne({
                 product_id: id
-            }).then(deletionInfo => {
+            }).then(async deletionInfo => {
                 if (deletionInfo.deletedCount === 0) {
                     throw `Could not delete product with id of ${id}`;
-                } else {}
+                } else {
+                    console.log('here2');
+                    await users.removePostedProductFromUser(posterId,id);
+                }
             });
         });
     },

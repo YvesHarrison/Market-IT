@@ -1,39 +1,97 @@
 <div class="container">
-      <hr>
-      <h2>User Profile</h2>
-      <hr>
-      <div class="container">
-        
-        <div class="row justify-content-center">
-          <div class="col-lg-8  col-12 jumbotron">
-            <form>
-              <div class="form-group">
-                <label ><h2>First Name</h2></label>
-                <p class=username>{{user.firstName}}</p>
-              </div>
+  <hr>
+  <h2>User Profile</h2>
+  <hr>
+  <div class="container">
 
-              <div class="form-group">
-                <label ><h2>Last Name</h2></label>
-                <p class=username>{{user.lastName}}</p>
-              </div>
-              <div class="form-group">
-                <label ><h2>Email</h2></label>
-				        <p class=useremail>{{user.email}}</p>
-              </div>
-              <div class="form-group" name="userimageform" id="userimageform">
-                <label for="userimage"><h2>Uploaded Product</h2></label>
-                {{!-- <p class="uploadedimages">{{products.image_name}}</p> --}}
-                
-                <hr>
-                <input type="button" onclick="location.href='/products/productup';" value="Add Product" />
-                </button>
-              </div>
-            </form>
+    <div class="row justify-content-center">
+      <div class="col-lg-8  col-12 jumbotron">
+        <form>
+          <div class="form-group">
+            <label>
+              <h2>First Name</h2>
+            </label>
+            <p class=username>{{user.firstName}}</p>
           </div>
+
+          <div class="form-group">
+            <label>
+              <h2>Last Name</h2>
+            </label>
+            <p class=username>{{user.lastName}}</p>
+          </div>
+          <div class="form-group">
+            <label>
+              <h2>Email</h2>
+            </label>
+            <p class=useremail>{{user.email}}</p>
+          </div>
+          <div class="form-group" name="userimageform" id="userimageform">
+            <label for="userimage">
+              <h2>Uploaded Product</h2>
+            </label>
+            {{!-- <p class="uploadedimages">{{products.image_name}}</p> --}}
+
+            <hr>
+            <input type="button" onclick="location.href='/products/productup';" value="Add Product" />
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <hr>
+
+  {{#if postprod}}
+  <hr>
+  <h2>Posted Products</h2>
+  <hr>
+  <div class="container">
+    {{#each posted_products}}
+    <div class="col-sm-3">
+      <div class="panel">
+        <div class="panel-body">
+          <button onclick="deleteTab(this,'{{this.posterId}}')" class='clsDeleteGoal pull-right' value={{this.product_id}}></span></button>
+          <span>
+            <div>{{this.p_name}}</div>
+          </span>
+          <span>
+            <div>${{this.price}}</div>
+          </span>
+          <form action="../products/edit/{{this.product_id}}" method="get">
+            <button value={{this.product_id}} class="btn btn-d btn-lg btn-block">
+              <div class="text-center">Edit</div>
+            </button>
+          </form>
         </div>
       </div>
-      <hr>
+    </div>
+    {{/each}}
+  </div>
+  <hr>
+  {{/if}}
+  {{#if boughtprod}}
+  <hr>
+  <h2>Enquired Products</h2>
+  <hr>
+  <div class="container">
+    {{#each bought_products}}
+    <div class="col-sm-3">
+      <div class="panel">
+        <div class="panel-body">
+          <button onclick="deleteTab(this)" class='clsDeleteGoal pull-right' value={{this.product_id}}></span></button>
+          <span>
+            <div>{{this.p_name}}</div>
+          </span>
+          <span>
+            <div>${{this.price}}</div>
+          </span>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+  <hr>
+  {{/if}}
 </div>
-
-
-          
+<script type="text/javascript" src="../public/js/product_upload.js"></script>
