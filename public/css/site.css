@@ -547,9 +547,11 @@ nav .caret {
 	color: #FFF;
 	background: #226ff4;
 }
-.scroll-top-button{
+
+.scroll-top-button {
 	background: #000;
 }
+
 /* Prevent ugly blue glow on chrome and safari */
 button {
 	outline: none !important;
@@ -638,9 +640,10 @@ button {
 	opacity: 1;
 }
 
-.scroll-top{
+.scroll-top {
 	color: #767676 !important;
 }
+
 /* = Custom Styling
 -------------------------------------------------------------- */
 
@@ -1266,12 +1269,20 @@ input[type="text"],
 input[type="email"] {
 	background: url('http://i.minus.com/ibhqW9Buanohx2.png') center left no-repeat, linear-gradient(top, #d6d7d7, #dee0e0);
 	width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  /* color: white; */
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+	/* color: white; */
+}
+
+.postproduct-description {
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	box-sizing: border-box;
+	border: 1px solid #ccc !important;
 }
 
 input[type="password"]:focus,
@@ -1297,14 +1308,14 @@ input[type="text"]::placeholder {
 	width: 87px;
 }
 
-	.toggle {
-		background: url(http://i.minus.com/ibitS19pe8PVX6.png) no-repeat;
-		display: block;
-		height: 16px;
-		margin-top: -20px;
-		width: 87px;
-		z-index: -1;
-	}
+.toggle {
+	background: url(http://i.minus.com/ibitS19pe8PVX6.png) no-repeat;
+	display: block;
+	height: 16px;
+	margin-top: -20px;
+	width: 87px;
+	z-index: -1;
+}
 
 input[type="checkbox"]:checked+.toggle {
 	background-position: 0 -16px
@@ -1349,7 +1360,7 @@ input[type="submit"] {
 	border-top-right-radius: 5px;
 	border-bottom-right-radius: 5px;
 	border-bottom-left-radius: 5px;
-		
+
 }
 
 .shadow {
@@ -1398,7 +1409,7 @@ input[type="submit"] {
 .cntsignupback {
 	background: gray;
 	/* background-image: linear-gradient(to bottom, rgba(40, 0, 84, 0.8), rgba(0, 20, 255, 0.6)), url(../imgs/bg.png); */
-    background-size: cover;
+	background-size: cover;
 }
 
 .gradient-button {
@@ -1438,7 +1449,7 @@ input[type="submit"] {
 /* .add-product-btn{
 
 } */
-.clsformLabel{
+.clsformLabel {
 	/* color: #226ff4; */
 	font-family: "Arial Black", Gadget, sans-serif;
 }
@@ -1453,11 +1464,11 @@ input[type="submit"] {
 	border-bottom: transparent;
 } */
 
-.justify-content-center{
+.justify-content-center {
 	margin: 0 auto;
 }
 
-.info-h1{
+.info-h1 {
 	text-align: left;
 }
 
