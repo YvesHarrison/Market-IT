@@ -58,13 +58,17 @@
                         <div class="social_sharing">
                             <span>Share</span>
                             <ul>
-                                <li><a href="#" class="bg-facebook" data-toggle="tooltip" title="Facebook"><i class="fa fa-facebook"></i>
+                                <li><a href="http://www.facebook.com/sharer.php?u= localhost:3000" target="_blank" class="bg-facebook" data-toggle="tooltip"
+                                        title="Facebook"><i class="fa fa-facebook"></i>
                                         Facebook</a></li>
-                                <li><a href="#" class="bg-Tweet" data-toggle="tooltip" title="twitter"><i class="fa fa-twitter"></i>
+                                <li><a href="http://twitter.com/share?url=localhost:3000" target="_blank" class="bg-Tweet" data-toggle="tooltip"
+                                        title="twitter"><i class="fa fa-twitter"></i>
                                         Tweet</a></li>
-                                <li><a href="#" class="bg-google" data-toggle="tooltip" title="google-plus"><i class="fa fa-google-plus"></i>
+                                <li><a href="https://plus.google.com" target="_blank" class="bg-google" data-toggle="tooltip"
+                                        title="google-plus"><i class="fa fa-google-plus"></i>
                                         Google+</a></li>
-                                <li><a href="#" class="bg-pinterest" data-toggle="tooltip" title="pinterest"><i class="fa fa-pinterest"></i>
+                                <li><a href="https://www.pinterest.com" target="_blank" class="bg-pinterest"
+                                        data-toggle="tooltip" title="pinterest"><i class="fa fa-pinterest"></i>
                                         Pinterest</a></li>
                             </ul>
                         </div>
@@ -102,7 +106,9 @@
                 </div>
                 <div class="tab-pane fade" id="review">
                     {{!-- comment --}}
-                    <div class="header"><h3>comment</h3></div>
+                    <div class="header">
+                        <h3>comment</h3>
+                    </div>
                     <table class="table table-hover" id="comment-table">
                         <caption>Recent comments</caption>
                         <thead>
@@ -114,18 +120,18 @@
                         </thead>
 
                         <tbody>
-                            
+
                         </tbody>
                     </table>
-                    <textarea  id="commentBodyID" rows="3" cols="50" placeholder="your comment..." name="commentBody" ></textarea></br>
+                    <textarea id="commentBodyID" rows="3" cols="50" placeholder="your comment..." name="commentBody"></textarea></br>
                     <button class="submitButton" id="commentSubmit" value='{{product.product_id}}'>Make Comment</button>
                     <div class="error" id="error" hidden></div>
                 </div>
             </div>
             <div>
-                    
-        
-             
+
+
+
             </div>
         </div>
     </div>
