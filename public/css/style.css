@@ -30,7 +30,7 @@
     height: 42px;
     padding-left: 13px;
     padding-right: 46px;
-
+    position: absolute;
     border: 1px solid gray;
     border-radius: 5px;
     background: transparent;
