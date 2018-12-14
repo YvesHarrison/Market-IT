@@ -8,7 +8,7 @@
         {{!-- <form name="eproductup" action="/products/edit/{{product.product_id}}" method="POST" id="eproductup-form"
           class="eproductup-form" --}} <form name="eproductup" id="eproductup-form" class="eproductup-form" enctype="multipart/form-data">
           <div class="form-group">
-            <label for="productname">
+            <label for="eproductup-name">
               <h2>Product Name:</h2>
             </label>
             <input type="text" class="form-control" id="eproductup-name" name="ep_name" placeholder="Name"
@@ -17,7 +17,7 @@
           </div>
 
           <div class="form-group">
-            <label for="Tag">
+            <label for="eproductup-tag">
               <h2>Tag:</h2>
             </label>
             <input type="text" class="form-control" id="eproductup-tag" name="etags" placeholder="Tag" aria-describedby="tagHelp"
@@ -26,7 +26,7 @@
           </div>
 
           <div class="form-group">
-            <label for="price">
+            <label for="eproductup-price">
               <h2>Price:</h2>
             </label>
             <input type="number" class="form-control" id="eproductup-price" name="eprice" placeholder="Price"
@@ -35,7 +35,7 @@
           </div>
 
           <div class="form-group">
-            <label for="lastname">
+            <label for="eproductup-quantity">
               <h2>Quantity:</h2>
             </label>
             <input type="number" class="form-control" id="eproductup-quantity" name="equantity" placeholder="Quantity"
@@ -44,21 +44,12 @@
           </div>
 
           <div class="form-group">
-            <label for="description">
+            <label for="edescription">
               <h2>Description:</h2>
             </label>
             <textarea rows="10" cols="100" class="form-control" id="edescription" name="ep_description" placeholder="Description"
               aria-describedby="descriptionHelp" value='{{product.p_description}}'></textarea>
             <span id="descriptionHelp" class="form-text text-muted" style="display: none;">Please enter a description.</span>
-          </div>
-
-          <div class="form-group">
-            <label for="moreinfo">
-              <h2>More Information:</h2>
-            </label>
-            <textarea rows="20" cols="100" class="form-control" id="emoreinfo" name="edescription" placeholder="More Information"
-              aria-describedby="moreinfoHelp" value='{{product.p_description}}'></textarea>
-            <span id="moreinfoHelp" class="form-text text-muted" style="display: none;">Please enter information.</span>
           </div>
           <div class="text-center">
             <button type="submit" class="btn btn-primary" id="eproductup-button" value="{{product.product_id}}" onclick="validationForm1(this.value)">

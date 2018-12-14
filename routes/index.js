@@ -1,13 +1,11 @@
 const mainRoutes = require("./main");
 const productRoutes = require("./products");
-const detailRoutes = require("./detail");
 const userRoutes = require("./users");
 const path = require("path");
 
 const constructorMethod = app => {
   app.use("/",  mainRoutes );
   app.use("/products", productRoutes);
-  app.use("/detail", detailRoutes)
   app.use("/users", userRoutes);
   app.get("/about", (req, res) => {
     res.sendFile(path.resolve("static/about.html"));
