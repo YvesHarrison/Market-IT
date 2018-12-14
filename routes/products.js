@@ -73,12 +73,14 @@ router.get("/", async (req, res) => {
 });
 router.get("/productup", async (req, res) => {
   try {
+    if(req.user)
     res.status(200).render("postproduct");
+    else throw "You are not authenticated."
   } catch (e) {
     var msg = (typeof (e) == String) ? e : e.message;
     msg = msg == undefined ? 'Somethin went wrong, Please try again' : msg;
     req.flash('failure_msg', msg);
-    res.status(500).redirect('/products');
+    res.status(500).redirect('/login');
   }
 });
 router.post("/productup", upload.single('productimage'), async (req, res) => {
@@ -257,6 +259,7 @@ router.post("/edit/:id", async (req, res) => {
       res.status(403).redirect("/login");
 
     }
+    // res.status(200);
     res.status(200).redirect('/products');
   } catch (e) {
     var msg = (typeof (e) == String) ? e : e.message;

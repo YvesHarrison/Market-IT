@@ -186,10 +186,11 @@ router.get("/logout", function (req, res) {
 });
 
 router.get("/info", function (req, res) {
-	try {
+	try {if(req.user)
 		res.render("info", {
 			Logout: tag
 		});
+		else throw "You are not authenticated";
 	} catch (e) {
 		var msg = (typeof (e) == String) ? e : e.message;
 		msg = msg == undefined ? 'Somethin went wrong, Please try again' : msg;
