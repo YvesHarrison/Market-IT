@@ -282,6 +282,7 @@ router.get("/:id", async (req, res) => {
       });
     } else throw "product not found";
   } catch (e) {
+    console.log(e);
     var msg = (typeof (e) == String) ? e : e.message;
     msg = msg == undefined ? 'Somethin went wrong, Please try again' : msg;
     req.flash('failure_msg', msg);

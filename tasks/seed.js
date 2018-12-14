@@ -39,9 +39,9 @@ const main = async () => {
 		p_name: "Surface Laptop",
         p_description: "Really nice laptop with Windows 10 pro.",
         posterId: post_id,
-        tags: "Laptop",
+        tags: ["Laptop"],
         image_name: "2018-12-11T22_54_49.280ZLaptop.jpg",
-        image_path: "../public/uploads/products/2018-12-11T22_54_49.280ZLaptop.jpg",
+        image_path: "public/uploads/products/2018-12-11T22_54_49.280ZLaptop.jpg",
         price: 2100,
         quantity: 30
   });
