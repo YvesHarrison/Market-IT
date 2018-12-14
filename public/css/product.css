@@ -74,7 +74,7 @@ ul .picture-small-li {
 
 
 .current_price {
-    color: #dc4444;
+    color: #da3a3a;
     font-size: 18px;
     font-weight: 500;
 }
@@ -210,11 +210,11 @@ ul .picture-small-li {
 }
 
 .social_sharing ul li a.bg-Tweet {
-    background: #00aaf0;
+    background: #007eb3;
 }
 
 .social_sharing ul li a.bg-google {
-    background: #e04b34;
+    background: #dc3910;
 }
 
 .social_sharing ul li a.bg-pinterest {
@@ -280,4 +280,103 @@ ul .picture-small-li {
 .products-description{
     width: 370px;
     height: 86px;
+}
+
+.detail-description{
+    margin: 25px;
+}
+
+.comments-color{
+    color: #767676;
+}
+
+.detail-comment{
+    width: 50%;
+    margin: 0 auto;
+}
+
+.detail-comment textarea{
+    border: 1px solid gray;
+}
+
+
+.comment-button{
+    background: #226ff4;
+    color: #ffffff;
+    line-height: 40px;
+    width: 150px;
+    font-size: 14px;
+    font-weight: 500;
+    display: inline-block;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 3px;
+}
+
+.posted-products{
+    border:1px solid rgb(207, 207, 207);
+    border-radius: 6px;
+}
+
+.info-img{
+    width: 180px;
+    height: 100px;
+}
+.info-img img{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.info-pro-name{
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.info-pro-price{
+    font-weight: 180;
+}
+
+.info-edit-btn{
+    margin: 0 auto;
+    width: 80% !important;
+}
+
+.aui_close {
+    width: 23px;
+    height: 23px;
+    line-height: 20px;
+    display: block;
+    position: absolute;
+    left:10px;
+    top:10px;
+    font-family: Helvetica, STHeiti;
+    /* _font-family: '\u9ed1\u4f53', 'Book Antiqua', Palatino; */
+    font-size: 18px;
+    border-radius: 20px;
+    background: #999;
+    color: #FFF;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+    -moz-transition: linear .06s;
+    -webkit-transition: linear .06s;
+    transition: linear .06s;
+    padding: 0;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    cursor: pointer;
+    margin-top: 43px;
+    margin-left: 210px;
+}
+.aui_close:hover {
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    left:8px;
+    top:8px;
+    color: #FFF;
+    box-shadow: 0 1px 3px rgba(209, 40, 42, .5);
+    background: #d1282a;
+    border-radius: 24px;
+    transition: all 0.2s ease-out;
+    opacity: 0.8;
 }

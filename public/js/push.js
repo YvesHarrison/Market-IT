@@ -29,10 +29,16 @@ $('#commentSubmit').click(function () {
 
     
     var commBody = $('#commentBodyID').val();
-
-    //console.log("commBy", commBy);
+    if(!commBody){
+        $("#error").show();
+        $("#error").html("You must enter something to make a comment!");
+        $('#commentBodyID').focus();
+    }
+    else{
+        //console.log("commBy", commBy);
     //console.log("commBody", commBody);
     var productid = document.getElementById('commentSubmit').value;
+
     $.ajax({
         url: productid + '/detail/comments',
         type: 'POST',
@@ -53,6 +59,5 @@ $('#commentSubmit').click(function () {
             }
         }
     });
-
-
+    }
 });

@@ -33,8 +33,9 @@
             {{!-- <p class="uploadedimages">{{products.image_name}}</p> --}}
 
             <hr>
-            <input type="button" onclick="location.href='/products/productup';" value="Add Product" />
-            </button>
+            <div class="text-center">
+              <input type="button" onclick="location.href='/products/productup';" value="Add Product" class="gradient-button gradient-button-1 add-product-btn" />
+            </div>
           </div>
         </form>
       </div>
@@ -50,17 +51,21 @@
     {{#each posted_products}}
     <div class="col-sm-3">
       <div class="panel">
-        <div class="panel-body">
+        <div class="panel-body posted-products">
+          <div class="info-img">
+            <img src="../{{this.image_path}}" alt="img">
+          </div>
           <label for="info-button"></label>
-          <button id="info-button" onclick="deleteTab(this,'{{this.posterId}}')" class='clsDeleteGoal pull-right' value={{this.product_id}}></span></button>
+          <button id="info-button" onclick="deleteTab(this,'{{this.posterId}}')" class='aui_close clsDeleteGoal pull-right' value={{this.product_id}}>X</span></button>
           <span>
-            <div>{{this.p_name}}</div>
+            <div class="info-pro-name">&nbsp;{{this.p_name}}</div>
           </span>
           <span>
-            <div>${{this.price}}</div>
+            <div class="info-pro-price">&nbsp;&nbsp;${{this.price}}</div>
           </span>
+          <br>
           <form action="../products/edit/{{this.product_id}}" method="get">
-            <button value={{this.product_id}} class="btn btn-d btn-lg btn-block">
+            <button value={{this.product_id}} class="btn btn-d btn-lg btn-block info-edit-btn">
               <div class="text-center info-edit">Edit</div>
             </button>
           </form>
