@@ -40,13 +40,12 @@ router.post("/tag", (req, res) => {
     var l_arrTags = xss(req.body.split(/[\s,]+/));
     res.render("products");
   } catch (e) {
-    res.status(500).json({
-      error: e
-    });
+    var msg = (typeof (e) == String) ? e : e.message;
+    msg = msg == undefined ? 'Somethin went wrong, Please try again' : msg;
+    req.flash('failure_msg', msg);
+    res.status(500).redirect('/products');
   }
 });
-
-
 function escapeRegex(text) {
   return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 };
@@ -66,25 +65,27 @@ router.get("/", async (req, res) => {
       });
     }
   } catch (e) {
-    res.status(500).json({
-      error: e
-    });
+    var msg = (typeof (e) == String) ? e : e.message;
+    msg = msg == undefined ? 'Somethin went wrong, Please try again' : msg;
+    req.flash('failure_msg', msg);
+    res.status(500).redirect('/products');
   }
 });
 router.get("/productup", async (req, res) => {
   try {
-
+    if(req.user)
     res.status(200).render("postproduct");
+    else throw "You are not authenticated."
   } catch (e) {
-    res.status(500).json({
-      error: e
-    });
+    var msg = (typeof (e) == String) ? e : e.message;
+    msg = msg == undefined ? 'Somethin went wrong, Please try again' : msg;
+    req.flash('failure_msg', msg);
+    res.status(500).redirect('/login');
   }
 });
 router.post("/productup", upload.single('productimage'), async (req, res) => {
   try {
     if (xss(req.user)) {
-
       var l_strArrtags;
       if (xss(req.body.tags)) {
         var tags = xss(req.body.tags);
@@ -112,94 +113,122 @@ router.post("/productup", upload.single('productimage'), async (req, res) => {
         }
       } else throw "product couldnt be added";
     } else {
-
-      res.status(403).render("users/logout", {
+      res.status(403).render("login", {
         msg: "You are not authenticated"
       });
-
+      req.flash('failure_msg', "You are not authenticated");
     }
     res.status(200).redirect('/products');
   } catch (e) {
-    res.status(500).json({
-      error: e
-    });
+    var msg = (typeof (e) == String) ? e : e.message;
+    msg = msg == undefined ? 'Somethin went wrong, Please try again' : msg;
+    req.flash('failure_msg', msg);
+    res.status(500).redirect('/products');
   }
 });
 router.post("/buy/:id", async (req, res) => {
-  console.log("this is user");
-  console.log(xss(req.user));
+  try {
+    if (req.user) {
+      var product = await Prod.getProductById(xss(req.params.id));
+      if (product) {
+        var seller = await User.getUserById(xss(product.posterId));
+        var transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: {
+            user: 'saveit.team@gmail.com',
+            pass: 'save1234'
+          }
+        });
+        var mailOptions = {
+          from: 'saveit.team@gmail.com',
+          to: seller.email,
+          subject: xss(req.user.firstName) + ' wants to buy ' + xss(product.p_name) + ' from you',
+          text: 'Hi Seller,\nCongratulations! ' + xss(req.user.firstName) + ' wants to buy your product: ' + xss(product.p_name) + ' in quantity = ' + xss(req.body.quantity) + '. Following is his message:\n\n' + xss(req.body.message) + '\n\n Please contact ' + xss(req.user.firstName) + ' on email: ' + xss(req.user.email) + '\n\nRegards,\nTeam Market IT'
+        };
 
-  if (req.user) {
+        transporter.sendMail(mailOptions, function (error, info) {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log('Email sent: ' + info.response);
+          }
+        });
+        var updateduser = await User.addBoughtProductToUser(xss(req.user._id), xss(product.product_id));
+        if (updateduser) {
+          var addMetadata = {
+            p_name: product.p_name,
+            posterId: product.posterId,
+            buyerId: req.user._id,
+            product_id: product.product_id,
+            price: product.price,
+          };
+          var newone = await metadata.addProductEnquiry(addMetadata);
+          res.redirect('/products');
+        } else throw "product couldnt be bought";
+      } else throw "product not found";
+    } else {
+      req.flash('failure_msg', "You are not authenticated, please log in");
+      res.redirect('/login');
+    }
+  } catch (e) {
+    var msg = (typeof (e) == String) ? e : e.message;
+    msg = msg == undefined ? 'Somethin went wrong, Please try again' : msg;
+    req.flash('failure_msg', msg);
+    res.status(500).redirect('/products');
+  }
+});
+router.get("/buy/:id", async (req, res) => {
+  try {
     var product = await Prod.getProductById(xss(req.params.id));
     if (product) {
       var seller = await User.getUserById(xss(product.posterId));
-      var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-          user: 'saveit.team@gmail.com',
-          pass: 'save1234'
-        }
+      res.status(200).render("buy", {
+        product: product,
+        seller: seller
       });
-      var mailOptions = {
-        from: 'saveit.team@gmail.com',
-        to: seller.email,
-        subject: xss(req.user.firstName) + ' wants to buy ' + xss(product.p_name) + ' from you',
-        text: 'Hi Seller,\nCongratulations! ' + xss(req.user.firstName) + ' wants to buy your product: ' + xss(product.p_name) + ' in quantity = ' + xss(req.body.quantity) + '. Following is his message:\n\n' + xss(req.body.message) + '\n\n Please contact ' + xss(req.user.firstName) + ' on email: ' + xss(req.user.email) + '\n\nRegards,\nTeam Market IT'
-      };
-
-      transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log('Email sent: ' + info.response);
-        }
-      });
-      var updateduser = await User.addBoughtProductToUser(xss(req.user._id), xss(product.product_id));
-      if (updateduser) {
-        var addMetadata = {
-          p_name: product.p_name,
-          posterId: product.posterId,
-          buyerId: req.user._id,
-          product_id: product.product_id,
-          price: product.price,
-        };
-        var newone = await metadata.addProductEnquiry(addMetadata);
-        res.redirect('/products');
-      } else throw "product couldnt be bought";
     } else throw "product not found";
-  } else res.redirect('/login');
-});
-router.get("/buy/:id", async (req, res) => {
-
-  var product = await Prod.getProductById(xss(req.params.id));
-  if (product) {
-    var seller = await User.getUserById(xss(product.posterId));
-    res.status(200).render("buy", {
-      product: product,
-      seller: seller
-    });
-  } else throw "product not found";
+  } catch (e) {
+    var msg = (typeof (e) == String) ? e : e.message;
+    msg = msg == undefined ? 'Somethin went wrong, Please try again' : msg;
+    req.flash('failure_msg', msg);
+    res.status(500).redirect('/products');
+  }
 });
 router.get("/edit/:id", async (req, res) => {
+  try {
+    var product = await Prod.getProductById(xss(req.params.id));
+    if (product) {
+      var seller = await User.getUserById(xss(product.posterId));
+      var tags = (product.tags).join().toString();
+      res.status(200).render("updateproduct", {
+        product: product,
+        seller: seller,
+        tag: tags
+      });
+    } else throw "product not found";
+  } catch (e) {
+    var msg = (typeof (e) == String) ? e : e.message;
+    msg = msg == undefined ? 'Somethin went wrong, Please try again' : msg;
+    req.flash('failure_msg', msg);
+    res.status(500).redirect('/products');
+  }
 
-  var product = await Prod.getProductById(xss(req.params.id));
-  if (product) {
-    var seller = await User.getUserById(xss(product.posterId));
-    res.status(200).render("updateproduct", {
-      product: product,
-      seller: seller
-    });
-  } else throw "product not found";
 });
 router.delete("/delete/:id", async (req, res) => {
-  console.log("here: " + req.params.id);
-  var product = await Prod.getProductById(xss(req.params.id));
-  if (product) {
-    console.log("here");
-    await Prod.removeproduct(product.product_id, product.posterId);
-    res.status(200).redirect(`../products/edit/${product.posterId}`);
-    // res.status(200);
-  } else throw "product not found";
+  try {
+    var product = await Prod.getProductById(xss(req.params.id));
+    if (product) {
+      await Prod.removeproduct(product.product_id, product.posterId);
+      res.status(200).redirect(`../products/edit/${product.posterId}`);
+      // res.status(200);
+    } else throw "product not found";
+  } catch (e) {
+    var msg = (typeof (e) == String) ? e : e.message;
+    msg = msg == undefined ? 'Somethin went wrong, Please try again' : msg;
+    req.flash('failure_msg', msg);
+    res.status(500).redirect('/products');
+  }
+
 });
 router.post("/edit/:id", async (req, res) => {
   try {
@@ -230,11 +259,13 @@ router.post("/edit/:id", async (req, res) => {
       res.status(403).redirect("/login");
 
     }
+    // res.status(200);
     res.status(200).redirect('/products');
   } catch (e) {
-    res.status(500).json({
-      error: e
-    });
+    var msg = (typeof (e) == String) ? e : e.message;
+    msg = msg == undefined ? 'Somethin went wrong, Please try again' : msg;
+    req.flash('failure_msg', msg);
+    res.status(500).redirect('/products');
   }
 });
 
@@ -251,9 +282,11 @@ router.get("/:id", async (req, res) => {
       });
     } else throw "product not found";
   } catch (e) {
-    res.status(500).json({
-      error: e
-    });
+    console.log(e);
+    var msg = (typeof (e) == String) ? e : e.message;
+    msg = msg == undefined ? 'Somethin went wrong, Please try again' : msg;
+    req.flash('failure_msg', msg);
+    res.status(500).redirect('/products');
   }
 });
 
@@ -261,55 +294,63 @@ router.get('/detail', function (req, res) {
   try {
     res.render('detail');
   } catch (e) {
-    res.status(500).json({
-      error: e
-    });
+    var msg = (typeof (e) == String) ? e : e.message;
+    msg = msg == undefined ? 'Somethin went wrong, Please try again' : msg;
+    req.flash('failure_msg', msg);
+    res.status(500).redirect('/products');
   }
 });
 
 
 router.post('/:id/detail/comment', async function (req, res) {
-  let pro_id = xss(req.body.pro_id);
-  let commentset = await Prod.getcomment(pro_id);
-  //console.log("router",commentset);
-  res.json(commentset);
+  try {
+    let pro_id = xss(req.body.pro_id);
+    let commentset = await Prod.getcomment(pro_id);
+    //console.log("router",commentset);
+    res.json(commentset);
+  } catch (e) {
+    var msg = (typeof (e) == String) ? e : e.message;
+    msg = msg == undefined ? 'Somethin went wrong, Please try again' : msg;
+    req.flash('failure_msg', msg);
+    res.status(403).redirect('/' + req.params.id + '/detail/comment');
+  }
 
-  // try {
-  //   Comments.find({}, function (err, comments) {
-  //     res.json(comments);
-  //   });
-  // } catch (e) {
-  //   res.status(500).json({
-  //     error: e
-  //   });
-  // }
 });
 
-router.post('/:id/detail/comments', async function(req,res){
-  if(xss(req.user)){
-    var commentBody = xss(req.body.commentBody);
-    var createdAt = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
-    //console.log("user id",req.user._id);
-    var comment = new Comments();
-    comment.commentBody = commentBody;
-    comment.commentBy = xss(req.user.firstName);
-    comment.createdAt = createdAt;
-    console.log("comment:",comment);
-    comment.save(function (err) {
-      res.json({
-        message: "Comment saved successfully"
+router.post('/:id/detail/comments', async function (req, res) {
+  try {
+    if (xss(req.user)) {
+      var commentBody = xss(req.body.commentBody);
+      var createdAt = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
+      //console.log("user id",req.user._id);
+      var comment = new Comments();
+      comment.commentBody = commentBody;
+      comment.commentBy = xss(req.user.firstName);
+      comment.createdAt = createdAt;
+      console.log("comment:", comment);
+      comment.save(function (err) {
+        res.json({
+          message: "Comment saved successfully"
+        });
       });
-    });
-    await Prod.addCommentToProduct(comment, xss(req.params.id),function (err, user) {
-      if (err) throw err;
-      console.log("store:",comment);
-    });
-    res.json(comment);
+      await Prod.addCommentToProduct(comment, xss(req.params.id), function (err, user) {
+        if (err) throw err;
+        console.log("store:", comment);
+      });
+      res.json(comment);
+    } else {
+      let checkmessage = {
+        status: false
+      };
+      res.json(checkmessage);
+    }
+  } catch (e) {
+    var msg = (typeof (e) == String) ? e : e.message;
+    msg = msg == undefined ? 'Somethin went wrong, Please try again' : msg;
+    req.flash('failure_msg', msg);
+    res.status(500).redirect('/products');
   }
-  else{
-    let checkmessage={status:false};
-    res.json(checkmessage);
-  }
+
 });
 
 

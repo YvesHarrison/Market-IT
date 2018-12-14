@@ -16,9 +16,10 @@ router.get("/", function (req, res) {
 	try {
 		res.render("dashboardlog");
 	} catch (e) {
-		res.status(500).json({
-			error: e
-		});
+		var msg = (typeof (e) == String) ? e : e.message;
+		msg = msg == undefined ? 'Somethin went wrong, Please try again' : msg;
+		req.flash('failure_msg', msg);
+		res.status(500).redirect('/');
 	}
 });
 /*-----------Login and Authentication-------------------------*/
@@ -26,9 +27,10 @@ router.get("/login", function (req, res) {
 	try {
 		res.render("login");
 	} catch (e) {
-		res.status(500).json({
-			error: e
-		});
+		var msg = (typeof (e) == String) ? e : e.message;
+		msg = msg == undefined ? 'Somethin went wrong, Please try again' : msg;
+		req.flash('failure_msg', msg);
+		res.status(500).redirect('/');
 	}
 });
 
@@ -37,6 +39,7 @@ router.get("/signup", function (req, res) {
 	try {
 		res.render("signup");
 	} catch (e) {
+
 		res.status(500).json({
 			error: e
 		});
@@ -44,66 +47,75 @@ router.get("/signup", function (req, res) {
 });
 
 router.post('/signup', async function (req, res) {
-	var name = xss(req.body.firstName);
-	var email = xss(req.body.email);
-	var lastName = xss(req.body.last);
-	var phone = xss(req.body.phone);
-	var city = xss(req.body.city);
-	var address1 = xss(req.body.address1);
-	var address2 = xss(req.body.address2);
-	var password = bcrypt.hashSync(xss(req.body.password), SALT_ROUNDS);
+	try {
+		var name = xss(req.body.firstName);
+		var email = xss(req.body.email);
+		var lastName = xss(req.body.last);
+		var phone = xss(req.body.phone);
+		var city = xss(req.body.city);
+		var address1 = xss(req.body.address1);
+		var address2 = xss(req.body.address2);
+		var password = bcrypt.hashSync(xss(req.body.password), SALT_ROUNDS);
+		var password2 = bcrypt.compare(xss(req.body.password2), password);
 
-	var password2 = bcrypt.compare(xss(req.body.password2), password);
+		// Validation
+		req.checkBody('firstName', 'Name is required').notEmpty();
+		req.checkBody('email', 'Email is required').notEmpty();
+		req.checkBody('email', 'Email is not valid').isEmail();
+		req.checkBody('phone', 'Phone is required').notEmpty();
+		req.checkBody('password', 'Password is required').notEmpty();
+		req.checkBody('password2', 'Password do not match').equals(xss(req.body.password));
 
-	// Validation
-	req.checkBody('firstName', 'Name is required').notEmpty();
-	req.checkBody('email', 'Email is required').notEmpty();
-	req.checkBody('email', 'Email is not valid').isEmail();
-	req.checkBody('password', 'Password is required').notEmpty();
-	req.checkBody('password2', 'Password do not match').equals(xss(req.body.password));
-
-	var errors = req.validationErrors();
-	if (errors) {
-		res.render('signup', {
-			errors: errors
-		});
-	} else {
-		//checking for email and username are already taken
-		try {
-			var userexist = await User.getUserByemail(xss(email));
-		} catch (e) {
-			var userexist = undefined;
-		}
-
-		if (userexist) {
-			var err = [{
-				param: 'email',
-				msg: 'User already Exists',
-				value: req.body.email
-			}];
+		var errors = req.validationErrors();
+		if (errors) {
 			res.render('signup', {
-				errors: err
+				errors: errors
 			});
 		} else {
-			var newUser = ({
-				firstName: name,
-				lastName: lastName,
-				phone: phone,
-				city: city,
-				address1: address1,
-				address2: address2,
-				email: email,
-				hashedPassword: password
-			});
-			User.addUser(newUser, function (err, user) {
-				if (err) throw err;
-				console.log(xss(user));
-				console.log(xss(req.user));
-			});
-			req.flash('success_msg', 'You are registered and can now login');
-			res.redirect('/login');
+			//checking for email and username are already taken
+			try {
+				var userexist = await User.getUserByemail(xss(email));
+			} catch (e) {
+				var userexist = undefined;
+			}
+
+			if (userexist) {
+				var err = [{
+					param: 'email',
+					msg: 'User already Exists',
+					value: req.body.email
+				}];
+				res.render('signup', {
+					errors: err
+				});
+			} else {
+				var newUser = ({
+					firstName: name,
+					lastName: lastName,
+					phone: phone,
+					city: city,
+					phone: phone,
+					address1: address1,
+					address2: address2,
+					email: email,
+					hashedPassword: password
+				});
+				User.addUser(newUser, function (err, user) {
+					if (err) throw err;
+					console.log(xss(user));
+					console.log(xss(req.user));
+				});
+				req.flash('success_msg', 'You are registered and can now login');
+				res.redirect('/login');
+			}
 		}
+	} catch (e) {
+		var msg = (typeof (e) == String) ? e : e.message;
+		msg = msg == undefined ? 'Somethin went wrong, Please try again' : msg;
+		req.flash('failure_msg', msg);
+		res.status(500).redirect('/signup');
 	}
+
 });
 /*-------------------------Passport Locale Use-----------------------*/
 passport.use('local', new LocalStrategy({
@@ -149,7 +161,6 @@ passport.deserializeUser(async function (_id, done) {
 
 router.post('/login',
 	passport.authenticate('local', {
-
 		successRedirect: '/products',
 		failureRedirect: '/login',
 		failureFlash: true
@@ -161,20 +172,30 @@ router.post('/login',
 
 /*------------------------Logout------------------------------*/
 router.get("/logout", function (req, res) {
-	req.logout();
-	req.flash('success_msg', 'You are logged out');
-	res.redirect("/login");
+	try {
+		req.logout();
+		req.flash('success_msg', 'You are logged out');
+		res.status(200).redirect("/login");
+	} catch (e) {
+		var msg = (typeof (e) == String) ? e : e.message;
+		msg = (msg == undefined) ? 'Somethin went wrong, Please try again' : msg;
+		req.flash('failure_msg', msg);
+		res.status(500).redirect('/products');
+	}
+
 });
 
 router.get("/info", function (req, res) {
-	try {
+	try {if(req.user)
 		res.render("info", {
 			Logout: tag
 		});
+		else throw "You are not authenticated";
 	} catch (e) {
-		res.status(500).json({
-			error: e
-		});
+		var msg = (typeof (e) == String) ? e : e.message;
+		msg = msg == undefined ? 'Somethin went wrong, Please try again' : msg;
+		req.flash('failure_msg', msg);
+		res.status(500).redirect('/products');
 	}
 });
 
@@ -202,15 +223,15 @@ router.get("/info/:id", async function (req, res) {
 				boughtprod: boughtprod
 			});
 		} else {
-			console.log("here1");
 			req.flash("error", "Something went wrong");
 			res.redirect("/");
 		}
 
 	} catch (e) {
-		res.status(500).json({
-			error: e
-		});
+		var msg = (typeof (e) == String) ? e : e.message;
+		msg = msg == undefined ? 'Somethin went wrong, Please try again' : msg;
+		req.flash('failure_msg', msg);
+		res.status(500).redirect('/products');
 	}
 });
 
