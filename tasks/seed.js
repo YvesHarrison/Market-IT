@@ -45,7 +45,8 @@ const main = async () => {
         price: 2100,
         quantity: 30
   });
-  await Productdata.addProduct(newProducts);
+  let newone=await Productdata.addProduct(newProducts);
+  await Userdata.addPostedProductToUser(newone.posterId, newone.product_id);
   console.log("Done seeding database");
   await db.serverConfig.close();
 };
