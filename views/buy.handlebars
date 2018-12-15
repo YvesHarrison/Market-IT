@@ -1,3 +1,5 @@
+<h1></h1>
+<h2></h2>
 <div class="breadcrumbs_area">
     <div class="container">
         <div class="breadcrumbs_inner">
@@ -22,7 +24,7 @@
         <div class="row">
             <div class="col-lg-5 col-md-6">
                 <div class="picture-big ">
-                        <img src="/{{product.image_path}}" class="img-responsive" id="pic" />
+                        <img src="/{{product.image_path}}" class="img-responsive" id="pic" alt="product-img"/>
                 </div>
             </div>
             <div class="col-lg-7 col-md-6">
@@ -43,15 +45,15 @@
                 <div class="message">
                     <form name="phrase" id="myForm" class="new-palindrome-form" method="POST" action="http://localhost:3000/products/buy/{{product.product_id}}">
                         <div class="form-group">
-                            <label>Quantity:</label>
-                            <input min="1" max="{{product.quantity}}" type="number" name="quantity" required>
+                            <label for="quantity">Quantity:</label>
+                            <input id="quantity" min="1" max="{{product.quantity}}" type="number" name="quantity" required>
                         </div>
                         <label for="text_input">Send Message to Seller :</label>
-                        <div class="form-group">
+                        <div class="form-group message-textarea">
                             <textarea type="text" rows="3" cols="30" class="form-control" id="text_input" name="message"
                                 placeholder="Message"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary" id="comment-button">Send Message</button>
+                        <button type="submit" class="comment-button" id="comment-button">Send Message</button>
                     </form>
                     <div class="error" id="error" hidden></div>
                 </div>

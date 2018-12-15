@@ -6249,7 +6249,7 @@ a.badge:focus {
 .container-fluid .jumbotron {
   border-radius: 6px;
   width: 40%;
-  margin-left: 35rem;
+  margin-left: 29%;
 }
 
 .jumbotron .container {
@@ -6823,7 +6823,7 @@ button.list-group-item-danger.active:focus {
 }
 
 .panel-body {
-  padding: 15px 15px 15px 50px;
+  padding: 15px 15px 15px 15px;
   text-align: left;
 }
 
