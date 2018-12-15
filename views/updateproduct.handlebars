@@ -3,6 +3,7 @@
   <h1 class="info-h1">Edit Your Product</h1>
   <hr>
   <div class="container">
+    <h2></h2>
     <div class="row justify-content-center">
       <div class="col-lg-8  col-12 jumbotron">
          <form name="eproductup" action="/products/edit/{{product.product_id}}" method="POST" id="eproductup-form" class="eproductup-form" onsubmit="return validationForm1(this.value)">
@@ -47,7 +48,7 @@
             <label for="edescription" class="clsLabelforFields">
               Description:
             </label>
-            <textarea rows="10" cols="100" class="form-control" id="edescription" name="ep_description" placeholder="Description you woul like to add to existing product"
+            <textarea rows="10" cols="100" class="form-control" id="edescription" name="ep_description" placeholder="Description you would like to add for existing product"
               aria-describedby="descriptionHelp"></textarea>
             <span id="descriptionHelp" class="form-text text-muted" style="display: none;">Please enter a description.</span>
           </div>
