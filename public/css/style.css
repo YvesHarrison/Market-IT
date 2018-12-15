@@ -1,6 +1,9 @@
 .market-it {
     margin-left: 15px;
     vertical-align: bottom;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow-x: hidden;
 }
 
 .nav-left {
@@ -13,8 +16,8 @@
 
 .nav-img {
     vertical-align: middle;
-    margin-top: 14px;
-    margin-left: 30px;
+    /* margin-top: 14px; */
+    /* margin-left: 30px; */
     margin-bottom: -23px;
 
 }
@@ -75,7 +78,7 @@
 }
 
 .products-div{
-    width: 370px;
+    width: 100%;
     height: 270px;
 }
 .products-div img{
