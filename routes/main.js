@@ -22,6 +22,16 @@ router.get("/", function (req, res) {
 		res.status(500).redirect('/');
 	}
 });
+router.get("/aboutus", function (req, res) {
+	try {
+		res.render("aboutus");
+	} catch (e) {
+		var msg = (typeof (e) == String) ? e : e.message;
+		msg = msg == undefined ? 'Somethin went wrong, Please try again' : msg;
+		req.flash('failure_msg', msg);
+		res.status(500).redirect('/');
+	}
+});
 /*-----------Login and Authentication-------------------------*/
 router.get("/login", function (req, res) {
 	try {
