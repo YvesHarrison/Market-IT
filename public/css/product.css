@@ -298,6 +298,7 @@ ul .picture-small-li {
 .detail-comment textarea{
     border: 1px solid rgb(177, 177, 177);
     border-radius: 6px;
+    width: 100%;
 }
 .message-textarea{
     border: 1px solid rgb(177, 177, 177);

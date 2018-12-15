@@ -179,8 +179,8 @@ router.get("/logout", function (req, res) {
 	} catch (e) {
 		var msg = (typeof (e) == String) ? e : e.message;
 		msg = (msg == undefined) ? 'Somethin went wrong, Please try again' : msg;
-		req.flash('failure_msg', msg);
-		res.status(500).redirect('/products');
+		req.flash('error', msg);
+		res.status(500).redirect('/');
 	}
 
 });
@@ -194,8 +194,8 @@ router.get("/info", function (req, res) {
 	} catch (e) {
 		var msg = (typeof (e) == String) ? e : e.message;
 		msg = msg == undefined ? 'Somethin went wrong, Please try again' : msg;
-		req.flash('failure_msg', msg);
-		res.status(500).redirect('/products');
+		req.flash('error', msg);
+		res.status(500).redirect('/');
 	}
 });
 
@@ -230,8 +230,8 @@ router.get("/info/:id", async function (req, res) {
 	} catch (e) {
 		var msg = (typeof (e) == String) ? e : e.message;
 		msg = msg == undefined ? 'Somethin went wrong, Please try again' : msg;
-		req.flash('failure_msg', msg);
-		res.status(500).redirect('/products');
+		req.flash('error', msg);
+		res.status(500).redirect('/');
 	}
 });
 
