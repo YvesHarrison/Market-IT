@@ -93,21 +93,6 @@
                     <div class="product_description detail-description">
                         <p>{{product.p_description}}</p>
                     </div>
-                    {{!-- <p class="more-info">For the last few years, Sony has been hot on the heels of rival Bose,
-                        working
-                        hard to create the
-                        ultimate noise-canceling headphone. And with the WH-1000XM3 -- priced at $350, £330 or $AU499
-                        -- it's finally done it.</p>
-                    <p class="more-info">In developing this third-generation model, it seems as if Sony's engineers
-                        went through CNET's
-                        review of last year's WH-1000MX2 and corrected each small issue I had with it.</p>
-                    <p class="more-info">The biggest design change is to the shape of the headband and padding on the
-                        ear cups. The
-                        headband is now more contoured to your head, and the headphone has shaved off 20 grams of
-                        weight. The padding on the ear cups is also a little softer.</p>
-                    <p class="more-info">The end result is a headphone that's clearly more comfortable than its
-                        predecessor.</p> --}}
-                    {{!-- <img class="more-info-img" src="../public/imgs/earphone.png" alt="earphone" /> --}}
                 </div>
                 <div class="tab-pane fade" id="review">
                     {{!-- comment --}}
@@ -115,19 +100,9 @@
                         <h3>Comments</h3>
                     </div>
                     <div class="table table-hover" id="comment-table">
-                        {{!-- <caption>Recent comments</caption> --}}
-                        {{!-- <thead>
-                            <tr>
-                                <th>Comments</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-
-                        </tbody> --}}
                     </div>
                     <div class="detail-comment">
-                        <textarea id="commentBodyID" rows="5" cols="80" placeholder="your comment..." name="commentBody"></textarea></br>
+                        <textarea id="commentBodyID" rows="5" cols="80" placeholder="your comment..." name="commentBody"></textarea>
                         <button class="submitButton comment-button" id="commentSubmit" value='{{product.product_id}}'>Make Comment</button>
                     </div>
                     <div class="error" id="error" hidden></div>
@@ -141,21 +116,5 @@
         </div>
     </div>
 </div>
-<script>
-    function show(p1, p2) {
-        let li01 = document.getElementById(p1)
-        let pic = document.getElementById('pic')
-        li01.onmouseover = function () {
-            pic.src = p2;
-        }
-    }
-    show("li01", "../public/imgs/earphone.png")
-    show("li02", "../public/imgs/earphone2.jpeg")
-    show("li03", "../public/imgs/earphone3.jpeg")
-    show("li04", "../public/imgs/earphone2.jpeg")
-</script>
-
-
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="../public/js/push.js"></script>

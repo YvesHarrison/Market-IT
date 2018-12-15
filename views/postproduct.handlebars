@@ -7,37 +7,37 @@
     <div class="col-lg-8  col-12 jumbotron">
       <form  name ="productup" action="/products/productup" method="POST" id="productup-form" class="productup-form" enctype="multipart/form-data" onsubmit="return Validation()">
         <div class="form-group" >
-          <label for="productup-name"><h2>Product Name:</h2></label>
+          <label for="productup-name" class="clsLabelforFields">Product Name:</label>
           <input type="text" class="form-control" id="productup-name" name="p_name" placeholder="Name" aria-describedby="pnameHelp" >
           <span id="pnameHelp" class="form-text text-muted" style="display: none;">Please enter a valid product name.</span> 
         </div>
         
         <div class="form-group">
-          <label for="productup-tag"><h2>Tag:</h2></label>
+          <label for="productup-tag" class="clsLabelforFields">Tag:</label>
           <input type="text" class="form-control" id="productup-tag" name="tags" placeholder="Tag" aria-describedby="tagHelp" >
           <span id="tagHelp" class="form-text text-muted" style="display: none;">Please enter a valid tag.</span>
         </div>
 
         <div class="form-group">
-          <label for="productup-price"><h2>Price:</h2></label>
+          <label for="productup-price" class="clsLabelforFields">Price:</label>
           <input type="text" class="form-control" id="productup-price" name="price" placeholder="Price" aria-describedby="priceHelp">
           <span id="priceHelp" class="form-text text-muted" style="display: none;">Please enter a valid price.</span>
         </div>
                 
         <div class="form-group">
-          <label for="productup-quantity"><h2>Quantity:</h2></label>
+          <label for="productup-quantity" class="clsLabelforFields">Quantity:</label>
           <input type="text" class="form-control" id="productup-quantity" name="quantity" placeholder="Quantity" aria-describedby="quantityHelp">
           <span id="quantityHelp" class="form-text text-muted" style="display: none;">Please enter a valid quantity.</span>
         </div>
               
         <div class="form-group">
-          <label for="description"><h2>Description:</h2></label>
+          <label for="description" class="clsLabelforFields">Description:</label>
           <textarea rows="10" cols="100" class="form-control postproduct-description" id="description" name="p_description" placeholder="Description" aria-describedby="descriptionHelp"></textarea>
           <span id="descriptionHelp" class="form-text text-muted" style="display: none;">Please enter a description.</span>
         </div>
               
         <div class="form-group">
-          <label for="productimage"><h2>Upload Image for your product:</h2></label> 
+          <label for="productimage" class="clsLabelforFields">Upload Image for your product:</label> 
           <div></div>
           <input type="file" id="productimage" name="productimage" accept="image/jpg, image/jpeg, image/png, image/gif, image/bmp">
         </div>
