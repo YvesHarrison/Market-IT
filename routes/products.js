@@ -276,9 +276,11 @@ router.get("/:id", async (req, res) => {
 
     if (product) {
       var tags = (product.tags).join().toString();
+      var reviews = product.comments.length;
       res.status(200).render("detail", {
         product: product,
-        tag: tags
+        tag: tags,
+        reviews :reviews
       });
     } else throw "product not found";
   } catch (e) {
