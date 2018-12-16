@@ -51,8 +51,8 @@ function Validation() {
     }
     var nme = document.getElementById("productimage");
     if(nme.value.length < 4) {
-        alert('Must Select any of your photo for upload!');
-        show_error('Must Select any of your photo for upload!');
+        alert('Must select a photo for upload!');
+        show_error('Must select a photo for upload!');
         return false;
     }
     // Validating file
