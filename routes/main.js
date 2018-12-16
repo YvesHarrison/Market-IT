@@ -16,9 +16,9 @@ router.get("/", function (req, res) {
 	try {
 		res.render("dashboardlog");
 	} catch (e) {
-		var msg = (typeof (e) == String) ? e : e.message;
+		var msg = typeof e == 'string' ? e : e.message;
 		msg = msg == undefined ? 'Something went wrong, Please try again' : msg;
-		req.flash('failure_msg', msg);
+		req.flash('error', msg);
 		res.status(500).redirect('/');
 	}
 });
@@ -26,20 +26,24 @@ router.get("/aboutus", function (req, res) {
 	try {
 		res.render("aboutus");
 	} catch (e) {
-		var msg = (typeof (e) == String) ? e : e.message;
+		var msg = typeof e == 'string' ? e : e.message;
 		msg = msg == undefined ? 'Something went wrong, Please try again' : msg;
-		req.flash('failure_msg', msg);
+		req.flash('error', msg);
 		res.status(500).redirect('/');
 	}
 });
 /*-----------Login and Authentication-------------------------*/
 router.get("/login", function (req, res) {
 	try {
-		res.render("login");
+		if (xss(req.user)) {
+			req.flash('error', "First signout to login");
+			res.status(403).redirect('/');
+		} else
+			res.render("login");
 	} catch (e) {
-		var msg = (typeof (e) == String) ? e : e.message;
+		var msg = typeof e == 'string' ? e : e.message;
 		msg = msg == undefined ? 'Something went wrong, Please try again' : msg;
-		req.flash('failure_msg', msg);
+		req.flash('error', msg);
 		res.status(500).redirect('/');
 	}
 });
@@ -47,11 +51,15 @@ router.get("/login", function (req, res) {
 /*---------------------------Registaration and Authentication----------------------*/
 router.get("/signup", function (req, res) {
 	try {
-		res.render("signup");
+		if (xss(req.user)) {
+			req.flash('error', "First signout to signup");
+			res.status(403).redirect('/');
+		} else
+			res.render("signup");
 	} catch (e) {
-		var msg = (typeof (e) == String) ? e : e.message;
+		var msg = typeof e == 'string' ? e : e.message;
 		msg = msg == undefined ? 'Something went wrong, Please try again' : msg;
-		req.flash('failure_msg', msg);
+		req.flash('error', msg);
 		res.status(500).redirect('/');
 	}
 });
@@ -120,9 +128,9 @@ router.post('/signup', async function (req, res) {
 			}
 		}
 	} catch (e) {
-		var msg = (typeof (e) == String) ? e : e.message;
+		var msg = typeof e == 'string' ? e : e.message;
 		msg = msg == undefined ? 'Something went wrong, Please try again' : msg;
-		req.flash('failure_msg', msg);
+		req.flash('error', msg);
 		res.status(500).redirect('/signup');
 	}
 
@@ -176,18 +184,22 @@ router.post('/login',
 		failureFlash: true
 	}),
 	function (req, res) {
-
 		res.redirect('/');
 	});
 
 /*------------------------Logout------------------------------*/
 router.get("/logout", function (req, res) {
 	try {
-		req.logout();
-		req.flash('success_msg', 'You are logged out');
-		res.status(200).redirect("/login");
+		if (xss(req.user)) {
+			req.logout();
+			req.flash('success_msg', 'You are logged out');
+			res.status(200).redirect("/login");
+		} else {
+			req.flash('error', 'Login first to logout');
+			res.status(403).redirect("/login");
+		}
 	} catch (e) {
-		var msg = (typeof (e) == String) ? e : e.message;
+		var msg = typeof e == 'string' ? e : e.message;
 		msg = (msg == undefined) ? 'Something went wrong, Please try again' : msg;
 		req.flash('error', msg);
 		res.status(500).redirect('/');
@@ -196,13 +208,14 @@ router.get("/logout", function (req, res) {
 });
 
 router.get("/info", function (req, res) {
-	try {if(xss(req.user))
-		res.render("info", {
-			Logout: tag
-		});
+	try {
+		if (xss(req.user))
+			res.render("info", {
+				Logout: tag
+			});
 		else throw "You are not authenticated";
 	} catch (e) {
-		var msg = (typeof (e) == String) ? e : e.message;
+		var msg = typeof e == 'string' ? e : e.message;
 		msg = msg == undefined ? 'Something went wrong, Please try again' : msg;
 		req.flash('error', msg);
 		res.status(500).redirect('/');
@@ -233,12 +246,11 @@ router.get("/info/:id", async function (req, res) {
 				boughtprod: boughtprod
 			});
 		} else {
-			req.flash("error", "Something went wrong");
-			res.redirect("/");
+			req.flash("error", "You are not authenticated");
+			res.status(403).redirect("/");
 		}
-
 	} catch (e) {
-		var msg = (typeof (e) == String) ? e : e.message;
+		var msg = typeof e == 'string' ? e : e.message;
 		msg = msg == undefined ? 'Something went wrong, Please try again' : msg;
 		req.flash('error', msg);
 		res.status(500).redirect('/');
