@@ -5,7 +5,7 @@ CS 546 Web Programing Goup Course Project
 
 In public folder: css, client side javascript and images
 
-In utils folder: server side javascript
+In data folder: server side javascript and database operations
 
 In views folder: handlebar layout
 
