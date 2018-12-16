@@ -31,9 +31,14 @@ function validationForm1(ele_id) {
             return false;
         }
 
-        if (quantity == "" && quantity == /[0,9]/g) {
+        if (quantity == "") {
             alert("Quantity cannnot be empty");
             show_error("Quantity cannnot be empty");
+            return false;
+        }
+        if ((quantity != /[0,9]/g)) {
+            alert("Quantity must be a number");
+            show_error("Quantity must be a number");
             return false;
         }
 
