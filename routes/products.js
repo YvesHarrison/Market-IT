@@ -35,8 +35,6 @@ const upload = multer({
 
 router.post("/tag", (req, res) => {
   try {
-    console.log(xss(req.body));
-    console.log("This is the body");
     var l_arrTags = xss(req.body.split(/[\s,]+/));
     res.render("products");
   } catch (e) {
@@ -52,8 +50,7 @@ function escapeRegex(text) {
 };
 router.get("/", async (req, res) => {
   try {
-    console.log(xss(req.query.search));
-    if (req.query.search) {
+    if (xss(req.query.search)) {
       const regex = new RegExp(escapeRegex(xss(req.query.search)), 'gi');
       var products = await Prod.getProductsByTag(regex, xss(req.query.search));
       res.render("products", {
@@ -74,7 +71,7 @@ router.get("/", async (req, res) => {
 });
 router.get("/productup", async (req, res) => {
   try {
-    if (req.user)
+    if (xss(req.user))
       res.status(200).render("postproduct");
     else throw "You are not authenticated."
   } catch (e) {
@@ -95,7 +92,6 @@ router.post("/productup", upload.single('productimage'), async (req, res) => {
         var tags = xss(req.body.tags);
         l_strArrtags = tags.split(',');
       } else l_strArrtags = [];
-      console.log(xss(req.file));
       var newProd = {
         p_name: xss(req.body.p_name),
         p_description: xss(req.body.p_description),
@@ -106,12 +102,9 @@ router.post("/productup", upload.single('productimage'), async (req, res) => {
         price: xss(req.body.price),
         quantity: xss(req.body.quantity)
       };
-      console.log("this is new: " + JSON.stringify(newProd));
       var newone = await Prod.addProduct(JSON.parse(JSON.stringify(newProd)));
-      console.log("this is new added: " + newone);
       if (newone) {
         let l_objuser = await User.addPostedProductToUser(newone.posterId, newone.product_id);
-        console.log(l_objuser);
         if (!l_objuser) {
           throw "User not found";
         }
@@ -191,7 +184,6 @@ router.get("/buy/:id", async (req, res) => {
         });
       } else throw "product not found";
     } else {
-      console.log("hi");
       req.flash('error', "You are not authenticated.");
       res.status(403).redirect('/login');
     }
@@ -205,7 +197,7 @@ router.get("/buy/:id", async (req, res) => {
 });
 router.get("/edit/:id", async (req, res) => {
   try {
-    if (req.user) {
+    if (xss(req.user)) {
       var product = await Prod.getProductById(xss(req.params.id));
       if (product) {
         var seller = await User.getUserById(xss(product.posterId));
@@ -246,7 +238,6 @@ router.delete("/delete/:id", async (req, res) => {
 });
 router.post("/edit/:id", async (req, res) => {
   try {
-    console.log(req.body);
     var product = await Prod.getProductById(xss(req.params.id));
     if (xss(req.user) && xss(req.user._id) == product.posterId) {
       var l_strArrtags;
@@ -264,9 +255,7 @@ router.post("/edit/:id", async (req, res) => {
         price: xss(req.body.eprice),
         quantity: xss(req.body.equantity)
       };
-      console.log("this is new: " + JSON.stringify(updatedProd));
       var newone = await Prod.updateProduct(product.product_id, JSON.parse(JSON.stringify(updatedProd)));
-      console.log("this is new added: " + newone);
 
     } else {
       req.flash('error', 'You are not authenticated');
@@ -289,7 +278,6 @@ router.post('/:id/detail/comment', async function (req, res) {
   try {
     let pro_id = xss(req.body.pro_id);
     let commentset = await Prod.getcomment(pro_id);
-    //console.log("router",commentset);
     res.json(commentset);
   } catch (e) {
     var msg = typeof e == 'string' ? e : e.message;
@@ -305,12 +293,10 @@ router.post('/:id/detail/comments', async function (req, res) {
     if (xss(req.user)) {
       var commentBody = xss(req.body.commentBody);
       var createdAt = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
-      //console.log("user id",req.user._id);
       var comment = new Comments();
       comment.commentBody = commentBody;
       comment.commentBy = xss(req.user.firstName);
       comment.createdAt = createdAt;
-      console.log("comment:", comment);
       comment.save(function (err) {
         res.json({
           message: "Comment saved successfully"
@@ -318,7 +304,6 @@ router.post('/:id/detail/comments', async function (req, res) {
       });
       await Prod.addCommentToProduct(comment, xss(req.params.id), function (err, user) {
         if (err) throw err;
-        console.log("store:", comment);
       });
       res.json(comment);
     } else {
@@ -338,8 +323,6 @@ router.post('/:id/detail/comments', async function (req, res) {
 router.get("/:id", async (req, res) => {
   try {
     var product = await Prod.getProductById(xss(req.params.id));
-    console.log(xss(req.params.id));
-
     if (product) {
       var tags = (product.tags).join().toString();
       var reviews = product.comments.length;
@@ -350,7 +333,6 @@ router.get("/:id", async (req, res) => {
       });
     } else throw "product not found";
   } catch (e) {
-    console.log(e);
     var msg = typeof e == 'string' ? e : e.message;
     msg = msg == undefined ? 'Something went wrong, Please try again' : msg;
     req.flash('error', msg);

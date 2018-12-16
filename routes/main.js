@@ -17,7 +17,7 @@ router.get("/", function (req, res) {
 		res.render("dashboardlog");
 	} catch (e) {
 		var msg = (typeof (e) == String) ? e : e.message;
-		msg = msg == undefined ? 'Somethin went wrong, Please try again' : msg;
+		msg = msg == undefined ? 'Something went wrong, Please try again' : msg;
 		req.flash('failure_msg', msg);
 		res.status(500).redirect('/');
 	}
@@ -27,7 +27,7 @@ router.get("/aboutus", function (req, res) {
 		res.render("aboutus");
 	} catch (e) {
 		var msg = (typeof (e) == String) ? e : e.message;
-		msg = msg == undefined ? 'Somethin went wrong, Please try again' : msg;
+		msg = msg == undefined ? 'Something went wrong, Please try again' : msg;
 		req.flash('failure_msg', msg);
 		res.status(500).redirect('/');
 	}
@@ -38,7 +38,7 @@ router.get("/login", function (req, res) {
 		res.render("login");
 	} catch (e) {
 		var msg = (typeof (e) == String) ? e : e.message;
-		msg = msg == undefined ? 'Somethin went wrong, Please try again' : msg;
+		msg = msg == undefined ? 'Something went wrong, Please try again' : msg;
 		req.flash('failure_msg', msg);
 		res.status(500).redirect('/');
 	}
@@ -49,10 +49,10 @@ router.get("/signup", function (req, res) {
 	try {
 		res.render("signup");
 	} catch (e) {
-
-		res.status(500).json({
-			error: e
-		});
+		var msg = (typeof (e) == String) ? e : e.message;
+		msg = msg == undefined ? 'Something went wrong, Please try again' : msg;
+		req.flash('failure_msg', msg);
+		res.status(500).redirect('/');
 	}
 });
 
@@ -93,7 +93,7 @@ router.post('/signup', async function (req, res) {
 				var err = [{
 					param: 'email',
 					msg: 'User already Exists',
-					value: req.body.email
+					value: xss(req.body.email)
 				}];
 				res.render('signup', {
 					errors: err
@@ -121,7 +121,7 @@ router.post('/signup', async function (req, res) {
 		}
 	} catch (e) {
 		var msg = (typeof (e) == String) ? e : e.message;
-		msg = msg == undefined ? 'Somethin went wrong, Please try again' : msg;
+		msg = msg == undefined ? 'Something went wrong, Please try again' : msg;
 		req.flash('failure_msg', msg);
 		res.status(500).redirect('/signup');
 	}
@@ -188,7 +188,7 @@ router.get("/logout", function (req, res) {
 		res.status(200).redirect("/login");
 	} catch (e) {
 		var msg = (typeof (e) == String) ? e : e.message;
-		msg = (msg == undefined) ? 'Somethin went wrong, Please try again' : msg;
+		msg = (msg == undefined) ? 'Something went wrong, Please try again' : msg;
 		req.flash('error', msg);
 		res.status(500).redirect('/');
 	}
@@ -196,14 +196,14 @@ router.get("/logout", function (req, res) {
 });
 
 router.get("/info", function (req, res) {
-	try {if(req.user)
+	try {if(xss(req.user))
 		res.render("info", {
 			Logout: tag
 		});
 		else throw "You are not authenticated";
 	} catch (e) {
 		var msg = (typeof (e) == String) ? e : e.message;
-		msg = msg == undefined ? 'Somethin went wrong, Please try again' : msg;
+		msg = msg == undefined ? 'Something went wrong, Please try again' : msg;
 		req.flash('error', msg);
 		res.status(500).redirect('/');
 	}
@@ -226,7 +226,7 @@ router.get("/info/:id", async function (req, res) {
 			}
 			res.render("info", {
 				Logout: tag,
-				users: req.user,
+				users: xss(req.user),
 				posted_products: posted_products,
 				bought_products: bought_products,
 				postprod: postprod,
@@ -239,7 +239,7 @@ router.get("/info/:id", async function (req, res) {
 
 	} catch (e) {
 		var msg = (typeof (e) == String) ? e : e.message;
-		msg = msg == undefined ? 'Somethin went wrong, Please try again' : msg;
+		msg = msg == undefined ? 'Something went wrong, Please try again' : msg;
 		req.flash('error', msg);
 		res.status(500).redirect('/');
 	}
