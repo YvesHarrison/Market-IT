@@ -217,10 +217,10 @@ function scrollToTarget(D)
 }
 
 // Initial tooltips
-$(function()
-{
-  $('[data-toggle="tooltip"]').tooltip()
-})
+// $(function()
+// {
+//   $('[data-toggle="tooltip"]').tooltip()
+// })
 
 
 // Animate when visible

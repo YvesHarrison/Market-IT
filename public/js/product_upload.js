@@ -49,7 +49,12 @@ function Validation() {
         show_error("Invalid Product Name");
         return false;
     }
-
+    var nme = document.getElementById("productimage");
+    if(nme.value.length < 4) {
+        alert('Must Select any of your photo for upload!');
+        show_error('Must Select any of your photo for upload!');
+        return false;
+    }
     // Validating file
     if (FileUploadPath == '') {
         alert("Please upload an image");
