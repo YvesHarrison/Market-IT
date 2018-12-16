@@ -14,7 +14,7 @@ function validationForm1(ele_id) {
         //check empty fields
         console.log("tag");
         if (productname == "") {
-            alert("Description cannnot be empty");
+            alert("Product Name cannnot be empty");
             show_error("Product Name cannnot be empty");
             return false;
         }
@@ -26,11 +26,15 @@ function validationForm1(ele_id) {
         }
 
         if (price == "") {
-            throw "Price cannnot be empty";
+            alert("Price cannnot be empty");
+            show_error("Price cannnot be empty");
+            return false;
         }
 
         if (quantity == "" && quantity == /[0,9]/g) {
-            throw "quantity cannnot be empty";
+            alert("Quantity cannnot be empty");
+            show_error("Quantity cannnot be empty");
+            return false;
         }
 
         //correct username 

@@ -9,7 +9,6 @@ function Validation() {
     var price = document.getElementById('productup-price').value;
     var quantity = document.getElementById('productup-quantity').value;
     var description = document.getElementById('description').value;
-    var moreinformation = document.getElementById('moreinfo').value;
     var image = document.getElementById('productimage').value;
     var FileUploadPath = image.value;
     //check empty fields

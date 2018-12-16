@@ -27,8 +27,8 @@ const main = async () => {
 		phone: "5512297751",
 		city: "Jersey City",
 		address1: "JFK Boulevard",
-		address2: "",
-		email: "shreeshchavan@gmail.com",
+		address2: "Apt #3",
+		email: "shreesh.chavan@gmail.com",
 		hashedPassword: password
   });
   let user=await Userdata.addUser(newUser);
@@ -37,9 +37,9 @@ const main = async () => {
 
   var newProducts = ({
 		p_name: "Surface Laptop",
-        p_description: "Really nice laptop with Windows 10 pro.",
+        p_description: "Surface Book 2 is the most powerful Surface ever; built with power and versatility to be a laptop, tablet, and portable studio all-in-one.",
         posterId: post_id,
-        tags: ["Laptop"],
+        tags: ["Laptop, surface,touchscreen,compact"],
         image_name: "2018-12-11T22_54_49.280ZLaptop.jpg",
         image_path: "public/uploads/products/2018-12-11T22_54_49.280ZLaptop.jpg",
         price: 2100,
