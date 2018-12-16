@@ -36,7 +36,7 @@ const upload = multer({
 router.post("/tag", (req, res) => {
   try {
     var l_arrTags = xss(req.body.split(/[\s,]+/));
-    res.render("products");
+    res.redirect("/products");
   } catch (e) {
     var msg = typeof e == 'string' ? e : e.message;
     msg = msg == undefined ? 'Something went wrong, Please try again' : msg;
@@ -106,7 +106,8 @@ router.post("/productup", upload.single('productimage'), async (req, res) => {
       if (newone) {
         let l_objuser = await User.addPostedProductToUser(newone.posterId, newone.product_id);
         if (!l_objuser) {
-          throw "User not found";
+          req.flash('error', "User not found");
+          res.status(404).redirect('/products');
         }
       } else throw "product couldnt be added";
     } else {
@@ -123,7 +124,7 @@ router.post("/productup", upload.single('productimage'), async (req, res) => {
 });
 router.post("/buy/:id", async (req, res) => {
   try {
-    if (req.user) {
+    if (xss(req.user)) {
       var product = await Prod.getProductById(xss(req.params.id));
       if (product) {
         var seller = await User.getUserById(xss(product.posterId));
@@ -174,7 +175,7 @@ router.post("/buy/:id", async (req, res) => {
 });
 router.get("/buy/:id", async (req, res) => {
   try {
-    if (req.user) {
+    if (xss(req.user)) {
       var product = await Prod.getProductById(xss(req.params.id));
       if (product) {
         var seller = await User.getUserById(xss(product.posterId));
@@ -222,12 +223,21 @@ router.get("/edit/:id", async (req, res) => {
 });
 router.delete("/delete/:id", async (req, res) => {
   try {
-    var product = await Prod.getProductById(xss(req.params.id));
-    if (product) {
-      await Prod.removeproduct(product.product_id, product.posterId);
-      res.status(200).redirect(`../products/edit/${product.posterId}`);
-      // res.status(200);
-    } else throw "product not found";
+    if (xss(req.user)) {
+      var product = await Prod.getProductById(xss(req.params.id));
+      if (product) {
+        await Prod.removeproduct(product.product_id, product.posterId);
+        res.status(200).redirect(`../products/edit/${product.posterId}`);
+        // res.status(200);
+      } else {
+        req.flash('error', "product not found");
+        res.status(404).redirect('/products');
+      }
+    } else {
+      req.flash('error', "You are not authenticated");
+      res.status(403).redirect('/');
+    }
+
   } catch (e) {
     var msg = typeof e == 'string' ? e : e.message;
     msg = msg == undefined ? 'Something went wrong, Please try again' : msg;
