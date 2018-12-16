@@ -134,9 +134,11 @@ ul .picture-small-li {
 .product_details .product_description {
     margin-bottom: 20px;
 }
-.product_stock label{
+
+.product_stock label {
     font-family: Arial, Helvetica, sans-serif;
 }
+
 .product_stock input {
     width: 70px;
     height: 30px;
@@ -246,66 +248,71 @@ ul .picture-small-li {
     margin-bottom: 45px;
 }
 
-.comments{
+.comments {
     margin-top: 60px;
 }
-.comments a{
+
+.comments a {
     font-size: 18px;
 }
-.comments a:hover{
+
+.comments a:hover {
     text-decoration: none;
 }
-.more-info{
+
+.more-info {
     margin: 20px;
     font-size: 16px;
     font-weight: 400;
 }
-#myTabContent{
+
+#myTabContent {
     text-align: center;
 }
 
 
 
 
-.products-img-list{
+.products-img-list {
     width: 370px;
     height: 270px;
 }
 
-.products-img-list img{
+.products-img-list img {
     max-width: 100%;
     max-height: 100%;
 }
 
-.products-description{
+.products-description {
     width: 370px;
     height: 86px;
 }
 
-.detail-description{
+.detail-description {
     margin: 25px;
 }
 
-.comments-color{
+.comments-color {
     color: #767676;
 }
 
-.detail-comment{
+.detail-comment {
     width: 50%;
     margin: 0 auto;
 }
 
-.detail-comment textarea{
+.detail-comment textarea {
     border: 1px solid rgb(177, 177, 177);
     border-radius: 6px;
     width: 100%;
 }
-.message-textarea{
+
+.message-textarea {
     border: 1px solid rgb(177, 177, 177);
     border-radius: 6px;
 }
 
-.comment-button{
+.comment-button {
     background: #226ff4;
     color: #ffffff;
     line-height: 40px;
@@ -318,30 +325,31 @@ ul .picture-small-li {
     border-radius: 3px;
 }
 
-.posted-products{
-    border:1px solid rgb(207, 207, 207);
+.posted-products {
+    border: 1px solid rgb(207, 207, 207);
     border-radius: 6px;
 }
 
-.info-img{
+.info-img {
     width: 100%;
     height: 100px;
 }
-.info-img img{
+
+.info-img img {
     max-width: 100%;
     max-height: 100%;
 }
 
-.info-pro-name{
+.info-pro-name {
     font-size: 18px;
     font-weight: 400;
 }
 
-.info-pro-price{
+.info-pro-price {
     font-weight: 180;
 }
 
-.info-edit-btn{
+.info-edit-btn {
     margin: 0 auto;
     width: 80% !important;
 }
@@ -352,8 +360,8 @@ ul .picture-small-li {
     line-height: 20px;
     display: block;
     position: absolute;
-    left:10px;
-    top:10px;
+    left: 10px;
+    top: 10px;
     font-family: Helvetica, STHeiti;
     /* _font-family: '\u9ed1\u4f53', 'Book Antiqua', Palatino; */
     font-size: 18px;
@@ -372,12 +380,13 @@ ul .picture-small-li {
     margin-top: 20%;
     margin-left: 74%;
 }
+
 .aui_close:hover {
     width: 24px;
     height: 24px;
     line-height: 24px;
-    left:8px;
-    top:8px;
+    left: 8px;
+    top: 8px;
     color: #FFF;
     box-shadow: 0 1px 3px rgba(209, 40, 42, .5);
     background: #d1282a;
